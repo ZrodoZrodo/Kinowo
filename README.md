@@ -1,0 +1,2 @@
+# Kinowo
+Projekt grupowy
