@@ -6,8 +6,8 @@ export declare class UserService {
         message: string;
     }>;
     login({ email, password }: LoginUserDto): Promise<{
-        name: string;
-        email: string;
         id: string;
+        email: string;
+        name: string;
     }>;
 }

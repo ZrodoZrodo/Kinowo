@@ -29,15 +29,20 @@ export class UserService {
         }
 
        async login({email,password}:LoginUserDto){
-        password=await bcrypt.hash(password,process.env.SALT)
-           console.log(password)
-        return await prisma.user.findFirst({
-            where:{email,password},
-            select:{
-                id:true,
-                name:true,
-                email:true,
-            }
-        })
+        try {
+            password = await bcrypt.hash(password, process.env.SALT)
+            return await prisma.user.findFirst({
+                where: {email, password},
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                }
+            })
+        }
+        catch (e)
+        {
+            console.log(e.code+" "+e.message)
+        }
        }
 }

@@ -30,16 +30,20 @@ let UserService = class UserService {
         }
     }
     async login({ email, password }) {
-        password = await bcrypt.hash(password, process.env.SALT);
-        console.log(password);
-        return await prisma_1.default.user.findFirst({
-            where: { email, password },
-            select: {
-                id: true,
-                name: true,
-                email: true,
-            }
-        });
+        try {
+            password = await bcrypt.hash(password, process.env.SALT);
+            return await prisma_1.default.user.findFirst({
+                where: { email, password },
+                select: {
+                    id: true,
+                    name: true,
+                    email: true,
+                }
+            });
+        }
+        catch (e) {
+            console.log(e.code + " " + e.message);
+        }
     }
 };
 UserService = __decorate([
