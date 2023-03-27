@@ -10,8 +10,6 @@ export class UserService {
 
     async register({name,lastName,email,password}:CreateUserDto):Promise<{status:number,message:string}>{
         try {
-
-
             password=await bcrypt.hash(password,process.env.SALT)
             console.log(password)
              await prisma.user.create({
