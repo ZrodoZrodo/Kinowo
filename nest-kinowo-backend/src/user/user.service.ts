@@ -3,6 +3,7 @@ import prisma from '../../prisma/prisma';
 import { CreateUserDto } from '../../dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { LoginUserDto } from '../../dto/loginUser.dto';
+import {CreateReservationDto} from "../../dto/CreateReservationDto";
 
 @Injectable()
 export class UserService {
@@ -79,15 +80,15 @@ export class UserService {
     });
   }
 
-  async createReservation(
-    userId: string,
-    movieId: string,
-    title: string,
-    date: Date,
-    price: number,
-    screeningNumber: number,
-    seatNumber: number,
-  ) {
+  async createReservation({
+    userId,
+    movieId,
+    title,
+    date,
+    price,
+    screeningNumber,
+    seatNumber,
+  }:CreateReservationDto ){
     return await prisma.reservation.create({
       data: {
         movieId,

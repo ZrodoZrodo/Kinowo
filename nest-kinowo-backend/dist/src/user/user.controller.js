@@ -17,9 +17,19 @@ const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
 const create_user_dto_1 = require("../../dto/create-user.dto");
 const loginUser_dto_1 = require("../../dto/loginUser.dto");
+const CreateReservationDto_1 = require("../../dto/CreateReservationDto");
 let UserController = class UserController {
     constructor(UserService) {
         this.UserService = UserService;
+    }
+    async getUser(id) {
+        return this.UserService.getUser(id);
+    }
+    async getUserActiveReservations(id) {
+        return this.UserService.getUserActiveReservations(id);
+    }
+    async getUserComingReservations(id) {
+        return this.UserService.getUserComingReservations(id);
     }
     async register(newUser) {
         return this.UserService.register(newUser);
@@ -27,7 +37,34 @@ let UserController = class UserController {
     async login(User) {
         return this.UserService.login(User);
     }
+    async createReservation(Reservation) {
+        return this.UserService.createReservation(Reservation);
+    }
+    async updateUser(user, id) {
+        return this.UserService.updateUser(user.email, user.name, user.lastName, id);
+    }
 };
+__decorate([
+    (0, common_1.Get)('/User/:id'),
+    __param(0, (0, common_1.Param)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getUser", null);
+__decorate([
+    (0, common_1.Get)('/UserActiveReservations/:id'),
+    __param(0, (0, common_1.Param)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getUserActiveReservations", null);
+__decorate([
+    (0, common_1.Get)('/UserComingReservations/:id'),
+    __param(0, (0, common_1.Param)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getUserComingReservations", null);
 __decorate([
     (0, common_1.Post)('/register'),
     __param(0, (0, common_1.Body)()),
@@ -42,6 +79,21 @@ __decorate([
     __metadata("design:paramtypes", [loginUser_dto_1.LoginUserDto]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "login", null);
+__decorate([
+    (0, common_1.Post)('/createReservation'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [CreateReservationDto_1.CreateReservationDto]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "createReservation", null);
+__decorate([
+    (0, common_1.Put)('/User/:id'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Param)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "updateUser", null);
 UserController = __decorate([
     (0, common_1.Controller)('user'),
     __param(0, (0, common_1.Inject)(user_service_1.UserService)),

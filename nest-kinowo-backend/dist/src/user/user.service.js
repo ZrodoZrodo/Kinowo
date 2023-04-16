@@ -11,7 +11,7 @@ const common_1 = require("@nestjs/common");
 const prisma_1 = require("../../prisma/prisma");
 const bcrypt = require("bcrypt");
 let UserService = class UserService {
-    async register({ name, lastName, email, password }) {
+    async register({ name, lastName, email, password, }) {
         try {
             password = await bcrypt.hash(password, process.env.SALT);
             console.log(password);
@@ -21,12 +21,14 @@ let UserService = class UserService {
                     name,
                     password,
                     lastName,
-                }
+                },
             });
-            return { status: 201, message: "Created" };
+            return { status: 201, message: 'Created' };
         }
         catch (e) {
-            return e.code == 'P2002' ? { status: 409, message: "This email already exist" } : e.message;
+            return e.code == 'P2002'
+                ? { status: 409, message: 'This email already exist' }
+                : e.message;
         }
     }
     async login({ email, password }) {
@@ -38,12 +40,66 @@ let UserService = class UserService {
                     id: true,
                     name: true,
                     email: true,
-                }
+                },
             });
         }
         catch (e) {
-            console.log(e.code + " " + e.message);
+            console.log(e.code + ' ' + e.message);
         }
+    }
+    async getUser(id) {
+        return await prisma_1.default.user.findFirst({
+            where: { id },
+            select: {
+                id: true,
+                email: true,
+                name: true,
+                lastName: true,
+            },
+        });
+    }
+    async getUserActiveReservations(id) {
+        return await prisma_1.default.user.findFirst({
+            where: { id },
+            select: {
+                reservations: {
+                    where: { watched: true },
+                },
+            },
+        });
+    }
+    async getUserComingReservations(id) {
+        return await prisma_1.default.user.findFirst({
+            where: { id },
+            select: {
+                reservations: {
+                    where: { watched: false },
+                },
+            },
+        });
+    }
+    async createReservation({ userId, movieId, title, date, price, screeningNumber, seatNumber, }) {
+        return await prisma_1.default.reservation.create({
+            data: {
+                movieId,
+                title,
+                date,
+                price,
+                screeningNumber,
+                seatNumber,
+                user: {
+                    connect: {
+                        id: userId,
+                    },
+                },
+            },
+        });
+    }
+    async updateUser(email, name, lastName, id) {
+        return prisma_1.default.user.update({
+            where: { id },
+            data: { email, name, lastName },
+        });
     }
 };
 UserService = __decorate([
