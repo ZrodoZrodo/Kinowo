@@ -10,30 +10,41 @@ exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_1 = require("../../prisma/prisma");
 const bcrypt = require("bcrypt");
+const validation_1 = require("../../validation/validation");
 let UserService = class UserService {
     async register({ name, lastName, email, password, }) {
-        try {
-            password = await bcrypt.hash(password, process.env.SALT);
-            console.log(password);
-            await prisma_1.default.user.create({
-                data: {
-                    email,
-                    name,
-                    password,
-                    lastName,
-                },
-            });
-            return { status: 201, message: 'Created' };
+        if (name && lastName && email && password) {
+            if (!((0, validation_1.Valid)({ name }) &&
+                (0, validation_1.Valid)({ lastName }) &&
+                (0, validation_1.Valid)({ email }) &&
+                (0, validation_1.Valid)({ password })))
+                return { status: 400, message: 'Bad Data' };
+            try {
+                password = await bcrypt.hash(password, 12);
+                console.log(password);
+                await prisma_1.default.user.create({
+                    data: {
+                        email,
+                        name,
+                        password,
+                        lastName,
+                    },
+                });
+                return { status: 201, message: 'Created' };
+            }
+            catch (e) {
+                return e.code == 'P2002'
+                    ? { status: 409, message: 'This email already exist' }
+                    : e.message;
+            }
         }
-        catch (e) {
-            return e.code == 'P2002'
-                ? { status: 409, message: 'This email already exist' }
-                : e.message;
+        else {
+            return { status: 400, message: 'check your JSON' };
         }
     }
     async login({ email, password }) {
         try {
-            password = await bcrypt.hash(password, process.env.SALT);
+            password = await bcrypt.hash(password, 12);
             return await prisma_1.default.user.findFirst({
                 where: { email, password },
                 select: {

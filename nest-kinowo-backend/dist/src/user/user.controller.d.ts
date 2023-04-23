@@ -1,7 +1,7 @@
-import { UserService } from "./user.service";
-import { CreateUserDto } from "../../dto/create-user.dto";
-import { LoginUserDto } from "../../dto/loginUser.dto";
-import { CreateReservationDto } from "../../dto/CreateReservationDto";
+import { UserService } from './user.service';
+import { CreateUserDto } from '../../dto/create-user.dto';
+import { LoginUserDto } from '../../dto/loginUser.dto';
+import { CreateReservationDto } from '../../dto/CreateReservationDto';
 export declare class UserController {
     private UserService;
     constructor(UserService: UserService);

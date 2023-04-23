@@ -3,7 +3,8 @@ import prisma from '../../prisma/prisma';
 import { CreateUserDto } from '../../dto/create-user.dto';
 import * as bcrypt from 'bcrypt';
 import { LoginUserDto } from '../../dto/loginUser.dto';
-import {CreateReservationDto} from "../../dto/CreateReservationDto";
+import { CreateReservationDto } from '../../dto/CreateReservationDto';
+import { Valid } from '../../validation/validation';
 
 @Injectable()
 export class UserService {
@@ -13,28 +14,41 @@ export class UserService {
     email,
     password,
   }: CreateUserDto): Promise<{ status: number; message: string }> {
-    try {
-      password = await bcrypt.hash(password, process.env.SALT);
-      console.log(password);
-      await prisma.user.create({
-        data: {
-          email,
-          name,
-          password,
-          lastName,
-        },
-      });
-      return { status: 201, message: 'Created' };
-    } catch (e) {
-      return e.code == 'P2002'
-        ? { status: 409, message: 'This email already exist' }
-        : e.message;
+    if (name && lastName && email && password) {
+      if (
+        !(
+          Valid({ name }) &&
+          Valid({ lastName }) &&
+          Valid({ email }) &&
+          Valid({ password })
+        )
+      )
+        return { status: 400, message: 'Bad Data' };
+      try {
+        password = await bcrypt.hash(password, 12);
+        console.log(password);
+        await prisma.user.create({
+          data: {
+            email,
+            name,
+            password,
+            lastName,
+          },
+        });
+        return { status: 201, message: 'Created' };
+      } catch (e) {
+        return e.code == 'P2002'
+          ? { status: 409, message: 'This email already exist' }
+          : e.message;
+      }
+    } else {
+      return { status: 400, message: 'check your JSON' };
     }
   }
 
   async login({ email, password }: LoginUserDto) {
     try {
-      password = await bcrypt.hash(password, process.env.SALT);
+      password = await bcrypt.hash(password, 12);
       return await prisma.user.findFirst({
         where: { email, password },
         select: {
@@ -88,7 +102,7 @@ export class UserService {
     price,
     screeningNumber,
     seatNumber,
-  }:CreateReservationDto ){
+  }: CreateReservationDto) {
     return await prisma.reservation.create({
       data: {
         movieId,
