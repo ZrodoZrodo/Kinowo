@@ -5,7 +5,7 @@ import * as bcrypt from 'bcrypt';
 import { LoginUserDto } from '../../dto/loginUser.dto';
 import { CreateReservationDto } from '../../dto/CreateReservationDto';
 import { Valid } from '../../validation/validation';
-
+//toDo dodać sprawdzanie czy użytkownik nie jest usunięty
 @Injectable()
 export class UserService {
   async register({
@@ -26,7 +26,6 @@ export class UserService {
         return { status: 400, message: 'Bad Data' };
       try {
         password = await bcrypt.hash(password, 12);
-        console.log(password);
         await prisma.user.create({
           data: {
             email,
@@ -123,6 +122,54 @@ export class UserService {
     return prisma.user.update({
       where: { id },
       data: { email, name, lastName },
+    });
+  }
+
+  async getMoviesHistory(id: string) {
+    return prisma.user.findFirst({
+      where: { id },
+      select: {
+        reservations: {
+          where: { watched: true },
+          select: {
+            movieId: true,
+            title: true,
+            date: true,
+            price: true,
+          },
+        },
+      },
+    });
+  }
+  async addOpinion({
+    userid,
+    movieId,
+    movieTitle,
+    description,
+    rate,
+  }: {
+    userid: string;
+    movieId: string;
+    movieTitle: string;
+    description: string;
+    rate: string;
+  }) {
+    return prisma.opinion.create({
+      data: {
+        movieTitle,
+        description,
+        rate,
+        user: {
+          connect: {
+            id: userid,
+          },
+        },
+        movie: {
+          connect: {
+            id: movieId,
+          },
+        },
+      },
     });
   }
 }

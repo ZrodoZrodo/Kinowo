@@ -11,12 +11,13 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  email    String @unique
-  name     String
-  lastName String
-  password String
-
+  id           String        @id @default(auto()) @map("_id") @db.ObjectId
+  email        String        @unique
+  name         String
+  lastName     String
+  password     String
+  opinions     Opinion[]
+  deleted      Boolean       @default(false)
   reservations Reservation[]
 }
 
@@ -28,17 +29,21 @@ model Reservation {
   title           String
   date            DateTime
   price           Float
-  watched         Boolean? @default(false)
+  watched         Boolean  @default(false)
   screeningNumber Int
   seatNumber      Int
 }
 
 model Opinion {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
   movieTitle  String
   description String
-  movieId     String
   rate        String
+  deleted     Boolean @default(false)
+  user        User?   @relation(fields: [userId], references: [id])
+  userId      String? @db.ObjectId
+  movieId     String? @db.ObjectId
+  movie       Movie?  @relation(fields: [movieId], references: [id])
 }
 
 model Admin {
@@ -50,30 +55,36 @@ model Admin {
 }
 
 model CinemaAdmin {
-  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  id              String           @id @default(auto()) @map("_id") @db.ObjectId
   name            String
   lastName        String
   cinemaName      String
   password        String
-  movies          String[]
-  MoviesScreening String[]
+  deleted         Boolean          @default(false)
+  movies          Movie[]
+  moviesScreening MovieScreening[]
 }
 
 model Movie {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  description String
-  images      String[]
-  opinionId   String[]
-  premiere    DateTime
-  end         DateTime
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  title         String
+  description   String
+  images        String[]
+  opinion       Opinion[]
+  premiere      DateTime
+  end           DateTime
+  deleted       Boolean      @default(false)
+  cinemaAdmin   CinemaAdmin? @relation(fields: [cinemaAdminId], references: [id])
+  cinemaAdminId String?      @db.ObjectId
 }
 
-model movieScreening {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
-  movieId      String
-  reservations Int[]
-  price        Float
-  date         DateTime
-  end          Boolean
+model MovieScreening {
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  movieId       String
+  reservations  Int[]
+  price         Float
+  date          DateTime
+  end           Boolean
+  CinemaAdmin   CinemaAdmin? @relation(fields: [cinemaAdminId], references: [id])
+  cinemaAdminId String?      @db.ObjectId
 }

@@ -16,7 +16,7 @@ import { CreateReservationDto } from '../../dto/CreateReservationDto';
 @Controller('user')
 export class UserController {
   constructor(@Inject(UserService) private UserService: UserService) {}
-  @Get('/User/:id')
+  @Get('/:id')
   async getUser(@Param() id: string) {
     return this.UserService.getUser(id);
   }
@@ -44,7 +44,7 @@ export class UserController {
     return this.UserService.createReservation(Reservation);
   }
 
-  @Put('/User/:id')
+  @Put('/:id')
   async updateUser(
     @Body() user: { email; name; lastName },
     @Param() id: string,
@@ -55,5 +55,10 @@ export class UserController {
       user.lastName,
       id,
     );
+  }
+
+  @Get('/addOpinion')
+  async addOpinion(@Body() opinion) {
+    return this.UserService.addOpinion(opinion);
   }
 }
