@@ -1,4 +1,11 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Inject } from '@nestjs/common';
+import { CinemaService } from './cinema.service';
 
 @Controller('cinema')
-export class CinemaController {}
+export class CinemaController {
+  constructor(@Inject(CinemaService) private CinemaService: CinemaService) {}
+  @Get('/getAll')
+  async getAll() {
+    return this.CinemaService.getAll();
+  }
+}

@@ -60,6 +60,7 @@ export class UserService {
       console.log(e.code + ' ' + e.message);
     }
   }
+
   async getUser(id: string) {
     return await prisma.user.findFirst({
       where: { id },
@@ -71,6 +72,7 @@ export class UserService {
       },
     });
   }
+
   async getUserActiveReservations(id: string) {
     return await prisma.user.findFirst({
       where: { id },
