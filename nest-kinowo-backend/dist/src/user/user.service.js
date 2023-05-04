@@ -11,6 +11,7 @@ const common_1 = require("@nestjs/common");
 const prisma_1 = require("../../prisma/prisma");
 const bcrypt = require("bcrypt");
 const validation_1 = require("../../validation/validation");
+const uuid_1 = require("uuid");
 let UserService = class UserService {
     async register({ name, lastName, email, password, }) {
         if (name && lastName && email && password) {
@@ -45,6 +46,7 @@ let UserService = class UserService {
         console.log(email, password);
         try {
             password = await bcrypt.hash(password, 12);
+            const token = await bcrypt.hash(email + uuid_1.v4.toString(), 12);
             const resp = await prisma_1.default.user.findFirst({
                 where: { email, password },
                 select: {
@@ -54,11 +56,18 @@ let UserService = class UserService {
                 },
             });
             if (!resp) {
-                return { message: 'not Found' };
+                return false;
+            }
+            else {
+                await prisma_1.default.user.update({
+                    where: { id: resp.id },
+                    data: { token },
+                });
+                return { token, user: resp };
             }
         }
         catch (e) {
-            console.log(e.code + ' ' + e.message);
+            return { error: e.code + ' ' + e.message };
         }
     }
     async getUser(id) {

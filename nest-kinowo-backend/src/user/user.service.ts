@@ -5,6 +5,8 @@ import * as bcrypt from 'bcrypt';
 import { LoginUserDto } from '../../dto/loginUser.dto';
 import { CreateReservationDto } from '../../dto/CreateReservationDto';
 import { Valid } from '../../validation/validation';
+import { v4 as uuid } from 'uuid';
+
 //toDo dodać sprawdzanie czy użytkownik nie jest usunięty
 @Injectable()
 export class UserService {
@@ -49,6 +51,8 @@ export class UserService {
     console.log(email, password);
     try {
       password = await bcrypt.hash(password, 12);
+      const token = await bcrypt.hash(email + uuid.toString(), 12);
+
       const resp = await prisma.user.findFirst({
         where: { email, password },
         select: {
@@ -58,10 +62,16 @@ export class UserService {
         },
       });
       if (!resp) {
-        return { message: 'not Found' };
+        return false;
+      } else {
+        await prisma.user.update({
+          where: { id: resp.id },
+          data: { token },
+        });
+        return { token, user: resp };
       }
     } catch (e) {
-      console.log(e.code + ' ' + e.message);
+      return { error: e.code + ' ' + e.message };
     }
   }
 

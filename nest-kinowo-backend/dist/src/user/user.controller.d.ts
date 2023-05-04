@@ -21,8 +21,18 @@ export declare class UserController {
         status: number;
         message: string;
     }>;
-    login(User: LoginUserDto): Promise<{
-        message: string;
+    login(User: LoginUserDto): Promise<false | {
+        token: string;
+        user: {
+            name: string;
+            email: string;
+            id: string;
+        };
+        error?: undefined;
+    } | {
+        error: string;
+        token?: undefined;
+        user?: undefined;
     }>;
     createReservation(Reservation: CreateReservationDto): Promise<import(".prisma/client").Reservation>;
     updateUser(user: {
