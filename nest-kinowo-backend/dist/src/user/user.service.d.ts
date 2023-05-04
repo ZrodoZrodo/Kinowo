@@ -25,4 +25,19 @@ export declare class UserService {
     }>;
     createReservation({ userId, movieId, title, date, price, screeningNumber, seatNumber, }: CreateReservationDto): Promise<import(".prisma/client").Reservation>;
     updateUser(email: string, name: string, lastName: string, id: string): Promise<import(".prisma/client").User>;
+    getMoviesHistory(id: string): Promise<{
+        reservations: {
+            movieId: string;
+            title: string;
+            date: Date;
+            price: number;
+        }[];
+    }>;
+    addOpinion({ userid, movieId, movieTitle, description, rate, }: {
+        userid: string;
+        movieId: string;
+        movieTitle: string;
+        description: string;
+        rate: string;
+    }): Promise<import(".prisma/client").Opinion>;
 }

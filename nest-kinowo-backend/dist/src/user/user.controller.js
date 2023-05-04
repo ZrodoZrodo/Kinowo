@@ -43,9 +43,12 @@ let UserController = class UserController {
     async updateUser(user, id) {
         return this.UserService.updateUser(user.email, user.name, user.lastName, id);
     }
+    async addOpinion(opinion) {
+        return this.UserService.addOpinion(opinion);
+    }
 };
 __decorate([
-    (0, common_1.Get)('/User/:id'),
+    (0, common_1.Get)('/:id'),
     __param(0, (0, common_1.Param)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -87,13 +90,20 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "createReservation", null);
 __decorate([
-    (0, common_1.Put)('/User/:id'),
+    (0, common_1.Put)('/:id'),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Param)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "updateUser", null);
+__decorate([
+    (0, common_1.Get)('/addOpinion'),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "addOpinion", null);
 UserController = __decorate([
     (0, common_1.Controller)('user'),
     __param(0, (0, common_1.Inject)(user_service_1.UserService)),
