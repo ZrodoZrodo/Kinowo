@@ -11,17 +11,16 @@ const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const user_module_1 = require("./user/user.module");
-const cinema_controller_1 = require("./cinema/cinema.controller");
-const cinema_module_1 = require("./cinema/cinema.module");
 const admin_module_1 = require("./admin/admin.module");
 const dotenv = require("dotenv");
+const cinema_module_1 = require("./cinema/cinema.module");
 dotenv.config();
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [user_module_1.UserModule, cinema_module_1.CinemaModule, admin_module_1.AdminModule],
-        controllers: [app_controller_1.AppController, cinema_controller_1.CinemaController],
+        imports: [user_module_1.UserModule, admin_module_1.AdminModule, cinema_module_1.CinemaModule],
+        controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })
 ], AppModule);

@@ -7,15 +7,13 @@ export declare class UserService {
         message: string;
     }>;
     login({ email, password }: LoginUserDto): Promise<{
-        id: string;
-        email: string;
-        name: string;
+        message: string;
     }>;
     getUser(id: string): Promise<{
-        id: string;
-        email: string;
         name: string;
         lastName: string;
+        email: string;
+        id: string;
     }>;
     getUserActiveReservations(id: string): Promise<{
         reservations: import(".prisma/client").Reservation[];

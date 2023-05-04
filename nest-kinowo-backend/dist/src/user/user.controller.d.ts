@@ -6,10 +6,10 @@ export declare class UserController {
     private UserService;
     constructor(UserService: UserService);
     getUser(id: string): Promise<{
-        id: string;
-        email: string;
         name: string;
         lastName: string;
+        email: string;
+        id: string;
     }>;
     getUserActiveReservations(id: string): Promise<{
         reservations: import(".prisma/client").Reservation[];
@@ -22,9 +22,7 @@ export declare class UserController {
         message: string;
     }>;
     login(User: LoginUserDto): Promise<{
-        id: string;
-        email: string;
-        name: string;
+        message: string;
     }>;
     createReservation(Reservation: CreateReservationDto): Promise<import(".prisma/client").Reservation>;
     updateUser(user: {

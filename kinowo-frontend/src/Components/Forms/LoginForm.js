@@ -18,15 +18,15 @@ const LoginForm = () => {
       const response = await fetch(`${API}/user/login`, {
         method: "POST",
         headers: {
-          
-          "Content-Type": "application/json",
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({
           email: formData.get("email").valueOf(),
-          password: formData.get("password").valueOf(),
+          password: formData.get("password").valueOf()
         }),
       });
-
+console.log(JSON.stringify({   email: formData.get("email").valueOf(),
+  password: formData.get("password").valueOf()}))
       const { user, token } = await response.json();
       setUser(user);
       localStorage.setItem("TOKEN", token);

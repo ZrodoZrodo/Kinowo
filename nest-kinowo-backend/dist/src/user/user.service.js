@@ -42,9 +42,10 @@ let UserService = class UserService {
         }
     }
     async login({ email, password }) {
+        console.log(email, password);
         try {
             password = await bcrypt.hash(password, 12);
-            return await prisma_1.default.user.findFirst({
+            const resp = await prisma_1.default.user.findFirst({
                 where: { email, password },
                 select: {
                     id: true,
@@ -52,6 +53,9 @@ let UserService = class UserService {
                     email: true,
                 },
             });
+            if (!resp) {
+                return { message: 'not Found' };
+            }
         }
         catch (e) {
             console.log(e.code + ' ' + e.message);
