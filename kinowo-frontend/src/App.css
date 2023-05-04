@@ -27,3 +27,9 @@ html {
   backdrop-filter: blur(20px);
   border-radius: 40px;
 }
+.Hero__background-img {
+  background-image: url(./Components/UI/Backgrounds/felix-mooneeram-evlkOfkQ5rE-unsplash.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

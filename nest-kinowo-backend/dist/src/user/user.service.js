@@ -21,7 +21,6 @@ let UserService = class UserService {
                 return { status: 400, message: 'Bad Data' };
             try {
                 password = await bcrypt.hash(password, 12);
-                console.log(password);
                 await prisma_1.default.user.create({
                     data: {
                         email,
@@ -110,6 +109,41 @@ let UserService = class UserService {
         return prisma_1.default.user.update({
             where: { id },
             data: { email, name, lastName },
+        });
+    }
+    async getMoviesHistory(id) {
+        return prisma_1.default.user.findFirst({
+            where: { id },
+            select: {
+                reservations: {
+                    where: { watched: true },
+                    select: {
+                        movieId: true,
+                        title: true,
+                        date: true,
+                        price: true,
+                    },
+                },
+            },
+        });
+    }
+    async addOpinion({ userid, movieId, movieTitle, description, rate, }) {
+        return prisma_1.default.opinion.create({
+            data: {
+                movieTitle,
+                description,
+                rate,
+                user: {
+                    connect: {
+                        id: userid,
+                    },
+                },
+                movie: {
+                    connect: {
+                        id: movieId,
+                    },
+                },
+            },
         });
     }
 };

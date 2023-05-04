@@ -1,7 +1,9 @@
 import API from "../../env";
+import { useNavigate } from "react-router-dom";
 import InputForm from "./InputForm";
 import Submit from "./Submit";
 const RegisterForm = (props) => {
+  const navigate = useNavigate();
   async function Register(event) {
     event.preventDefault();
     const formdata = new FormData(event.target);
@@ -18,6 +20,7 @@ const RegisterForm = (props) => {
           password: formdata.get("password").valueOf(),
         }),
       });
+      navigate("/login");
     } catch (error) {
       console.error(error);
     }

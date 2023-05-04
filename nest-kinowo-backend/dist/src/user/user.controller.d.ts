@@ -32,4 +32,5 @@ export declare class UserController {
         name: any;
         lastName: any;
     }, id: string): Promise<import(".prisma/client").User>;
+    addOpinion(opinion: any): Promise<import(".prisma/client").Opinion>;
 }
