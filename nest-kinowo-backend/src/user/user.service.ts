@@ -6,6 +6,7 @@ import { LoginUserDto } from '../../dto/loginUser.dto';
 import { CreateReservationDto } from '../../dto/CreateReservationDto';
 import { Valid } from '../../validation/validation';
 import { v4 as uuid } from 'uuid';
+import { moveDefaultProjectToStart } from '@nestjs/cli/lib/utils/project-utils';
 
 //toDo dodać sprawdzanie czy użytkownik nie jest usunięty
 @Injectable()
@@ -117,28 +118,43 @@ export class UserService {
     price,
     screeningNumber,
     seatNumber,
+    token,
   }: CreateReservationDto) {
-    return await prisma.reservation.create({
-      data: {
-        movieId,
-        title,
-        date,
-        price,
-        screeningNumber,
-        seatNumber,
-        user: {
-          connect: {
-            id: userId,
+    if (await this.auth(token, userId)) {
+      return await prisma.reservation.create({
+        data: {
+          movieId,
+          title,
+          date,
+          price,
+          screeningNumber,
+          seatNumber,
+          user: {
+            connect: {
+              id: userId,
+            },
           },
         },
-      },
-    });
+      });
+    } else {
+      return false;
+    }
   }
-  async updateUser(email: string, name: string, lastName: string, id: string) {
-    return prisma.user.update({
-      where: { id },
-      data: { email, name, lastName },
-    });
+  async updateUser(
+    email: string,
+    name: string,
+    lastName: string,
+    id: string,
+    token: string,
+  ) {
+    if (await this.auth(token, id)) {
+      return prisma.user.update({
+        where: { id },
+        data: { email, name, lastName },
+      });
+    } else {
+      return false;
+    }
   }
 
   async getMoviesHistory(id: string) {
@@ -157,35 +173,46 @@ export class UserService {
       },
     });
   }
+
+  async auth(token: string, id: string) {
+    return !!prisma.user.findFirst({
+      where: { token, id },
+    });
+  }
+
   async addOpinion({
     userid,
     movieId,
     movieTitle,
     description,
     rate,
+    token,
   }: {
     userid: string;
     movieId: string;
     movieTitle: string;
     description: string;
     rate: string;
+    token: string;
   }) {
-    return prisma.opinion.create({
-      data: {
-        movieTitle,
-        description,
-        rate,
-        user: {
-          connect: {
-            id: userid,
+    if (await this.auth(token, userid)) {
+      return prisma.opinion.create({
+        data: {
+          movieTitle,
+          description,
+          rate,
+          user: {
+            connect: {
+              id: userid,
+            },
+          },
+          movie: {
+            connect: {
+              id: movieId,
+            },
           },
         },
-        movie: {
-          connect: {
-            id: movieId,
-          },
-        },
-      },
-    });
+      });
+    }
   }
 }

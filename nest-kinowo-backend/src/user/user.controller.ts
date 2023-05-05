@@ -46,19 +46,31 @@ export class UserController {
 
   @Put('/:id')
   async updateUser(
-    @Body() user: { email; name; lastName },
+    @Body()
+    user: { email: string; name: string; lastName: string; token: string },
     @Param() id: string,
   ) {
     return this.UserService.updateUser(
       user.email,
       user.name,
       user.lastName,
+      user.token,
       id,
     );
   }
 
-  @Get('/addOpinion')
-  async addOpinion(@Body() opinion) {
+  @Post('/addOpinion')
+  async addOpinion(
+    @Body()
+    opinion: {
+      userid: string;
+      movieId: string;
+      movieTitle: string;
+      description: string;
+      rate: string;
+      token: string;
+    },
+  ) {
     return this.UserService.addOpinion(opinion);
   }
 }
