@@ -11,6 +11,17 @@ module.exports = {
       pink: "#C66176",
       "dark-pink": "#A43B5C",
       "light-pink": "#C22642",
+      "dark-purple":"#101017"
+    },
+    letterSpacing: {
+      tightest: '-.075em',
+      tighter: '-.05em',
+      tight: '-.025em',
+      normal: '0',
+      wide: '.025em',
+      wider: '.05em',
+      widest: '.1em',
+      widest: '.25em',
     },
   },
   daisyui: {

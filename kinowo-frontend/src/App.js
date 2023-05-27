@@ -15,9 +15,10 @@ function App() {
         <Route path="" exact element={<HeroPage />} />
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
-        {user && (
+        <Route path="dashboard" element={<Dashboard />} />
+        {/* {user && (
           <Route path="dashboard" element={<Dashboard />} />
-        )}
+        )} */}
       </Routes>
     </Router>
   );
