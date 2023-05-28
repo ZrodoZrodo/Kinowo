@@ -36,9 +36,17 @@ export declare class UserController {
     }>;
     createReservation(Reservation: CreateReservationDto): Promise<import(".prisma/client").Reservation>;
     updateUser(user: {
-        email: any;
-        name: any;
-        lastName: any;
+        email: string;
+        name: string;
+        lastName: string;
+        token: string;
     }, id: string): Promise<import(".prisma/client").User>;
-    addOpinion(opinion: any): Promise<import(".prisma/client").Opinion>;
+    addOpinion(opinion: {
+        userid: string;
+        movieId: string;
+        movieTitle: string;
+        description: string;
+        rate: string;
+        token: string;
+    }): Promise<import(".prisma/client").Opinion>;
 }

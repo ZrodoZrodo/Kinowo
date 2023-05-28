@@ -41,7 +41,7 @@ let UserController = class UserController {
         return this.UserService.createReservation(Reservation);
     }
     async updateUser(user, id) {
-        return this.UserService.updateUser(user.email, user.name, user.lastName, id);
+        return this.UserService.updateUser(user.email, user.name, user.lastName, user.token, id);
     }
     async addOpinion(opinion) {
         return this.UserService.addOpinion(opinion);
@@ -98,7 +98,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "updateUser", null);
 __decorate([
-    (0, common_1.Get)('/addOpinion'),
+    (0, common_1.Post)('/addOpinion'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),

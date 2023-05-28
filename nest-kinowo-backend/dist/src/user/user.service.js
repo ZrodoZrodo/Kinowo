@@ -43,7 +43,6 @@ let UserService = class UserService {
         }
     }
     async login({ email, password }) {
-        console.log(email, password);
         try {
             password = await bcrypt.hash(password, 12);
             const token = await bcrypt.hash(email + uuid_1.v4.toString(), 12);
@@ -101,7 +100,7 @@ let UserService = class UserService {
             },
         });
     }
-    async createReservation({ userId, movieId, title, date, price, screeningNumber, seatNumber, }) {
+    async createReservation({ userId, movieId, title, date, price, screeningNumber, seatNumber, token, }) {
         return await prisma_1.default.reservation.create({
             data: {
                 movieId,

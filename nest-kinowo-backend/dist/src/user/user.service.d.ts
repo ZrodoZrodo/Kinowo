@@ -9,9 +9,9 @@ export declare class UserService {
     login({ email, password }: LoginUserDto): Promise<false | {
         token: string;
         user: {
-            id: string;
-            email: string;
             name: string;
+            email: string;
+            id: string;
         };
         error?: undefined;
     } | {
@@ -20,10 +20,10 @@ export declare class UserService {
         user?: undefined;
     }>;
     getUser(id: string): Promise<{
-        id: string;
-        email: string;
         name: string;
         lastName: string;
+        email: string;
+        id: string;
     }>;
     getUserActiveReservations(id: string): Promise<{
         reservations: import(".prisma/client").Reservation[];
@@ -31,7 +31,7 @@ export declare class UserService {
     getUserComingReservations(id: string): Promise<{
         reservations: import(".prisma/client").Reservation[];
     }>;
-    createReservation({ userId, movieId, title, date, price, screeningNumber, seatNumber, }: CreateReservationDto): Promise<import(".prisma/client").Reservation>;
+    createReservation({ userId, movieId, title, date, price, screeningNumber, seatNumber, token, }: CreateReservationDto): Promise<import(".prisma/client").Reservation>;
     updateUser(email: string, name: string, lastName: string, id: string): Promise<import(".prisma/client").User>;
     getMoviesHistory(id: string): Promise<{
         reservations: {
@@ -47,5 +47,6 @@ export declare class UserService {
         movieTitle: string;
         description: string;
         rate: string;
+        token: string;
     }): Promise<import(".prisma/client").Opinion>;
 }
