@@ -55,3 +55,9 @@ html {
   border: 1px solid #621419;
   border-radius: 10px 10px 0px 0px;
 }
+.Dashboard_banner{
+  background-image: url(./Components/UI/Backgrounds/Banner.png);
+  
+  background-repeat: no-repeat;
+  background-size: cover;
+}

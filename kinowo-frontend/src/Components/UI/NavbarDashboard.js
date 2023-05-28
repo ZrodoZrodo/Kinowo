@@ -49,34 +49,43 @@ const NavbarDashboard = (props) => {
             </li>
           </ul>
         </div>
+        <a className="normal-case sm:text-4xl tracking-widest text-left pl-8"> KINOWO</a>
       </div>
-    
-        <a className="normal-case text-xl tracking-widest text-left">KINOWO</a>
+
       
+
       <div className="navbar-end">
         <input
           type="text"
-          placeholder="username@site.com"
-          class="input input-bordered w-full pr-16"
+          placeholder="Wyszukaj kino albo film"
+          class="input input-bordered w-1/3 pr-16"
         />
-        
+
         <button className="btn btn-ghost btn-circle">
           <div className="indicator">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
+              width="24"
+              height="24"
               viewBox="0 0 24 24"
-              stroke="currentColor"
+              fill="none"
             >
               <path
+                d="M11.7163 2.75482H7.21631V2.75482C4.73103 2.75482 2.71631 4.76954 2.71631 7.25482V16.7422C2.71631 19.2275 4.73103 21.2422 7.21631 21.2422V21.2422H11.7163"
+                stroke="white"
+                stroke-width="1.5"
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                stroke-width="2"
-                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+              />
+              <path
+                d="M10.9761 11.9986H21.3529M21.3529 11.9986L17.8053 8.45093M21.3529 11.9986L17.8053 15.5462"
+                stroke="white"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               />
             </svg>
-            <span className="badge badge-xs badge-primary indicator-item"></span>
+            
           </div>
         </button>
       </div>
