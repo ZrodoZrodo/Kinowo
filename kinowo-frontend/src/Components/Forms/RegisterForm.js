@@ -20,7 +20,12 @@ const RegisterForm = (props) => {
           password: formdata.get("password").valueOf(),
         }),
       });
-      navigate("/login");
+      console.log(response)
+      if(response.status===201)
+        {
+            navigate("/login");
+        }
+
     } catch (error) {
       console.error(error);
     }

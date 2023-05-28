@@ -16,7 +16,6 @@ model User {
   name         String
   lastName     String
   password     String
-  token        String?
   opinions     Opinion[]
   deleted      Boolean       @default(false)
   reservations Reservation[]

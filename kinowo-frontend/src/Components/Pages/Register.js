@@ -1,7 +1,7 @@
 import RegisterForm from "../Forms/RegisterForm";
 import Card from "../UI/Card";
 
-const Register = (props) => {
+const Register = () => {
   return (
     <div className="Register grid content-center justify-items-center">
       <Card className="flex flex-wrap">

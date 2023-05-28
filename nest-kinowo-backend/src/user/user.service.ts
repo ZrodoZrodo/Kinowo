@@ -10,6 +10,32 @@ import { v4 as uuid } from 'uuid';
 //toDo dodać sprawdzanie czy użytkownik nie jest usunięty
 @Injectable()
 export class UserService {
+
+
+
+
+  private readonly users = [
+    {
+      userId: 1,
+      username: 'john',
+      password: 'changeme',
+    },
+    {
+      userId: 2,
+      username: 'maria',
+      password: 'guess',
+    },
+  ];
+
+  async findOne(username: string): Promise<any> {
+
+     return await prisma.user.findFirst({
+      where:{email:username}
+    })
+  }
+
+
+
   async register({
     name,
     lastName,
@@ -24,10 +50,12 @@ export class UserService {
           Valid({ email }) &&
           Valid({ password })
         )
-      )
-        return { status: 400, message: 'Bad Data' };
+      ) {
+        console.log(Valid({lastName}))
+        return {status: 400, message: 'Bad Data'};
+      }
       try {
-        password = await bcrypt.hash(password, 12);
+        password = await bcrypt.hash(password, 2);
         await prisma.user.create({
           data: {
             email,
@@ -47,43 +75,25 @@ export class UserService {
     }
   }
 
-  async login({ email, password }: LoginUserDto) {
-    try {
-      password = await bcrypt.hash(password, 12);
-      const token = await bcrypt.hash(email + uuid.toString(), 12);
 
-      const resp = await prisma.user.findFirst({
-        where: { email, password },
-        select: {
-          id: true,
-          name: true,
-          email: true,
-        },
-      });
-      if (!resp) {
-        return false;
-      } else {
-        await prisma.user.update({
-          where: { id: resp.id },
-          data: { token },
-        });
-        return { token, user: resp };
-      }
-    } catch (e) {
-      return { error: e.code + ' ' + e.message };
-    }
-  }
 
   async getUser(id: string) {
-    return await prisma.user.findFirst({
-      where: { id },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        lastName: true,
-      },
-    });
+
+    try {
+      return await prisma.user.findFirst({
+        where: {
+          id:id,
+        },
+        select:{
+          id: true,
+          email: true,
+          lastName: true,
+          deleted: true,
+        }
+      })
+    }catch (e) {
+      console.log(e)
+    }
   }
 
   async getUserActiveReservations(id: string) {

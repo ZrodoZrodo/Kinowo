@@ -11,17 +11,37 @@ const common_1 = require("@nestjs/common");
 const prisma_1 = require("../../prisma/prisma");
 const bcrypt = require("bcrypt");
 const validation_1 = require("../../validation/validation");
-const uuid_1 = require("uuid");
 let UserService = class UserService {
+    constructor() {
+        this.users = [
+            {
+                userId: 1,
+                username: 'john',
+                password: 'changeme',
+            },
+            {
+                userId: 2,
+                username: 'maria',
+                password: 'guess',
+            },
+        ];
+    }
+    async findOne(username) {
+        return await prisma_1.default.user.findFirst({
+            where: { email: username }
+        });
+    }
     async register({ name, lastName, email, password, }) {
         if (name && lastName && email && password) {
             if (!((0, validation_1.Valid)({ name }) &&
                 (0, validation_1.Valid)({ lastName }) &&
                 (0, validation_1.Valid)({ email }) &&
-                (0, validation_1.Valid)({ password })))
+                (0, validation_1.Valid)({ password }))) {
+                console.log((0, validation_1.Valid)({ lastName }));
                 return { status: 400, message: 'Bad Data' };
+            }
             try {
-                password = await bcrypt.hash(password, 12);
+                password = await bcrypt.hash(password, 2);
                 await prisma_1.default.user.create({
                     data: {
                         email,
@@ -42,43 +62,23 @@ let UserService = class UserService {
             return { status: 400, message: 'check your JSON' };
         }
     }
-    async login({ email, password }) {
+    async getUser(id) {
         try {
-            password = await bcrypt.hash(password, 12);
-            const token = await bcrypt.hash(email + uuid_1.v4.toString(), 12);
-            const resp = await prisma_1.default.user.findFirst({
-                where: { email, password },
+            return await prisma_1.default.user.findFirst({
+                where: {
+                    id: id,
+                },
                 select: {
                     id: true,
-                    name: true,
                     email: true,
-                },
+                    lastName: true,
+                    deleted: true,
+                }
             });
-            if (!resp) {
-                return false;
-            }
-            else {
-                await prisma_1.default.user.update({
-                    where: { id: resp.id },
-                    data: { token },
-                });
-                return { token, user: resp };
-            }
         }
         catch (e) {
-            return { error: e.code + ' ' + e.message };
+            console.log(e);
         }
-    }
-    async getUser(id) {
-        return await prisma_1.default.user.findFirst({
-            where: { id },
-            select: {
-                id: true,
-                email: true,
-                name: true,
-                lastName: true,
-            },
-        });
     }
     async getUserActiveReservations(id) {
         return await prisma_1.default.user.findFirst({

@@ -15,22 +15,24 @@ const LoginForm = () => {
     const setCookies = new Cookies();
     const formData = new FormData(e.target);
     try {
-      const response = await fetch(`${API}/user/login`, {
+      const response = await fetch(`${API}/auth/login`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
+
         body: JSON.stringify({
-          email: formData.get("email").valueOf(),
+          username: formData.get("email").valueOf(),
           password: formData.get("password").valueOf()
         }),
       });
-console.log(JSON.stringify({   email: formData.get("email").valueOf(),
-  password: formData.get("password").valueOf()}))
       const { user, token } = await response.json();
-      setUser(user);
-      localStorage.setItem("TOKEN", token);
-      navigate("/dashboard");
+      console.log( user, token)
+      if(user&&token) {
+        setUser(user);
+        localStorage.setItem("TOKEN", token);
+        navigate("/dashboard");
+      }
     } catch (error) {
       console.error(error);
     }

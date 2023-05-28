@@ -16,14 +16,14 @@ exports.UserController = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
 const create_user_dto_1 = require("../../dto/create-user.dto");
-const loginUser_dto_1 = require("../../dto/loginUser.dto");
 const CreateReservationDto_1 = require("../../dto/CreateReservationDto");
+const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 let UserController = class UserController {
     constructor(UserService) {
         this.UserService = UserService;
     }
     async getUser(id) {
-        return this.UserService.getUser(id);
+        return this.UserService.getUser(id.id);
     }
     async getUserActiveReservations(id) {
         return this.UserService.getUserActiveReservations(id);
@@ -34,24 +34,22 @@ let UserController = class UserController {
     async register(newUser) {
         return this.UserService.register(newUser);
     }
-    async login(User) {
-        return this.UserService.login(User);
-    }
     async createReservation(Reservation) {
         return this.UserService.createReservation(Reservation);
     }
     async updateUser(user, id) {
-        return this.UserService.updateUser(user.email, user.name, user.lastName, user.token, id);
+        return this.UserService.updateUser(user.email, user.name, user.lastName, id);
     }
     async addOpinion(opinion) {
         return this.UserService.addOpinion(opinion);
     }
 };
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)('/:id'),
     __param(0, (0, common_1.Param)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getUser", null);
 __decorate([
@@ -75,13 +73,6 @@ __decorate([
     __metadata("design:paramtypes", [create_user_dto_1.CreateUserDto]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "register", null);
-__decorate([
-    (0, common_1.Post)('/login'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [loginUser_dto_1.LoginUserDto]),
-    __metadata("design:returntype", Promise)
-], UserController.prototype, "login", null);
 __decorate([
     (0, common_1.Post)('/createReservation'),
     __param(0, (0, common_1.Body)()),

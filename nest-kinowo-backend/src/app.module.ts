@@ -5,11 +5,13 @@ import { UserModule } from './user/user.module';
 
 import { AdminModule } from './admin/admin.module';
 import * as dotenv from 'dotenv';
-import { CinemaModule } from './cinema/cinema.module'; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import { CinemaModule } from './cinema/cinema.module';
+import { AuthModule } from './auth/auth.module';
+
 dotenv.config();
 
 @Module({
-  imports: [UserModule, AdminModule, CinemaModule],
+  imports: [UserModule, AdminModule, CinemaModule, AuthModule],
   controllers: [AppController],
   providers: [AppService],
 })

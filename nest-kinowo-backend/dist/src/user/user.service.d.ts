@@ -1,29 +1,17 @@
 import { CreateUserDto } from '../../dto/create-user.dto';
-import { LoginUserDto } from '../../dto/loginUser.dto';
 import { CreateReservationDto } from '../../dto/CreateReservationDto';
 export declare class UserService {
+    private readonly users;
+    findOne(username: string): Promise<any>;
     register({ name, lastName, email, password, }: CreateUserDto): Promise<{
         status: number;
         message: string;
     }>;
-    login({ email, password }: LoginUserDto): Promise<false | {
-        token: string;
-        user: {
-            name: string;
-            email: string;
-            id: string;
-        };
-        error?: undefined;
-    } | {
-        error: string;
-        token?: undefined;
-        user?: undefined;
-    }>;
     getUser(id: string): Promise<{
-        name: string;
-        lastName: string;
-        email: string;
         id: string;
+        email: string;
+        lastName: string;
+        deleted: boolean;
     }>;
     getUserActiveReservations(id: string): Promise<{
         reservations: import(".prisma/client").Reservation[];

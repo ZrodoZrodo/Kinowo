@@ -1,24 +1,29 @@
 import {
   Body,
   Controller,
-  Get,
+  Get, HttpCode,
   Inject,
   Param,
   Post,
   Put,
-  Res,
+  Res, UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from '../../dto/create-user.dto';
 import { LoginUserDto } from '../../dto/loginUser.dto';
 import { CreateReservationDto } from '../../dto/CreateReservationDto';
+import {JwtAuthGuard} from "../auth/jwt-auth.guard";
 
 @Controller('user')
 export class UserController {
   constructor(@Inject(UserService) private UserService: UserService) {}
+
+
+  @UseGuards(JwtAuthGuard)
   @Get('/:id')
-  async getUser(@Param() id: string) {
-    return this.UserService.getUser(id);
+  async getUser(@Param() id: {id:string}) {
+
+    return this.UserService.getUser(id.id);
   }
   @Get('/UserActiveReservations/:id')
   async getUserActiveReservations(@Param() id: string) {
@@ -34,10 +39,6 @@ export class UserController {
     return this.UserService.register(newUser);
   }
 
-  @Post('/login')
-  async login(@Body() User: LoginUserDto) {
-    return this.UserService.login(User);
-  }
 
   @Post('/createReservation')
   async createReservation(@Body() Reservation: CreateReservationDto) {
@@ -54,7 +55,6 @@ export class UserController {
       user.email,
       user.name,
       user.lastName,
-      user.token,
       id,
     );
   }

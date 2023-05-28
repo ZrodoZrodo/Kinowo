@@ -14,12 +14,13 @@ const user_module_1 = require("./user/user.module");
 const admin_module_1 = require("./admin/admin.module");
 const dotenv = require("dotenv");
 const cinema_module_1 = require("./cinema/cinema.module");
+const auth_module_1 = require("./auth/auth.module");
 dotenv.config();
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [user_module_1.UserModule, admin_module_1.AdminModule, cinema_module_1.CinemaModule],
+        imports: [user_module_1.UserModule, admin_module_1.AdminModule, cinema_module_1.CinemaModule, auth_module_1.AuthModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

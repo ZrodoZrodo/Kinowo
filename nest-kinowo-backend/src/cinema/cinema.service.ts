@@ -28,38 +28,7 @@ export class CinemaService {
     });
   }
 
-  async login({
-    cinemaName,
-    password,
-  }: {
-    cinemaName: string;
-    password: string;
-  }) {
-    try {
-      password = await bcrypt.hash(password, 12);
-      const token = await bcrypt.hash(cinemaName + uuid.toString(), 12);
 
-      const resp = await prisma.cinemaAdmin.findFirst({
-        where: { cinemaName, password, deleted: false },
-        select: {
-          id: true,
-          name: true,
-          lastName: true,
-        },
-      });
-      if (!resp) {
-        return false;
-      } else {
-        await prisma.user.update({
-          where: { id: resp.id },
-          data: { token },
-        });
-        return { token, user: resp };
-      }
-    } catch (e) {
-      return { error: e.code + ' ' + e.message };
-    }
-  }
   async addMovie({ title, description, premiere, end, id }) {
     return prisma.movie.create({
       data: {
