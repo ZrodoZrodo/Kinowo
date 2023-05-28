@@ -8,6 +8,7 @@ html {
   margin: 0;
   font-family: "Inter", sans-serif;
   scroll-behavior: smooth;
+  background-color: #101017;
 }
 .Landing{
   background-color: #101017;
@@ -18,6 +19,10 @@ html {
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
+}
+.Dashboard{
+  background: #101017;
+
 }
 .Card{
   background: linear-gradient(115.5deg, #FFFFFF 5.37%, rgba(217, 217, 217, 0.36) 96.08%);
@@ -30,6 +35,29 @@ html {
 .Hero__background-img {
   background-image: url(./Components/UI/Backgrounds/felix-mooneeram-evlkOfkQ5rE-unsplash.jpg);
   background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.Footer_dashboard{
+  background: linear-gradient(0deg, #13081C 0%, rgba(19, 8, 28, 0) 100%);
+  border: 1px solid #55257D;
+  border-radius: 10px 10px 0px 0px;
+}
+.Burger{
+  background: linear-gradient(180deg, #3D2C4A 0%, rgba(61, 44, 74, 0) 100%);
+  border-radius: 0px 20px 20px 0px;
+}
+.About__backgorund{
+  background: radial-gradient(108.3% 108.3% at 50% -8.3%, #621419 0%, rgba(37, 17, 24, 0) 100%);
+}
+.Footer_hero{
+  background: linear-gradient(0deg, #13081C 0%, rgba(19, 8, 28, 0) 100%);
+  border: 1px solid #621419;
+  border-radius: 10px 10px 0px 0px;
+}
+.Dashboard_banner{
+  background-image: url(./Components/UI/Backgrounds/Banner.png);
+  
   background-repeat: no-repeat;
   background-size: cover;
 }
