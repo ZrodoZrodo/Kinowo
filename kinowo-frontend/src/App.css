@@ -45,7 +45,7 @@ html {
 }
 .Burger{
   background: linear-gradient(180deg, #3D2C4A 0%, rgba(61, 44, 74, 0) 100%);
-  border-radius: 0px 20px 20px 0px;
+  
 }
 .About__backgorund{
   background: radial-gradient(108.3% 108.3% at 50% -8.3%, #621419 0%, rgba(37, 17, 24, 0) 100%);
