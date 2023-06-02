@@ -7,9 +7,9 @@ export declare class UserController {
     getUser(id: {
         id: string;
     }): Promise<{
-        lastName: string;
-        email: string;
         id: string;
+        email: string;
+        lastName: string;
         deleted: boolean;
     }>;
     getUserActiveReservations(id: string): Promise<{

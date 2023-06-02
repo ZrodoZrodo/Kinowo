@@ -13,7 +13,6 @@ export class AppController {
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
   async login(@Request() req) {
-    console.log("hh")
     return {
       token:await this.authService.login(req.user),
       user:req.user,

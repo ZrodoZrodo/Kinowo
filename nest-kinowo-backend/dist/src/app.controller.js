@@ -21,7 +21,6 @@ let AppController = class AppController {
         this.authService = authService;
     }
     async login(req) {
-        console.log("hh");
         return {
             token: await this.authService.login(req.user),
             user: req.user,
