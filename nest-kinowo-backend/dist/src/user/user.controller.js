@@ -53,6 +53,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getUser", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)('/UserActiveReservations/:id'),
     __param(0, (0, common_1.Param)()),
     __metadata("design:type", Function),
@@ -60,6 +61,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getUserActiveReservations", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)('/UserComingReservations/:id'),
     __param(0, (0, common_1.Param)()),
     __metadata("design:type", Function),
@@ -74,6 +76,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "register", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('/createReservation'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -81,6 +84,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "createReservation", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Put)('/:id'),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Param)()),
@@ -89,6 +93,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "updateUser", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Post)('/addOpinion'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),

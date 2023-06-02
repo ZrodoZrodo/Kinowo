@@ -8,4 +8,9 @@ export class CinemaController {
   async getAll() {
     return this.CinemaService.getAll();
   }
+
+  @Get('/getAll')
+  async getAll() {
+    return this.CinemaService.getAll();
+  }
 }

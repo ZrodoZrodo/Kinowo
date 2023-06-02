@@ -22,16 +22,17 @@ model User {
 }
 
 model Reservation {
-  id              String   @id @default(auto()) @map("_id") @db.ObjectId
-  user            User     @relation(fields: [userId], references: [id])
-  userId          String   @db.ObjectId
-  movieId         String
-  title           String
-  date            DateTime
-  price           Float
-  watched         Boolean  @default(false)
-  screeningNumber Int
-  seatNumber      Int
+  id               String         @id @default(auto()) @map("_id") @db.ObjectId
+  user             User           @relation(fields: [userId], references: [id])
+  userId           String         @db.ObjectId
+  movieId          String
+  title            String
+  date             DateTime
+  price            Float
+  watched          Boolean        @default(false)
+  movieScreening   MovieScreening @relation(fields: [movieScreeningId], references: [id])
+  seatNumber       Int
+  movieScreeningId String         @db.ObjectId
 }
 
 model Opinion {
@@ -79,12 +80,13 @@ model Movie {
 }
 
 model MovieScreening {
-  id            String       @id @default(auto()) @map("_id") @db.ObjectId
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
   movieId       String
   reservations  Int[]
   price         Float
   date          DateTime
   end           Boolean
-  CinemaAdmin   CinemaAdmin? @relation(fields: [cinemaAdminId], references: [id])
-  cinemaAdminId String?      @db.ObjectId
+  CinemaAdmin   CinemaAdmin?  @relation(fields: [cinemaAdminId], references: [id])
+  cinemaAdminId String?       @db.ObjectId
+  Reservation   Reservation[]
 }

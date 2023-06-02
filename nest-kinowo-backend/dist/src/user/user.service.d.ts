@@ -8,13 +8,23 @@ export declare class UserService {
         message: string;
     }>;
     getUser(id: string): Promise<{
-        id: string;
-        email: string;
+        name: string;
         lastName: string;
+        email: string;
+        id: string;
         deleted: boolean;
     }>;
     getUserActiveReservations(id: string): Promise<{
-        reservations: import(".prisma/client").Reservation[];
+        reservations: {
+            id: string;
+            movieId: string;
+            title: string;
+            date: Date;
+            price: number;
+            screeningNumber: number;
+            seatNumber: number;
+            watched: boolean;
+        }[];
     }>;
     getUserComingReservations(id: string): Promise<{
         reservations: import(".prisma/client").Reservation[];

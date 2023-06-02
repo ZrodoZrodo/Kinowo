@@ -28,7 +28,7 @@ let UserService = class UserService {
     }
     async findOne(username) {
         return await prisma_1.default.user.findFirst({
-            where: { email: username }
+            where: { email: username },
         });
     }
     async register({ name, lastName, email, password, }) {
@@ -73,7 +73,8 @@ let UserService = class UserService {
                     email: true,
                     lastName: true,
                     deleted: true,
-                }
+                    name: true,
+                },
             });
         }
         catch (e) {
@@ -86,6 +87,16 @@ let UserService = class UserService {
             select: {
                 reservations: {
                     where: { watched: true },
+                    select: {
+                        id: true,
+                        movieId: true,
+                        title: true,
+                        date: true,
+                        price: true,
+                        watched: true,
+                        screeningNumber: true,
+                        seatNumber: true,
+                    },
                 },
             },
         });

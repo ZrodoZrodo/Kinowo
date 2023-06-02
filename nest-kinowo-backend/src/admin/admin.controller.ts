@@ -34,7 +34,7 @@ export class AdminController {
   async getUserUndeletedOpinions(@Param() id: string) {
     return this.AdminService.getUserUndeletedOpinions(id);
   }
-  @Get('/getUserUndeletedOpinions/:id')
+  @Get('/getUserDeletedOpinions/:id')
   async getUserDeletedOpinions(@Param() id: string) {
     return this.AdminService.getUserDeletedOpinions(id);
   }

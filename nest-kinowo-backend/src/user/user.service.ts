@@ -10,10 +10,6 @@ import { v4 as uuid } from 'uuid';
 //toDo dodać sprawdzanie czy użytkownik nie jest usunięty
 @Injectable()
 export class UserService {
-
-
-
-
   private readonly users = [
     {
       userId: 1,
@@ -28,13 +24,10 @@ export class UserService {
   ];
 
   async findOne(username: string): Promise<any> {
-
-     return await prisma.user.findFirst({
-      where:{email:username}
-    })
+    return await prisma.user.findFirst({
+      where: { email: username },
+    });
   }
-
-
 
   async register({
     name,
@@ -51,8 +44,8 @@ export class UserService {
           Valid({ password })
         )
       ) {
-        console.log(Valid({lastName}))
-        return {status: 400, message: 'Bad Data'};
+        console.log(Valid({ lastName }));
+        return { status: 400, message: 'Bad Data' };
       }
       try {
         password = await bcrypt.hash(password, 2);
@@ -75,24 +68,22 @@ export class UserService {
     }
   }
 
-
-
   async getUser(id: string) {
-
     try {
       return await prisma.user.findFirst({
         where: {
-          id:id,
+          id: id,
         },
-        select:{
+        select: {
           id: true,
           email: true,
           lastName: true,
           deleted: true,
-        }
-      })
-    }catch (e) {
-      console.log(e)
+          name: true,
+        },
+      });
+    } catch (e) {
+      console.log(e);
     }
   }
 
@@ -101,7 +92,16 @@ export class UserService {
       where: { id },
       select: {
         reservations: {
-          where: { watched: true },
+          select: {
+            id: true,
+            movieId: true,
+            title: true,
+            date: true,
+            price: true,
+            watched: true,
+            screeningNumber: true,
+            seatNumber: true,
+          },
         },
       },
     });
@@ -126,7 +126,6 @@ export class UserService {
     price,
     screeningNumber,
     seatNumber,
-    token,
   }: CreateReservationDto) {
     return await prisma.reservation.create({
       data: {
