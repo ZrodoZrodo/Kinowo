@@ -6,6 +6,8 @@ import Login from "./Components/Pages/Login";
 import Dashboard from "./Components/Pages/Dashboard/Dashboard";
 import { useContext } from "react";
 import UserContext from "./UserContext";
+import UserEdit from "./Components/Pages/UserEdit";
+import Film from "./Components/Pages/Film";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -16,6 +18,8 @@ function App() {
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="useredit" element={<UserEdit />} />
+        <Route path="booking" element={<Film/>} />
         {/* {user && (
           <Route path="dashboard" element={<Dashboard />} />
         )} */}
