@@ -9,7 +9,7 @@ const About = () => {
         <div className="">
           <p className="text-white sm:text-6xl text-2xl"> Doświadczaj. </p>
           <p className="text-white sm:text-6xl text-2xl"> Odkrywaj. </p>
-          <p className="text-whitesm:text-6xl text-2xl"> Oglądaj. </p>
+          <p className="text-white sm:text-6xl text-2xl"> Oglądaj. </p>
           <p className="text-white sm:text-center md:text-left  w-1/2 mt-6">
             Cieszcie się z nami każdym seansie, z każdą chwilą, Niech filmowy
             świat stanie się dla Was rajem, a każda historia zostanie w Waszej

@@ -60,7 +60,7 @@ const Navbar = () => {
       <div class="navbar-center hidden lg:flex">
         <ul class="menu menu-horizontal text-white px-1">
           <li>
-            <p>Home</p>
+            <p>Panel główny</p>
           </li>
           <li>
             <AnchorLink href="#poznaj">Poznaj nas</AnchorLink>

@@ -1,3 +1,5 @@
+import Searchinput from "./SearchInput";
+
 const NavbarDashboard = (props) => {
   return (
     <div className="navbar bg-dark-purple">
@@ -25,7 +27,7 @@ const NavbarDashboard = (props) => {
           >
             <li>
               <a>
-                Rezerwuj bilet{" "}
+                Rezerwuj bilet
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -65,10 +67,9 @@ const NavbarDashboard = (props) => {
               </a>
             </li>
             <li>
-              <a >
+              <a>
                 Historia{" "}
                 <svg
-                
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
@@ -144,6 +145,9 @@ const NavbarDashboard = (props) => {
                 </svg>
               </a>
             </li>
+            <a>
+              <div className="border-2 border-l-transparent border-r-transparent border-t-transparent border-b-purple rounded-null w-full mt-2 mb-2"></div>
+            </a>
             <li>
               <a>Lokalizacja</a>
             </li>
@@ -165,12 +169,7 @@ const NavbarDashboard = (props) => {
       </div>
 
       <div className="navbar-end">
-        <input
-          type="text"
-          placeholder="Wyszukaj kino albo film"
-          class="input input-bordered w-1/3 pr-16"
-        />
-
+        <Searchinput />
         <button className="btn btn-ghost btn-circle">
           <div className="indicator">
             <svg

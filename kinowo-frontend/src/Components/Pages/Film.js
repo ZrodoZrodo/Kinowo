@@ -1,6 +1,6 @@
 import Footer from "../UI/Footer";
 import NavbarDashboard from "../UI/NavbarDashboard";
-import poster1 from "../UI/Posters/images-w1400.png";
+import poster1 from "../UI/Posters/BlackPanther.png";
 
 const Film = () => {
   return (
@@ -11,12 +11,12 @@ const Film = () => {
           <section class="text-gray-600 body-font">
             <div class="container px-5 py-24 mx-auto bg-dark-purple  w-full">
               <div class="p-5 flex items-center mx-auto border-b mb-10 border-purple border-2 rounded-lg sm:flex-row flex-col">
-                <div class="sm:w-32 sm:h-32 h-40 w-40 sm:mr-10 inline-flex items-center justify-center flex-shrink-0">
+                <div class="sm:w-32 sm:h-32 h-64 w-64 sm:mr-10 inline-flex items-center justify-center flex-shrink-0">
                   <img src={poster1} />
                 </div>
                 <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
                   <h1 class="text-purple text-5xl title-font font-bold mb-2">
-                    THE ASSASSIN
+                  Black Panther
                   </h1>
                   <h1 class="text-purple text-2xl title-font font-bold mb-2">
                     Opis
