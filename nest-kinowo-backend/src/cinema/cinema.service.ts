@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import prisma from '../../prisma/prisma';
-import * as bcrypt from 'bcrypt';
-import { v4 as uuid } from 'uuid';
 @Injectable()
 export class CinemaService {
-  async getAll() {
+  async getAll(id: string) {
     return prisma.movie.findMany({
+      where: { cinemaAdminId: id },
       select: {
         title: true,
         description: true,
@@ -28,9 +27,62 @@ export class CinemaService {
     });
   }
 
+  async getOne(title: string) {
+    return prisma.movie.findMany({
+      where: {
+        title: {
+          contains: title,
+        },
+      },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        images: true,
+      },
+    });
+  }
+
+  async getOneDetails(id: string) {
+    return prisma.movie.findFirst({
+      where: { id },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        images: true,
+        opinion: true,
+        premiere: true,
+        end: true,
+        deleted: true,
+        cinemaAdmin: {
+          select: {
+            cinemaName: true,
+          },
+        },
+      },
+    });
+  }
 
   async addMovie({ title, description, premiere, end, id }) {
     return prisma.movie.create({
+      data: {
+        title,
+        description,
+        premiere,
+        end,
+        cinemaAdmin: {
+          connect: {
+            id,
+          },
+        },
+      },
+    });
+  }
+
+  async updateMovie({ title, description, premiere, end, id }) {
+    return prisma.movie.update({
+      where: { id },
       data: {
         title,
         description,

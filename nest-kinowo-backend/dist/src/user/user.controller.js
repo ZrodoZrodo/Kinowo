@@ -25,11 +25,14 @@ let UserController = class UserController {
     async getUser(id) {
         return this.UserService.getUser(id.id);
     }
+    async getMoviesHistory(id) {
+        return this.UserService.getMoviesHistory(id.id);
+    }
     async getUserActiveReservations(id) {
-        return this.UserService.getUserActiveReservations(id);
+        return this.UserService.getUserActiveReservations(id.id);
     }
     async getUserComingReservations(id) {
-        return this.UserService.getUserComingReservations(id);
+        return this.UserService.getUserComingReservations(id.id);
     }
     async register(newUser) {
         return this.UserService.register(newUser);
@@ -54,10 +57,18 @@ __decorate([
 ], UserController.prototype, "getUser", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.Get)('/UserActiveReservations/:id'),
+    (0, common_1.Get)('getMoviesHistory/:id'),
     __param(0, (0, common_1.Param)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getMoviesHistory", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Get)('/UserReservations/:id'),
+    __param(0, (0, common_1.Param)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getUserActiveReservations", null);
 __decorate([
@@ -65,7 +76,7 @@ __decorate([
     (0, common_1.Get)('/UserComingReservations/:id'),
     __param(0, (0, common_1.Param)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getUserComingReservations", null);
 __decorate([

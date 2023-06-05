@@ -86,7 +86,6 @@ let UserService = class UserService {
             where: { id },
             select: {
                 reservations: {
-                    where: { watched: true },
                     select: {
                         id: true,
                         movieId: true,
@@ -111,7 +110,7 @@ let UserService = class UserService {
             },
         });
     }
-    async createReservation({ userId, movieId, title, date, price, screeningNumber, seatNumber, token, }) {
+    async createReservation({ userId, movieId, title, date, price, screeningNumber, seatNumber, }) {
         return await prisma_1.default.reservation.create({
             data: {
                 movieId,

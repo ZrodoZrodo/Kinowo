@@ -25,15 +25,22 @@ export class UserController {
   async getUser(@Param() id: { id: string }) {
     return this.UserService.getUser(id.id);
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('getMoviesHistory/:id')
+  async getMoviesHistory(@Param() id: { id: string }) {
+    return this.UserService.getMoviesHistory(id.id);
+  }
+
   @UseGuards(JwtAuthGuard)
   @Get('/UserReservations/:id')
-  async getUserActiveReservations(@Param() id: string) {
-    return this.UserService.getUserActiveReservations(id);
+  async getUserActiveReservations(@Param() id: { id: string }) {
+    return this.UserService.getUserActiveReservations(id.id);
   }
   @UseGuards(JwtAuthGuard)
   @Get('/UserComingReservations/:id')
-  async getUserComingReservations(@Param() id: string) {
-    return this.UserService.getUserComingReservations(id);
+  async getUserComingReservations(@Param() id: { id: string }) {
+    return this.UserService.getUserComingReservations(id.id);
   }
 
   @Post('/register')

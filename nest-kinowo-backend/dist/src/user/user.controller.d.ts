@@ -7,25 +7,39 @@ export declare class UserController {
     getUser(id: {
         id: string;
     }): Promise<{
-        name: string;
-        lastName: string;
-        email: string;
         id: string;
+        email: string;
+        lastName: string;
         deleted: boolean;
+        name: string;
     }>;
-    getUserActiveReservations(id: string): Promise<{
+    getMoviesHistory(id: {
+        id: string;
+    }): Promise<{
+        reservations: {
+            movieId: string;
+            title: string;
+            date: Date;
+            price: number;
+        }[];
+    }>;
+    getUserActiveReservations(id: {
+        id: string;
+    }): Promise<{
         reservations: {
             id: string;
             movieId: string;
             title: string;
             date: Date;
             price: number;
+            watched: boolean;
             screeningNumber: number;
             seatNumber: number;
-            watched: boolean;
         }[];
     }>;
-    getUserComingReservations(id: string): Promise<{
+    getUserComingReservations(id: {
+        id: string;
+    }): Promise<{
         reservations: import(".prisma/client").Reservation[];
     }>;
     register(newUser: CreateUserDto): Promise<{
