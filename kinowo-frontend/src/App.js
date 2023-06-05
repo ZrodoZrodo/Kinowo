@@ -9,6 +9,7 @@ import UserContext from "./UserContext";
 import UserEdit from "./Components/Pages/UserEdit";
 import Film from "./Components/Pages/Film";
 import {ChooseSeat} from "./Components/Pages/ChooseSeat/ChooseSeat";
+import History from "./Components/Pages/History/History";
 
 function App() {
   const { user } = useContext(UserContext);
@@ -21,6 +22,7 @@ function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="useredit" element={<UserEdit />} />
         <Route path="booking" element={<Film/>} />
+        <Route path="history" element={<History/>} />
         <Route path="/chooseSeat/:id" element={<ChooseSeat/>} />
         {/* {user && (
           <Route path="dashboard" element={<Dashboard />} />

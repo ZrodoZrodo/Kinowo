@@ -6,22 +6,22 @@ const Film = () => {
   return (
     <div className="h-screen">
       <NavbarDashboard></NavbarDashboard>
-      <div class="">
+      <div >
         <section>
-          <section class="text-gray-600 body-font">
-            <div class="container px-5 py-24 mx-auto bg-dark-purple  w-full">
-              <div class="p-5 flex items-center mx-auto border-b mb-10 border-purple border-2 rounded-lg sm:flex-row flex-col">
-                <div class="sm:w-32 sm:h-32 h-64 w-64 sm:mr-10 inline-flex items-center justify-center flex-shrink-0">
+          <section className="text-gray-600 body-font">
+            <div className="container px-5 py-24 mx-auto bg-dark-purple  w-full">
+              <div className="p-5 flex items-center mx-auto border-b mb-10 border-purple border-2 rounded-lg sm:flex-row flex-col">
+                <div className="sm:w-32 sm:h-32 h-64 w-64 sm:mr-10 inline-flex items-center justify-center flex-shrink-0">
                   <img src={poster1} />
                 </div>
-                <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-                  <h1 class="text-purple text-5xl title-font font-bold mb-2">
+                <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
+                  <h1 className="text-purple text-5xl title-font font-bold mb-2">
                   Black Panther
                   </h1>
-                  <h1 class="text-purple text-2xl title-font font-bold mb-2">
+                  <h1 className="text-purple text-2xl title-font font-bold mb-2">
                     Opis
                   </h1>
-                  <p class="leading-relaxed text-base">
+                  <p className="leading-relaxed text-base">
                     "Black Panther" to film akcji i science fiction z 2018 roku,
                     który został wyreżyserowany przez Ryana Cooglera. Fabuła
                     filmu skupia się na losach tytułowego bohatera, T'Challi
@@ -37,27 +37,27 @@ const Film = () => {
                     T'Challa musi wykorzystać wszystkie swoje umiejętności i
                     wiedzę, by obronić Wakandę i swoich poddanych.
                   </p>
-                  <div class="py-4">
+                  <div className="py-4">
                     
                   </div>
-                  <div class="md:flex font-bold ">
-                    <div class="w-full md:w-1/2 flex space-x-3">
-                      <div class="w-1/2">
-                        <h2 class="text-purple">Data premiery:</h2>
+                  <div className="md:flex font-bold ">
+                    <div className="w-full md:w-1/2 flex space-x-3">
+                      <div className="w-1/2">
+                        <h2 className="text-purple">Data premiery:</h2>
                         <p>20.02.2020</p>
                       </div>
-                      <div class="w-1/2">
-                        <h2 class="text-purple">Czas trwania:</h2>
+                      <div className="w-1/2">
+                        <h2 className="text-purple">Czas trwania:</h2>
                         <p>120 minut</p>
                       </div>
                     </div>
-                    <div class="w-full md:w-1/2 flex space-x-3">
-                      <div class="w-1/2">
-                        <h2 class="text-purple">Typ:</h2>
+                    <div className="w-full md:w-1/2 flex space-x-3">
+                      <div className="w-1/2">
+                        <h2 className="text-purple">Typ:</h2>
                         <p>Akcja</p>
                       </div>
-                      <div class="w-1/2">
-                        <h2 class="text-purple">Reżyser:</h2>
+                      <div className="w-1/2">
+                        <h2 className="text-purple">Reżyser:</h2>
                         <p>Akcja</p>
                       </div>
                     </div>
@@ -70,7 +70,7 @@ const Film = () => {
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
-                      class="w-4 h-4 ml-2"
+                      className="w-4 h-4 ml-2"
                       viewBox="0 0 24 24"
                     >
                       <path d="M5 12h14M12 5l7 7-7 7"></path>
