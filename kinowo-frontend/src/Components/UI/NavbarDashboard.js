@@ -1,3 +1,4 @@
+import Number from "./Number";
 import Searchinput from "./SearchInput";
 
 const NavbarDashboard = (props) => {
@@ -26,7 +27,7 @@ const NavbarDashboard = (props) => {
             className="menu menu-compact Burger dropdown-content mt-3 p-2 shadow  rounded-box w-52"
           >
             <li>
-              <a>
+              <p>
                 Rezerwuj bilet
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -64,10 +65,10 @@ const NavbarDashboard = (props) => {
                     stroke-linejoin="round"
                   />
                 </svg>
-              </a>
+              </p>
             </li>
             <li>
-              <a>
+              <p>
                 Historia{" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -91,10 +92,10 @@ const NavbarDashboard = (props) => {
                     stroke-linejoin="round"
                   />
                 </svg>
-              </a>
+              </p>
             </li>
             <li>
-              <a>
+              <p>
                 Oceny
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -111,10 +112,10 @@ const NavbarDashboard = (props) => {
                     stroke-linejoin="round"
                   />
                 </svg>
-              </a>
+              </p>
             </li>
             <li>
-              <a>
+              <p>
                 Edytuj dane konta
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -143,33 +144,199 @@ const NavbarDashboard = (props) => {
                     stroke-linejoin="round"
                   />
                 </svg>
-              </a>
+              </p>
             </li>
-            <a>
+            <p>
               <div className="border-2 border-l-transparent border-r-transparent border-t-transparent border-b-purple rounded-null w-full mt-2 mb-2"></div>
-            </a>
+            </p>
             <li>
-              <a>Lokalizacja</a>
+              <label for="my-modal-4" class="">
+                Lokalizacja
+              </label>
             </li>
             <li>
-              <a>Regulamin</a>
+              <label for="my-modal-4-1" class="">
+                Regulamin
+              </label>
             </li>
             <li>
-              <a>O nas</a>
+              <label for="my-modal-4-2" class="">
+                O nas
+              </label>
             </li>
             <li>
-              <a>Kontakt</a>
+              <label for="my-modal-4-3" class="">
+                Kontakt
+              </label>
             </li>
           </ul>
         </div>
-        <a className="normal-case sm:text-4xl tracking-widest text-left pl-8">
+        <p className="normal-case sm:text-4xl tracking-widest text-left pl-8">
           {" "}
           KINOWO
-        </a>
+        </p>
       </div>
 
       <div className="navbar-end">
         <Searchinput />
+        <input type="checkbox" id="my-modal-4" class="modal-toggle" />
+        <label for="my-modal-4" class="modal cursor-pointer">
+          <label class="modal-box relative bg-dark-purple" for="">
+            <h3 class="text-dark-pink text-3xl">Lokalizacja</h3>
+            <p class="py-4">
+            <div className="flex flex-nowrap ">
+            <Number>01</Number>
+            <p className="self-center text-white min-[400px]:text-3xl ml-4 sm:text-thin">
+              Cinema City Wolności
+            </p>
+          </div>
+          <div className="flex flex-nowrap ">
+            <Number>02</Number>
+            <p className="self-center text-white min-[400px]:text-3xl ml-4 ">
+              Cinema City Galeria Jurajska
+            </p>
+          </div>
+          <div className="flex flex-nowrap ">
+            <Number>03</Number>
+            <p className="self-center text-white min-[400px]:text-3xl ml-4 ">
+              Cinema City Poznań
+            </p>
+          </div>
+          <div className="flex flex-nowrap ">
+            <Number>04</Number>
+            <p className="self-center text-white min-[400px]:text-3xl ml-4">
+              Cinema City Warszawa
+            </p>
+          </div>
+          <div className="flex flex-nowrap ">
+            <Number>05</Number>
+            <p className="self-center text-white min-[400px]:text-3xl ml-4">
+              Stanowiska sponsorów
+            </p>
+          </div>
+            </p>
+          </label>
+        </label>
+        <input type="checkbox" id="my-modal-4-1" class="modal-toggle" />
+        <label for="my-modal-4-1" class="modal cursor-pointer">
+          <label class="modal-box relative bg-dark-purple" for="">
+            <h3 class="text-dark-pink text-3xl">Regulamin</h3>
+            <p class="py-4 text-white">
+              Niniejsza polityka prywatności wyjaśnia, w jaki sposób gromadzimy,
+              wykorzystujemy, przechowujemy i chronimy informacje osobowe
+              naszych użytkowników w ramach systemu logowania i zarządzania
+              kinem. Szanujemy Twoją prywatność i dokładamy wszelkich starań,
+              aby chronić Twoje dane osobowe zgodnie z obowiązującymi przepisami
+              o ochronie prywatności. <br /> <br />
+              <p className="text-dark-pink">
+                1. Gromadzenie informacji osobowych:{" "}
+              </p>
+              Podczas rejestracji i korzystania z naszego systemu logowania,
+              możemy prosić o podanie pewnych informacji osobowych, takich jak
+              imię, nazwisko, adres e-mail, numer telefonu itp. Gromadzimy te
+              dane w celu umożliwienia dostępu do systemu i zapewnienia
+              odpowiednich usług zgodnie z Twoimi preferencjami. <br /> <br />
+              <p className="text-dark-pink">
+                2. Wykorzystanie informacji osobowych:{" "}
+              </p>
+              Informacje osobowe, które nam dostarczasz, wykorzystujemy w celu
+              umożliwienia Ci korzystania z systemu logowania i zapewnienia
+              dostępu do odpowiednich funkcji zgodnie z Twoją rolą w systemie.
+              Możemy również wykorzystywać te dane w celach analizy,
+              doskonalenia naszych usług, dostosowywania treści oraz w celach
+              marketingowych, o ile wyrazisz na to zgodę. <br /> <br />
+              <p className="text-dark-pink">
+                3. Przechowywanie i ochrona informacji osobowych:{" "}
+              </p>
+              Dane osobowe przechowujemy przez okres niezbędny do realizacji
+              celów, dla których zostały zebrane, o ile nie przewiduje się
+              dłuższego okresu przechowywania zgodnie z obowiązującymi
+              przepisami. Stosujemy odpowiednie środki techniczne i
+              organizacyjne, aby chronić Twoje dane osobowe przed nieuprawnionym
+              dostępem, utratą, zmianą lub ujawnieniem.
+              <br /> <br />
+              <p className="text-dark-pink">
+                4. Udostępnianie informacji osobowych:{" "}
+              </p>
+              Właściwe informacje osobowe mogą być udostępniane tylko w
+              określonych przypadkach, takich jak przestrzeganie obowiązujących
+              przepisów prawa, odpowiedzi na żądania organów ścigania lub w celu
+              ochrony naszych praw lub bezpieczeństwa. Nie sprzedajemy ani nie
+              udostępniamy Twoich danych osobowych firmom trzecim w celach
+              marketingowych bez Twojej zgody. <br /> <br />
+              <p className="text-dark-pink">5. Prawa użytkownika: </p>
+              Masz prawo do dostępu, poprawiania, usunięcia lub ograniczenia
+              przetwarzania swoich danych osobowych. Możesz również w każdej
+              chwili wycofać swoją zgodę na przetwarzanie danych osobowych. Aby
+              skorzystać z tych praw lub uzyskać więcej informacji, skontaktuj
+              się z nami za pośrednictwem danych kontaktowych podanych w sekcji
+              "Kontakt". <br /> <br />
+              <p className="text-dark-pink">
+                6. Zmiany w polityce prywatności:
+              </p>
+              Możemy od czasu do czasu aktualizować naszą politykę prywatności.
+              W przypadku istotnych zmian poinformujemy Cię o nich poprzez
+              odpowiednie środki, takie jak powiadomienie na stronie logowania
+              lub wysłanie wiadomości e-mail. Zachęcamy do regularnego
+              sprawdzania naszej polityki prywatności, aby być na bieżąco z
+              naszymi praktykami ochrony prywatności. Jeśli masz jakiekolwiek
+              pytania dotyczące naszej polityki prywatności lub ochrony danych,
+              prosimy o kontaktowanie się z nami za pomocą danych kontaktowych
+              podanych w sekcji "Kontakt"
+            </p>
+          </label>
+        </label>
+        <input type="checkbox" id="my-modal-4-2" class="modal-toggle" />
+        <label for="my-modal-4-2" class="modal cursor-pointer">
+          <label class="modal-box relative bg-dark-purple" for="">
+            <li className=" text-dark-pink text-3xl"> Kim jesteśmy?</li>
+            <p className=" py-4 mt-2 max-w-md text-white">
+              Jesteśmy firmą, która zapewnia kompleksowe rozwiązania dla kin i
+              sieci kinowych, a nasza oferta obejmuje również wiele kin, które
+              działają pod naszą opieką. Znajdziesz tutaj informacje o naszych
+              kinach oraz o miejscach, w których możesz je znaleźć.
+            </p>
+            <li className="text-3xl  text-dark-pink  text-end">
+              Nasza filozofia
+            </li>
+            <p className="sm:text-start lg:text-end mt-2 text-white">
+              Nasze kina oferują wyjątkowe wrażenia kinowe, dzięki najnowszym
+              technologiom w dziedzinie projekcji filmów, dźwięku i innych
+              innowacyjnych rozwiązaniom. nasze sale kinowe są przestronne i
+              wygodne, a wybór filmów jest na tyle szeroki, że każdy kinoman
+              znajdzie coś dla siebie.
+            </p>
+          </label>
+        </label>
+        <input type="checkbox" id="my-modal-4-3" class="modal-toggle" />
+        <label for="my-modal-4-3" class="modal cursor-pointer ">
+          <label class="modal-box relative bg-dark-purple" for="">
+            <h3 class="text-dark-pink  font-bold text-2xl">Kontakt</h3>
+            <p class="py-4 text-white">
+              Jeśli masz pytania lub potrzebujesz pomocy technicznej dotyczącej
+              naszego systemu logowania i zarządzania kinem, poniżej znajdują
+              się informacje kontaktowe oraz informacje dotyczące wsparcia
+              technicznego.<br></br>
+              <p className="text-2xl text-dark-pink "> Dane kontaktowe:</p>
+              <ul className="text-center">
+                <li>
+                  {" "}
+                  <p className=" text-dark-pink ">Telefon:</p> +48 123 456 789{" "}
+                </li>
+                <li>
+                  {" "}
+                  <p className=" text-dark-pink ">Adres e-mail:</p>{" "}
+                  support@kinomania.com
+                </li>
+                <li>
+                  {" "}
+                  <p className=" text-dark-pink ">Godziny pracy:</p>{" "}
+                  Poniedziałek - Piątek, od 9:00 do 17:00
+                </li>
+              </ul>
+            </p>
+          </label>
+        </label>
         <button className="btn btn-ghost btn-circle">
           <div className="indicator">
             <svg
