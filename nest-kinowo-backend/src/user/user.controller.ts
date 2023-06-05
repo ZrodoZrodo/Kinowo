@@ -75,7 +75,7 @@ export class UserController {
       movieId: string;
       movieTitle: string;
       description: string;
-      rate: string;
+      rate: number;
       token: string;
     },
   ) {

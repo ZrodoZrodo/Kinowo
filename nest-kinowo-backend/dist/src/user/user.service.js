@@ -93,7 +93,6 @@ let UserService = class UserService {
                         date: true,
                         price: true,
                         watched: true,
-                        screeningNumber: true,
                         seatNumber: true,
                     },
                 },
@@ -117,7 +116,7 @@ let UserService = class UserService {
                 title,
                 date,
                 price,
-                screeningNumber,
+                movieScreeningId: screeningNumber,
                 seatNumber,
                 user: {
                     connect: {
