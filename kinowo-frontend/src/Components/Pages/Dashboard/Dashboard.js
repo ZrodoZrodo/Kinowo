@@ -4,7 +4,7 @@ import NavbarDashboard from "../../UI/NavbarDashboard";
 const Dashboard = () => {
   return (
     <>
-      <div className="bg-dark-purple h-screen w-full">
+      <div className="bg-dark-purple h-full w-full">
         <NavbarDashboard></NavbarDashboard>
         <div className="grid justify-items-center w-full mb-4">
         <div className="border-2 border-l-transparent border-r-transparent border-t-purple border-b-transparent rounded-null w-1/2  "></div>
@@ -20,8 +20,8 @@ const Dashboard = () => {
               historie, które ożywają na wielkim ekranie.
             </p>
           </div>
-          <div className="grid grid-cols-3  gap-4 place-items-center w-full mt-24 ">
-            <div className="Burger text-3xl text-center w-1/2 ">
+          <div className="grid md:grid-cols-3  grid-cols-1  gap-4 place-items-center w-full mt-24 ">
+            <div className="Burger text-3xl text-center w-max-md">
               <p className="m-2 text-dashboard-pink">Edytuj dane konta</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@ const Dashboard = () => {
                 />
               </svg>
             </div>
-            <div className="Burger text-3xl text-center w-1/2 ">
+            <div className="Burger text-3xl text-center w-max-md  my-4 ">
               <p className="m-2 text-dashboard-pink">Rezerwuj bilety</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +92,7 @@ const Dashboard = () => {
                 />
               </svg>
             </div>
-            <div className="Burger text-3xl text-center w-1/2 ">
+            <div className="Burger text-3xl text-center  sm:w-max-md lg:w-1/3 ">
               <p className="m-2 text-dashboard-pink">Historia</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -119,7 +119,7 @@ const Dashboard = () => {
               </svg>
             </div>
           </div>
-          <div className="border-2 border-l-purple border-r-transparent border-t-transparent border-b-transparent rounded-null  h-24 mt-24"></div>
+          <div className="border-2 border-l-purple border-r-transparent border-t-transparent border-b-transparent rounded-null h-40 mt-24"></div>
         </div>
       </div>
       <Footer></Footer>
