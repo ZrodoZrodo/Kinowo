@@ -7,7 +7,7 @@ const Dashboard = () => {
       <div className="bg-dark-purple h-screen w-full">
         <NavbarDashboard></NavbarDashboard>
         <div className="grid justify-items-center w-full mb-4">
-          <div className="border-2 border-l-transparent border-r-transparent border-t-purple border-b-transparent rounded-null w-1/2  "></div>
+        <div className="border-2 border-l-transparent border-r-transparent border-t-purple border-b-transparent rounded-null w-1/2  "></div>
           <div className="Dashboard_banner w-4/6 sm:h-80  mt-6 grid ">
             <p className=" text-xl m-6 text-dashboard-pink">
               Witaj w naszym serwisie!
