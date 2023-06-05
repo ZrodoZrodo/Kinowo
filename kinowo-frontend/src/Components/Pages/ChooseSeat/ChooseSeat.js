@@ -14,6 +14,26 @@ export const ChooseSeat =()=>{
     const [disabled,setDisabled]=useState([1,4,7,3])
     const [marked,setMarked]=useState([])
 
+    const order=async()=>{
+       const resp= fetch('http://localhost:3000/user/createReservation',{
+            method:"POST",
+            headers: {
+                'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODU5NzkzNTMsImV4cCI6MTY4NTk4Mjk1M30.WKGhTj9O3LAd7IboN2VlYwYo-hUbL8Tdq8qI34QU6e8',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userId:"64743a001715c9adaf265f9a",
+                movieId:"test",
+                title:'test',
+                date:'22/22/2222',
+                price:21.37,
+                screeningNumber:id,
+                seatNumber:marked
+            }),
+        })
+        console.log( await resp.json())
+    }
+
     if(!disabled) return;
 
     console.log(marked)
@@ -49,6 +69,7 @@ export const ChooseSeat =()=>{
                 {Demo.map(col=><div className={"border-x-4 p-5 border-x-purple"}><SeatColumn disabled={disabled} marked={marked} setMarked={setMarked} column={col}/></div> )}
             </div>
                 <div
+                    onClick={()=>order()}
                     className="border-2 px-9 mt-8 shadow-3xl border-purple rounded-lg px-3 py-2 cursor-pointer">
                     Kup bilet
                 </div>

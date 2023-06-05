@@ -19,10 +19,9 @@ export declare class UserService {
             id: string;
             movieId: string;
             title: string;
-            date: Date;
+            date: string;
             price: number;
-            screeningNumber: number;
-            seatNumber: number;
+            seatNumber: number[];
             watched: boolean;
         }[];
     }>;
@@ -35,7 +34,7 @@ export declare class UserService {
         reservations: {
             movieId: string;
             title: string;
-            date: Date;
+            date: string;
             price: number;
         }[];
     }>;
@@ -44,7 +43,7 @@ export declare class UserService {
         movieId: string;
         movieTitle: string;
         description: string;
-        rate: string;
+        rate: number;
         token: string;
     }): Promise<import(".prisma/client").Opinion>;
 }

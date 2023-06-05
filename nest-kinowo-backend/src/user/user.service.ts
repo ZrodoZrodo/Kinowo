@@ -99,7 +99,6 @@ export class UserService {
             date: true,
             price: true,
             watched: true,
-            screeningNumber: true,
             seatNumber: true,
           },
         },
@@ -133,7 +132,7 @@ export class UserService {
         title,
         date,
         price,
-        screeningNumber,
+        movieScreeningId: screeningNumber,
         seatNumber,
         user: {
           connect: {
@@ -178,7 +177,7 @@ export class UserService {
     movieId: string;
     movieTitle: string;
     description: string;
-    rate: string;
+    rate: number;
     token: string;
   }) {
     return prisma.opinion.create({

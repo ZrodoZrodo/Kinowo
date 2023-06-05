@@ -3,8 +3,8 @@ export class CreateReservationDto {
   userId: string;
   movieId: string;
   title: string;
-  date: Date;
+  date: string;
   price: number;
-  screeningNumber: number;
-  seatNumber: number;
+  screeningNumber: string;
+  seatNumber: number[];
 }
