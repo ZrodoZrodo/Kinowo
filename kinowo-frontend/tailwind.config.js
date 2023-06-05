@@ -2,6 +2,11 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
+    extend:{
+      boxShadow:{
+        '3xl':'0px 3px 9px 1px #55257D'
+      }
+    },
     colors: {
       red: "#CC1E1E",
       black: "#000000",
@@ -26,6 +31,7 @@ module.exports = {
       widest: ".25em",
     },
   },
+
   daisyui: {
     themes: [
       {

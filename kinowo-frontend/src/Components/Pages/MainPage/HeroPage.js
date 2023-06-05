@@ -4,7 +4,7 @@ import Map from "../Map";
 
 import HeroContent from "./HeroContent";
 import HeroSummit from "./HeroSummit";
-import Navbar from "./Navabar";
+import Navbar from "./Navbar";
 
 const HeroPage = () => {
   return (

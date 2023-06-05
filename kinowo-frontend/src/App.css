@@ -61,3 +61,65 @@ html {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.Line{
+  width: 30px;
+  height: 0px;
+  border: 2px solid #55257D;
+}
+
+.ChooseHeader{
+
+  width: 346px;
+  height: 52px;
+
+
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 48px;
+  display: flex;
+
+  letter-spacing: 0.04em;
+
+  color: #FFFFFF;
+
+  text-shadow: 0px 3px 61px #55257D;
+}
+
+.Screen{
+
+  width: 75px;
+  height: 53px;
+
+
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 20px;
+  line-height: 24px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.04em;
+
+  color: #55257D;
+}
+
+.Legend{
+
+  width: 261px;
+  height: 180px;
+
+
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 39px;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.25em;
+
+  color: #FFFFFF;
+}
