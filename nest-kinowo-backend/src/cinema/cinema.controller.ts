@@ -16,26 +16,31 @@ import { CreateReservationDto } from '../../dto/CreateReservationDto';
 @Controller('cinema')
 export class CinemaController {
   constructor(@Inject(CinemaService) private CinemaService: CinemaService) {}
+  //działa
   @Get('/getAll/:id')
-  async getAll(@Param() id: string) {
+  async getAll(@Param() { id }: { id: string }) {
     return this.CinemaService.getAll(id);
   }
-
+  //działa
   @UseGuards(JwtAuthGuard)
   @Get('/getOne/:title')
-  async getOne(@Param() title: string) {
+  async getOne(@Param() { title }: { title: string }) {
     return this.CinemaService.getOne(title);
   }
+  //działa
   @UseGuards(JwtAuthGuard)
   @Get('/getOneDetails/:id')
-  async getOneDetails(@Param() id: string) {
+  async getOneDetails(@Param() { id }: { id: string }) {
     return this.CinemaService.getOneDetails(id);
   }
+  //działa
   @UseGuards(JwtAuthGuard)
   @Get('/getMovies/:id')
-  async getMovies(@Param() id: string) {
+  async getMovies(@Param() { id }: { id: string }) {
     return this.CinemaService.getMovies(id);
   }
+
+  //działa
   @UseGuards(JwtAuthGuard)
   @Post('/addMovie')
   async addMovie(
@@ -50,7 +55,7 @@ export class CinemaController {
   ) {
     return this.CinemaService.addMovie(movie);
   }
-
+  //działa
   @UseGuards(JwtAuthGuard)
   @Put('/updateMovie')
   async updateMovie(
@@ -65,10 +70,10 @@ export class CinemaController {
   ) {
     return this.CinemaService.updateMovie(movie);
   }
-
+  //działa
   @UseGuards(JwtAuthGuard)
   @Delete('/deleteMovie/:id')
-  async deleteMovie(@Param() id: string) {
+  async deleteMovie(@Param() { id }: { id: string }) {
     return this.CinemaService.deleteMovie(id);
   }
 }

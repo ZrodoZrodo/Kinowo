@@ -12,23 +12,9 @@ const prisma_1 = require("../../prisma/prisma");
 const bcrypt = require("bcrypt");
 const validation_1 = require("../../validation/validation");
 let UserService = class UserService {
-    constructor() {
-        this.users = [
-            {
-                userId: 1,
-                username: 'john',
-                password: 'changeme',
-            },
-            {
-                userId: 2,
-                username: 'maria',
-                password: 'guess',
-            },
-        ];
-    }
     async findOne(username) {
         return await prisma_1.default.user.findFirst({
-            where: { email: username },
+            where: { email: username, deleted: false },
         });
     }
     async register({ name, lastName, email, password, }) {
@@ -130,6 +116,11 @@ let UserService = class UserService {
         return prisma_1.default.user.update({
             where: { id },
             data: { email, name, lastName },
+            select: {
+                email: true,
+                name: true,
+                lastName: true,
+            },
         });
     }
     async getMoviesHistory(id) {

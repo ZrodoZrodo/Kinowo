@@ -7,28 +7,16 @@ import { CreateReservationDto } from '../../dto/CreateReservationDto';
 import { Valid } from '../../validation/validation';
 import { v4 as uuid } from 'uuid';
 
-//toDo dodać sprawdzanie czy użytkownik nie jest usunięty
 @Injectable()
 export class UserService {
-  private readonly users = [
-    {
-      userId: 1,
-      username: 'john',
-      password: 'changeme',
-    },
-    {
-      userId: 2,
-      username: 'maria',
-      password: 'guess',
-    },
-  ];
-
+  //działa
   async findOne(username: string): Promise<any> {
     return await prisma.user.findFirst({
-      where: { email: username },
+      where: { email: username, deleted: false },
     });
   }
 
+  //działa
   async register({
     name,
     lastName,
@@ -68,6 +56,7 @@ export class UserService {
     }
   }
 
+  //działa
   async getUser(id: string) {
     try {
       return await prisma.user.findFirst({
@@ -146,6 +135,11 @@ export class UserService {
     return prisma.user.update({
       where: { id },
       data: { email, name, lastName },
+      select: {
+        email: true,
+        name: true,
+        lastName: true,
+      },
     });
   }
 

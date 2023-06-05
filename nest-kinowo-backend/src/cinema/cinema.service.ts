@@ -88,17 +88,13 @@ export class CinemaService {
         description,
         premiere,
         end,
-        cinemaAdmin: {
-          connect: {
-            id,
-          },
-        },
       },
     });
   }
   async deleteMovie(id) {
-    return prisma.movie.delete({
+    return prisma.movie.update({
       where: { id },
+      data: { deleted: true },
     });
   }
   async getMovies(id: string) {

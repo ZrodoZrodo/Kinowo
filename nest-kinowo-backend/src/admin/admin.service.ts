@@ -32,6 +32,9 @@ export class AdminService {
       data: {
         deleted: true,
       },
+      select: {
+        deleted: true,
+      },
     });
   }
 
@@ -40,6 +43,9 @@ export class AdminService {
       where: { id },
       data: {
         deleted: false,
+      },
+      select: {
+        deleted: true,
       },
     });
   }

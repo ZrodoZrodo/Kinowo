@@ -19,51 +19,54 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 @Controller('user')
 export class UserController {
   constructor(@Inject(UserService) private UserService: UserService) {}
-
+  //działa
   @UseGuards(JwtAuthGuard)
   @Get('/:id')
   async getUser(@Param() id: { id: string }) {
     return this.UserService.getUser(id.id);
   }
-
+  //działa
   @UseGuards(JwtAuthGuard)
   @Get('getMoviesHistory/:id')
   async getMoviesHistory(@Param() id: { id: string }) {
     return this.UserService.getMoviesHistory(id.id);
   }
-
+  //działa
   @UseGuards(JwtAuthGuard)
   @Get('/UserReservations/:id')
   async getUserActiveReservations(@Param() id: { id: string }) {
     return this.UserService.getUserActiveReservations(id.id);
   }
+  //działa
   @UseGuards(JwtAuthGuard)
   @Get('/UserComingReservations/:id')
   async getUserComingReservations(@Param() id: { id: string }) {
     return this.UserService.getUserComingReservations(id.id);
   }
-
+  //działa
   @Post('/register')
   async register(@Body() newUser: CreateUserDto) {
     return this.UserService.register(newUser);
   }
+  //działa
   @UseGuards(JwtAuthGuard)
   @Post('/createReservation')
   async createReservation(@Body() Reservation: CreateReservationDto) {
     return this.UserService.createReservation(Reservation);
   }
+  //działa
   @UseGuards(JwtAuthGuard)
   @Put('/:id')
   async updateUser(
     @Body()
-    user: { email: string; name: string; lastName: string; token: string },
-    @Param() id: string,
+    user: { email: string; name: string; lastName: string },
+    @Param() id: { id: string },
   ) {
     return this.UserService.updateUser(
       user.email,
       user.name,
       user.lastName,
-      id,
+      id.id,
     );
   }
   @UseGuards(JwtAuthGuard)
