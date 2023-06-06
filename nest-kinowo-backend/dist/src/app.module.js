@@ -15,12 +15,13 @@ const admin_module_1 = require("./admin/admin.module");
 const dotenv = require("dotenv");
 const cinema_module_1 = require("./cinema/cinema.module");
 const auth_module_1 = require("./auth/auth.module");
+const cloudinary_module_1 = require("./cloudinary/cloudinary.module");
 dotenv.config();
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [user_module_1.UserModule, admin_module_1.AdminModule, cinema_module_1.CinemaModule, auth_module_1.AuthModule],
+        imports: [user_module_1.UserModule, admin_module_1.AdminModule, cinema_module_1.CinemaModule, auth_module_1.AuthModule, cloudinary_module_1.CloudinaryModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

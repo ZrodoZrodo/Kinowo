@@ -115,6 +115,7 @@ export class UserService {
     screeningNumber,
     seatNumber,
   }: CreateReservationDto) {
+    console.log(seatNumber);
     return await prisma.reservation.create({
       data: {
         movieId,
@@ -172,7 +173,6 @@ export class UserService {
     movieTitle: string;
     description: string;
     rate: number;
-    token: string;
   }) {
     return prisma.opinion.create({
       data: {

@@ -7,11 +7,12 @@ import { AdminModule } from './admin/admin.module';
 import * as dotenv from 'dotenv';
 import { CinemaModule } from './cinema/cinema.module';
 import { AuthModule } from './auth/auth.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 dotenv.config();
 
 @Module({
-  imports: [UserModule, AdminModule, CinemaModule, AuthModule],
+  imports: [UserModule, AdminModule, CinemaModule, AuthModule, CloudinaryModule],
   controllers: [AppController],
   providers: [AppService],
 })

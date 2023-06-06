@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import prisma from '../../prisma/prisma';
+
 @Injectable()
 export class CinemaService {
   async getAll(id: string) {
@@ -64,13 +65,28 @@ export class CinemaService {
     });
   }
 
-  async addMovie({ title, description, premiere, end, id }) {
+  async addMovie({
+    title,
+    description,
+    premiere,
+    end,
+    id,
+    images,
+  }: {
+    title: string;
+    description: string;
+    premiere: string;
+    end: string;
+    id: string;
+    images: string[];
+  }) {
     return prisma.movie.create({
       data: {
         title,
         description,
         premiere,
         end,
+        images,
         cinemaAdmin: {
           connect: {
             id,

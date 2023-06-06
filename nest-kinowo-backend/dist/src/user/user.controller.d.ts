@@ -9,9 +9,9 @@ export declare class UserController {
     }): Promise<{
         id: string;
         email: string;
+        name: string;
         lastName: string;
         deleted: boolean;
-        name: string;
     }>;
     getMoviesHistory(id: {
         id: string;
@@ -32,8 +32,8 @@ export declare class UserController {
             title: string;
             date: string;
             price: number;
-            watched: boolean;
             seatNumber: number[];
+            watched: boolean;
         }[];
     }>;
     getUserComingReservations(id: {
@@ -54,8 +54,8 @@ export declare class UserController {
         id: string;
     }): Promise<{
         email: string;
-        lastName: string;
         name: string;
+        lastName: string;
     }>;
     addOpinion(opinion: {
         userid: string;

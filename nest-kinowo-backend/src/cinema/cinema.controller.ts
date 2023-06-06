@@ -7,15 +7,24 @@ import {
   Param,
   Post,
   Put,
+  UploadedFile,
+  UploadedFiles,
   UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CinemaService } from './cinema.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { CreateReservationDto } from '../../dto/CreateReservationDto';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
 
 @Controller('cinema')
 export class CinemaController {
-  constructor(@Inject(CinemaService) private CinemaService: CinemaService) {}
+  constructor(
+    @Inject(CinemaService) private CinemaService: CinemaService,
+    @Inject(CloudinaryService) private CloudinaryService: CloudinaryService,
+  ) {}
+
   //działa
   @Get('/getAll/:id')
   async getAll(@Param() { id }: { id: string }) {
@@ -41,20 +50,33 @@ export class CinemaController {
   }
 
   //działa
-  @UseGuards(JwtAuthGuard)
-  @Post('/addMovie')
-  async addMovie(
-    @Body()
-    movie: {
-      title: string;
-      description: string;
-      premiere: string;
-      end: string;
-      id: string;
-    },
+  @Post('/upload')
+  @UseInterceptors(FilesInterceptor('files', 10))
+  async uploadFile(
+    @UploadedFiles() files: Array<Express.Multer.File>,
+    @Body('title') title: string,
+    @Body('description') description: string,
+    @Body('premiere') premiere: string,
+    @Body('end') end: string,
+    @Body('id') id: string,
   ) {
-    return this.CinemaService.addMovie(movie);
+    console.log(files, title, id);
+    const array = [];
+    for (const photo of files) {
+      const { url } = await this.CloudinaryService.uploadFile(photo);
+      array.push(url);
+    }
+    await console.log(array);
+    await this.CinemaService.addMovie({
+      title,
+      description,
+      premiere,
+      end,
+      id,
+      images: array,
+    });
   }
+
   //działa
   @UseGuards(JwtAuthGuard)
   @Put('/updateMovie')

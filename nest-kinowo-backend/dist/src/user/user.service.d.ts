@@ -47,6 +47,5 @@ export declare class UserService {
         movieTitle: string;
         description: string;
         rate: number;
-        token: string;
     }): Promise<import(".prisma/client").Opinion>;
 }

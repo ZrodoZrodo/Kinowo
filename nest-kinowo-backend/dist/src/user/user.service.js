@@ -96,6 +96,7 @@ let UserService = class UserService {
         });
     }
     async createReservation({ userId, movieId, title, date, price, screeningNumber, seatNumber, }) {
+        console.log(seatNumber);
         return await prisma_1.default.reservation.create({
             data: {
                 movieId,

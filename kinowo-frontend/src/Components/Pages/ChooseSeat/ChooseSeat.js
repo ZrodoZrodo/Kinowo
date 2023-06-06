@@ -18,7 +18,7 @@ export const ChooseSeat =()=>{
        const resp= fetch('http://localhost:3000/user/createReservation',{
             method:"POST",
             headers: {
-                'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODU5NzkzNTMsImV4cCI6MTY4NTk4Mjk1M30.WKGhTj9O3LAd7IboN2VlYwYo-hUbL8Tdq8qI34QU6e8',
+                'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYwNTg1NjEsImV4cCI6MTY4NjA2MjE2MX0.uZoHDT8KuHCnQeRNB9xhKK-0oZDZZaHcMvZMAWTKQ84',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
