@@ -12,6 +12,7 @@ import {ChooseSeat} from "./Components/Pages/ChooseSeat/ChooseSeat";
 import History from "./Components/Pages/History/History";
 import AddMovie from "./Components/Pages/AddMovie";
 import AddOpinion from "./Components/Pages/AddOpinion";
+import {AdminPage} from "./Components/Pages/AdminPage/AdminPage";
 function App() {
   const { user } = useContext(UserContext);
   return (
@@ -21,12 +22,13 @@ function App() {
         <Route path="addopinion" element={<AddOpinion />} />
         <Route path="addmovie" element={<AddMovie />} />
         <Route path="register" element={<Register />} />
-        <Route path="login" element={<Login />} />
+        <Route path="/login/:role" element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="useredit" element={<UserEdit />} />
         <Route path="booking" element={<Film/>} />
         <Route path="history" element={<History/>} />
         <Route path="/chooseSeat/:id" element={<ChooseSeat/>} />
+        <Route path="/adminPage" element={<AdminPage/>} />
         {/* {user && (
           <Route path="dashboard" element={<Dashboard />} />
         )} */}

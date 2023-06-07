@@ -11,9 +11,22 @@ import { v4 as uuid } from 'uuid';
 export class UserService {
   //działa
   async findOne(username: string): Promise<any> {
-    return await prisma.user.findFirst({
-      where: { email: username, deleted: false },
-    });
+    const data = username.split(':');
+    if (data[1] == 'user') {
+      return await prisma.user.findFirst({
+        where: { email: data[0], deleted: false },
+      });
+    }
+    if (data[1] == 'cinemaAdmin') {
+      return await prisma.cinemaAdmin.findFirst({
+        where: { cinemaName: data[0], deleted: false },
+      });
+    }
+    if (data[1] == 'admin') {
+      return await prisma.admin.findFirst({
+        where: { email: data[0] },
+      });
+    }
   }
 
   //działa
@@ -165,8 +178,6 @@ export class UserService {
       return { status: false, message: 'one or more this seats is occuped' };
     }
   }
-
-
 
   async updateUser(email: string, name: string, lastName: string, id: string) {
     return prisma.user.update({

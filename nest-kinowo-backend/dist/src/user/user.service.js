@@ -13,9 +13,22 @@ const bcrypt = require("bcrypt");
 const validation_1 = require("../../validation/validation");
 let UserService = class UserService {
     async findOne(username) {
-        return await prisma_1.default.user.findFirst({
-            where: { email: username, deleted: false },
-        });
+        const data = username.split(':');
+        if (data[1] == 'user') {
+            return await prisma_1.default.user.findFirst({
+                where: { email: data[0], deleted: false },
+            });
+        }
+        if (data[1] == 'cinemaAdmin') {
+            return await prisma_1.default.cinemaAdmin.findFirst({
+                where: { cinemaName: data[0], deleted: false },
+            });
+        }
+        if (data[1] == 'admin') {
+            return await prisma_1.default.admin.findFirst({
+                where: { email: data[0] },
+            });
+        }
     }
     async register({ name, lastName, email, password, }) {
         if (name && lastName && email && password) {

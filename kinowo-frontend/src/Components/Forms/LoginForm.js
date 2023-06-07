@@ -1,6 +1,6 @@
 import InputForm from "./InputForm";
 import { useContext} from "react";
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Submit from "./Submit";
 import UserContext from "../../UserContext";
 import Cookies from "universal-cookie";
@@ -9,6 +9,7 @@ import API from "../../env";
 
 const LoginForm = () => {
   const { setUser } = useContext(UserContext);
+  const {role}=useParams();
   const navigate = useNavigate();
   async function Login(e) {
     e.preventDefault();
@@ -22,12 +23,12 @@ const LoginForm = () => {
         },
 
         body: JSON.stringify({
-          username: formData.get("email").valueOf(),
+          username: formData.get("email").valueOf()+`:${role}`,
           password: formData.get("password").valueOf()
         }),
       });
       const { user, token } = await response.json();
-      console.log( user, token)
+
       if(user&&token) {
         setUser(user);
         localStorage.setItem("TOKEN", token);
