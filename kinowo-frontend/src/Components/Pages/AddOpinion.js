@@ -64,6 +64,7 @@ const AddOpinion = () => {
           </form>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   );
 };
