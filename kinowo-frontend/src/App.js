@@ -13,6 +13,7 @@ import History from "./Components/Pages/History/History";
 import {PhotoUpload} from "./Components/photoUpload/photoUpload";
 import AddMovie from "./Components/Pages/AddMovie";
 import AddOpinion from "./Components/Pages/AddOpinion";
+import OpinionList from "./Components/Pages/OpinionList";
 function App() {
   const { user } = useContext(UserContext);
   return (
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="" exact element={<PhotoUpload />} />
         <Route path="addopinion" element={<AddOpinion />} />
+        <Route path="listopinion" element={<OpinionList />} />
         <Route path="addmovie" element={<AddMovie />} />
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
