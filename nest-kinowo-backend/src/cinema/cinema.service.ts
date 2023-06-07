@@ -148,10 +148,10 @@ export class CinemaService {
   }) {
     return prisma.movieScreening.create({
       data: {
-        movie:{
-          connect:{
-            id:movieId
-          }
+        movie: {
+          connect: {
+            id: movieId,
+          },
         },
         price,
         date,
@@ -174,31 +174,31 @@ export class CinemaService {
     });
   }
 
-  async getMovieScreeningByDate(date:string)
-  {
+  async getMovieScreeningByDate(date: string) {
     return prisma.movieScreening.findMany({
-      where:{date:{
-        startsWith:date
-        }},
-      select:{
-        movie:{
-          select:{
-            title:true,
-            description:true,
-            images:true,
-          }
-        }
-      }
-    })
+      where: {
+        date: {
+          startsWith: date,
+        },
+      },
+      select: {
+        movie: {
+          select: {
+            title: true,
+            description: true,
+            images: true,
+          },
+        },
+      },
+    });
   }
 
-  async getMovieScreeningHours(date:string,id:string)
-  {
+  async getMovieScreeningHours(date: string, id: string) {
     return prisma.movieScreening.findMany({
-      where:{date:{startsWith: date},movieId:id},
-      select:{
-        date:true,
-      }
-    })
+      where: { date: { startsWith: date }, movieId: id },
+      select: {
+        date: true,
+      },
+    });
   }
 }

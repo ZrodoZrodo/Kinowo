@@ -10,7 +10,6 @@ import UserEdit from "./Components/Pages/UserEdit";
 import Film from "./Components/Pages/Film";
 import {ChooseSeat} from "./Components/Pages/ChooseSeat/ChooseSeat";
 import History from "./Components/Pages/History/History";
-import {PhotoUpload} from "./Components/photoUpload/photoUpload";
 import AddMovie from "./Components/Pages/AddMovie";
 import AddOpinion from "./Components/Pages/AddOpinion";
 function App() {
@@ -18,7 +17,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="" exact element={<PhotoUpload />} />
+        <Route path="" exact element={<HeroPage />} />
         <Route path="addopinion" element={<AddOpinion />} />
         <Route path="addmovie" element={<AddMovie />} />
         <Route path="register" element={<Register />} />

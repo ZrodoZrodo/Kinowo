@@ -1,7 +1,51 @@
 import Footer from "../UI/Footer";
 import NavbarDashboard from "../UI/NavbarDashboard";
+import {useState} from "react";
 
 const AddMovie = () => {
+
+  const [data,setData]=useState({})
+
+  const [photosUrls,setPhotosUrls]=useState([])
+
+  const addPhoto=(e)=>{
+    e.preventDefault()
+    for(let i=0;i<e.target.files.length;i++)
+    {
+      const photoBlob=e.target.files[i]
+      const url=URL.createObjectURL(e.target.files[i])
+      setPhotosUrls(prevState => [...prevState,{url,photoBlob}]);
+
+    }
+    e.target.value=""
+  }
+
+  const deletePhoto=(photo)=>{
+    setPhotosUrls(prevState => prevState.filter(url=>url!==photo))
+  }
+
+  const send=(e)=>{
+
+e.preventDefault()
+    const photos=photosUrls.map(photo=>photo.photoBlob)
+    const formData=new FormData();
+    photos.forEach(photo=>{
+      formData.append('files',photo)
+    })
+
+    formData.append('end',data.end)
+    formData.append('premiere',data.premiere)
+    formData.append('description',data.description)
+    formData.append('title',data.title)
+    formData.append('id',"647e3cf8c696b7a714a9644a")
+
+    fetch('http://localhost:3000/cinema/upload',{
+      method: "POST",
+      body:formData
+    }).then(res=>res.json()).then(data=>console.log(data))
+
+  }
+
   return (
     <div className="card w-full">
       <NavbarDashboard></NavbarDashboard>
@@ -20,6 +64,8 @@ const AddMovie = () => {
               name="title"
               placeholder="Nazwa filmu"
               className="input input-bordered border-purple max-w-xs"
+              value={data.title}
+              onChange={(e)=>setData({...data,title:e.target.value})}
             />
             <hr className="border-purple w-4/5" />
             <p className="text-2xl"> Opis filmu:</p>
@@ -29,15 +75,19 @@ const AddMovie = () => {
               cols="100"
               placeholder="Opis"
               className="rounded-md caret-transparent bg-[#171017] border-2 border-purple resize-none text-left w-11/12 md:w-1/2"
+              onChange={(e)=>setData({...data,description:e.target.value})}
+              value={data.description}
             />
             <hr className="border-purple w-4/5" />
-            <div className="flex flex-wrap ">
+            <div className="flex flex-wrap justify-center">
               <div className=" grid justify-items-center my-4 mx-4">
                 <p className="text-2xl mb-2"> Premiera:</p>
                 <input
                   type="date"
                   min="1"
                   className="input input-bordered border-purple max-w-xs"
+                  value={data.premiere}
+                  onChange={(e)=>setData({...data,premiere:e.target.value})}
                 />
               </div>
               <div className=" grid justify-items-center my-4 mx-4">
@@ -46,11 +96,24 @@ const AddMovie = () => {
                   type="date"
                   placeholder="Price"
                   className="input input-bordered border-purple max-w-xs"
+                  value={data.end}
+                  onChange={(e)=>setData({...data,end:e.target.value})}
                 />
               </div>
+
+            </div>
+            <hr className="border-purple w-full" />
+
+              <div className={"rounded-md caret-transparent bg-[#171017] h-48 border-2 border-purple resize-none text-left w-11/12 md:w-1/2"}>
+                <input multiple className={"w-full h-full opacity-0"} onChange={(e)=>addPhoto(e)} type={'file'}/>
+              </div>
+              <div className={'w-full h-32 bg-[#171017] overflow-auto '}>
+                <div className={'flex  justify-center items-center'}>
+                  {photosUrls.map(photo=><img alt={"error"} key={photo.url} onClick={()=>deletePhoto(photo)} className={'object-fill h-32 w-32'} src={photo.url}/>)}
+                </div>
             </div>
             <div className="grid justify-items-center gap-7 ">
-            <button class="btn btn-success text-main-dark border-2 border-success max-w-xs justify-center">
+            <button onClick={(e)=>send(e)} class="btn btn-success text-main-dark border-2 border-success max-w-xs justify-center">
                 Dodaj film
               </button>
               <p className="btn btn-outline text-white">Wróc do listy filmów</p>

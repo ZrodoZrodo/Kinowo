@@ -20,7 +20,7 @@ export const ChooseSeat =()=>{
     useEffect(()=>{
         fetch(`http://localhost:3000/cinema/getOccupiedSeats/${id}`,{
             headers:{
-                'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYxMjE4MjAsImV4cCI6MTY4NjEyNTQyMH0.D8RH31klmBRv80pZ__1xnyM5wJXQKq1mgqqkGBH85Nc',
+                'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYxNTY1NTIsImV4cCI6MTY4NjE2MDE1Mn0.b_N8yRJZyiy7peVhWhS9X6JUWtQbgtGu_aZnGMOXOkU',
             }
         }).then(resp=>resp.json()).then(data=>setDisabled(data.reservations))
 
@@ -30,7 +30,7 @@ export const ChooseSeat =()=>{
        fetch('http://localhost:3000/user/createReservation',{
             method:"POST",
             headers: {
-                'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYxMjE4MjAsImV4cCI6MTY4NjEyNTQyMH0.D8RH31klmBRv80pZ__1xnyM5wJXQKq1mgqqkGBH85Nc',
+                'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYxNTY1NTIsImV4cCI6MTY4NjE2MDE1Mn0.b_N8yRJZyiy7peVhWhS9X6JUWtQbgtGu_aZnGMOXOkU',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
@@ -49,7 +49,7 @@ export const ChooseSeat =()=>{
                 setMarked([])
                 fetch(`http://localhost:3000/cinema/getOccupiedSeats/${id}`,{
                     headers:{
-                        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYxMjE4MjAsImV4cCI6MTY4NjEyNTQyMH0.D8RH31klmBRv80pZ__1xnyM5wJXQKq1mgqqkGBH85Nc',
+                        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYxNTY1NTIsImV4cCI6MTY4NjE2MDE1Mn0.b_N8yRJZyiy7peVhWhS9X6JUWtQbgtGu_aZnGMOXOkU',
                     }
                 }).then(resp=>resp.json()).then(data=>setDisabled(data.reservations))
             }

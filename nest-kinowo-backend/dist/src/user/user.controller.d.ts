@@ -7,18 +7,18 @@ export declare class UserController {
     getUser(id: {
         id: string;
     }): Promise<{
-        name: string;
-        lastName: string;
-        email: string;
         id: string;
         deleted: boolean;
+        email: string;
+        name: string;
+        lastName: string;
     }>;
     getMoviesHistory(id: {
         id: string;
     }): Promise<{
         reservations: {
-            movieId: string;
             title: string;
+            movieId: string;
             date: string;
             price: number;
         }[];
@@ -28,8 +28,8 @@ export declare class UserController {
     }): Promise<{
         reservations: {
             id: string;
-            movieId: string;
             title: string;
+            movieId: string;
             date: string;
             price: number;
             seatNumber: number[];
@@ -56,9 +56,9 @@ export declare class UserController {
     }, id: {
         id: string;
     }): Promise<{
+        email: string;
         name: string;
         lastName: string;
-        email: string;
     }>;
     addOpinion(opinion: {
         userid: string;
