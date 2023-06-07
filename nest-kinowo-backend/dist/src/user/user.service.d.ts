@@ -7,17 +7,18 @@ export declare class UserService {
         message: string;
     }>;
     getUser(id: string): Promise<{
-        id: string;
-        deleted: boolean;
-        email: string;
         name: string;
         lastName: string;
+        email: string;
+        id: string;
+        deleted: boolean;
+        opinions: import(".prisma/client").Opinion[];
     }>;
     getUserActiveReservations(id: string): Promise<{
         reservations: {
             id: string;
-            title: string;
             movieId: string;
+            title: string;
             date: string;
             price: number;
             seatNumber: number[];
@@ -32,14 +33,14 @@ export declare class UserService {
         message: string;
     }>;
     updateUser(email: string, name: string, lastName: string, id: string): Promise<{
-        email: string;
         name: string;
         lastName: string;
+        email: string;
     }>;
     getMoviesHistory(id: string): Promise<{
         reservations: {
-            title: string;
             movieId: string;
+            title: string;
             date: string;
             price: number;
         }[];
@@ -51,4 +52,7 @@ export declare class UserService {
         description: string;
         rate: number;
     }): Promise<import(".prisma/client").Opinion>;
+    getUserOpinions(id: string): Promise<{
+        opinions: import(".prisma/client").Opinion[];
+    }>;
 }

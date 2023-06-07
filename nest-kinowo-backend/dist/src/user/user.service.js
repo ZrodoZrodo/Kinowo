@@ -73,6 +73,7 @@ let UserService = class UserService {
                     lastName: true,
                     deleted: true,
                     name: true,
+                    opinions: true,
                 },
             });
         }
@@ -197,6 +198,16 @@ let UserService = class UserService {
                     connect: {
                         id: movieId,
                     },
+                },
+            },
+        });
+    }
+    async getUserOpinions(id) {
+        return prisma_1.default.user.findFirst({
+            where: { id },
+            select: {
+                opinions: {
+                    where: { deleted: false },
                 },
             },
         });

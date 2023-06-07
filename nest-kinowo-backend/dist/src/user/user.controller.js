@@ -31,6 +31,9 @@ let UserController = class UserController {
     async getUserActiveReservations(id) {
         return this.UserService.getUserActiveReservations(id.id);
     }
+    async getUserOpinions(id) {
+        return this.UserService.getUserOpinions(id.id);
+    }
     async getUserComingReservations(id) {
         return this.UserService.getUserComingReservations(id.id);
     }
@@ -71,6 +74,14 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "getUserActiveReservations", null);
+__decorate([
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
+    (0, common_1.Get)('/getUserOpinions/:id'),
+    __param(0, (0, common_1.Param)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getUserOpinions", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)('/UserComingReservations/:id'),

@@ -82,6 +82,7 @@ export class UserService {
           lastName: true,
           deleted: true,
           name: true,
+          opinions: true,
         },
       });
     } catch (e) {
@@ -235,6 +236,17 @@ export class UserService {
           connect: {
             id: movieId,
           },
+        },
+      },
+    });
+  }
+
+  async getUserOpinions(id: string) {
+    return prisma.user.findFirst({
+      where: { id },
+      select: {
+        opinions: {
+          where: { deleted: false },
         },
       },
     });

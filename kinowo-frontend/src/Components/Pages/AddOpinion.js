@@ -1,8 +1,51 @@
 import Footer from "../UI/Footer";
 import NavbarDashboard from "../UI/NavbarDashboard";
+import {useState,useEffect} from "react";
+import {useParams} from "react-router-dom";
+
+
+
 const film = { name: "Black panther" };
 
 const AddOpinion = () => {
+
+  const [movie,setMovie]=useState()
+
+  const {id}=useParams()
+
+
+  useEffect(()=>{
+    fetch(`http://localhost:3000/cinema/getOneDetails/${id}`,
+        {headers:{
+            'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYxNjYyNjMsImV4cCI6MTY4NjE2OTg2M30.9nS6geQoexEabzc_TEBIEovM4K8Ts8JpZ-lkrriXwYA',
+          }}).then(res=>res.json()).then(data=>setMovie(data))
+  },[])
+
+
+  const [data,setData]=useState({})
+
+
+  const send=(e)=>{
+    e.preventDefault()
+    fetch('http://localhost:3000/user/addOpinion',{
+      method:"POST",
+      headers:{
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYxNjYyNjMsImV4cCI6MTY4NjE2OTg2M30.9nS6geQoexEabzc_TEBIEovM4K8Ts8JpZ-lkrriXwYA',
+      },
+      body:JSON.stringify({
+        userid:"64743a001715c9adaf265f9a",
+        movieId:id,
+        movieTitle:movie.title,
+        description:data.description,
+        rate:data.rate
+      })
+    }).then(res=>res.json()).then(data=>console.log(data))
+
+  }
+
+
+
   return (
     <div className="h-screen bg-dark-purple">
       <NavbarDashboard></NavbarDashboard>
@@ -23,34 +66,39 @@ const AddOpinion = () => {
               <p className="btn mt-2">Wróc do filmów</p>
             </p>
           </div>
-          <form className="border-1 border-purple w-full text-center flex flex-col ">
-            <p className=" mt-6 text-4xl">Oceniasz film : {film.name} </p>
+          <form onSubmit={(e)=>send(e)} className="border-1 border-purple w-full text-center flex flex-col ">
+            <p className=" mt-6 text-4xl">Oceniasz film : {movie?.title} </p>
             <p className=" mt-5">Twoja ocena (W przedziale od 1 do 5)</p>
             <div class="rating rating-lg mt-4 self-center ">
               <input
                 type="radio"
                 name="rating-9"
                 class="mask mask-star-2 bg-purple"
+                onClick={()=>setData({...data,rate:1})}
               />
               <input
                 type="radio"
                 name="rating-9"
                 class="mask mask-star-2 bg-purple"
+                onClick={()=>setData({...data,rate:2})}
               />
               <input
                 type="radio"
                 name="rating-9"
                 class="mask mask-star-2 bg-purple"
+                onClick={()=>setData({...data,rate:3})}
               />
               <input
                 type="radio"
                 name="rating-9"
                 class="mask mask-star-2 bg-purple"
+                onClick={()=>setData({...data,rate:4})}
               />
               <input
                 type="radio"
                 name="rating-9"
                 class="mask mask-star-2 bg-purple"
+                onClick={()=>setData({...data,rate:5})}
               />
             </div>
             <textarea
@@ -59,6 +107,7 @@ const AddOpinion = () => {
               cols="100"
               placeholder="Twoja opinia"
               className="rounded-md caret-transparent bg-[#171017] border-2 border-purple resize-none self-center text-left w-11/12 md:w-1/2 mt-6 "
+              onChange={(e)=>setData({...data,description:e.target.value})}
             />
             <button className="btn mt-4 w-1/2 self-center">Dodaj opinię</button>
           </form>

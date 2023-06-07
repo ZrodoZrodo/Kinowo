@@ -37,6 +37,12 @@ export class UserController {
   async getUserActiveReservations(@Param() id: { id: string }) {
     return this.UserService.getUserActiveReservations(id.id);
   }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/getUserOpinions/:id')
+  async getUserOpinions(@Param() id: { id: string }) {
+    return this.UserService.getUserOpinions(id.id);
+  }
   //działa
   @UseGuards(JwtAuthGuard)
   @Get('/UserComingReservations/:id')
@@ -48,6 +54,7 @@ export class UserController {
   async register(@Body() newUser: CreateUserDto) {
     return this.UserService.register(newUser);
   }
+
   //działa
   @UseGuards(JwtAuthGuard)
   @Post('/createReservation')
