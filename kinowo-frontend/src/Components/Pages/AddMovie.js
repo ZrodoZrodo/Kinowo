@@ -3,7 +3,7 @@ import NavbarDashboard from "../UI/NavbarDashboard";
 
 const AddMovie = () => {
   return (
-    <div className="card w-full bg-main-dark rounded-none w-full ">
+    <div className="card w-full">
       <NavbarDashboard></NavbarDashboard>
       <form>
         <div class="flex flex-col space-y-4 card-body">
