@@ -116,22 +116,58 @@ export class UserService {
     seatNumber,
   }: CreateReservationDto) {
     console.log(seatNumber);
-    return await prisma.reservation.create({
-      data: {
-        movieId,
-        title,
-        date,
-        price,
-        movieScreeningId: screeningNumber,
-        seatNumber,
-        user: {
-          connect: {
-            id: userId,
-          },
-        },
+
+    const array = await prisma.movieScreening.findFirst({
+      where: { id: screeningNumber },
+      select: {
+        reservations: true,
       },
     });
+
+    let free = true;
+
+    array.reservations.forEach((res) => {
+      if (seatNumber.includes(res)) {
+        free = false;
+      }
+    });
+
+    if (free) {
+      await prisma.movieScreening.update({
+        where: { id: screeningNumber },
+        data: {
+          reservations: {
+            push: seatNumber,
+          },
+        },
+      });
+
+      return await prisma.reservation.create({
+        data: {
+          movieId,
+          title,
+          date,
+          price,
+          movieScreening: {
+            connect: {
+              id: screeningNumber,
+            },
+          },
+          seatNumber,
+          user: {
+            connect: {
+              id: userId,
+            },
+          },
+        },
+      });
+    } else {
+      return { status: false, message: 'one or more this seats is occuped' };
+    }
   }
+
+
+
   async updateUser(email: string, name: string, lastName: string, id: string) {
     return prisma.user.update({
       where: { id },

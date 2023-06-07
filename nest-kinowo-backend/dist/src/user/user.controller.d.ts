@@ -7,10 +7,10 @@ export declare class UserController {
     getUser(id: {
         id: string;
     }): Promise<{
-        id: string;
-        email: string;
         name: string;
         lastName: string;
+        email: string;
+        id: string;
         deleted: boolean;
     }>;
     getMoviesHistory(id: {
@@ -45,7 +45,10 @@ export declare class UserController {
         status: number;
         message: string;
     }>;
-    createReservation(Reservation: CreateReservationDto): Promise<import(".prisma/client").Reservation>;
+    createReservation(Reservation: CreateReservationDto): Promise<import(".prisma/client").Reservation | {
+        status: boolean;
+        message: string;
+    }>;
     updateUser(user: {
         email: string;
         name: string;
@@ -53,9 +56,9 @@ export declare class UserController {
     }, id: {
         id: string;
     }): Promise<{
-        email: string;
         name: string;
         lastName: string;
+        email: string;
     }>;
     addOpinion(opinion: {
         userid: string;

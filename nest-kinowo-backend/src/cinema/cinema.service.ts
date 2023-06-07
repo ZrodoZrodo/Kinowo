@@ -132,4 +132,73 @@ export class CinemaService {
       },
     });
   }
+
+  async putMoviesIntoScreening({
+    movieId,
+    price,
+    date,
+    end,
+    cinemaAdminId,
+  }: {
+    movieId: string;
+    price: number;
+    date: string;
+    end: boolean;
+    cinemaAdminId: string;
+  }) {
+    return prisma.movieScreening.create({
+      data: {
+        movie:{
+          connect:{
+            id:movieId
+          }
+        },
+        price,
+        date,
+        end,
+        CinemaAdmin: {
+          connect: {
+            id: cinemaAdminId,
+          },
+        },
+      },
+    });
+  }
+
+  async getOccupiedSeats(id: string) {
+    return prisma.movieScreening.findFirst({
+      where: { id },
+      select: {
+        reservations: true,
+      },
+    });
+  }
+
+  async getMovieScreeningByDate(date:string)
+  {
+    return prisma.movieScreening.findMany({
+      where:{date:{
+        startsWith:date
+        }},
+      select:{
+        movie:{
+          select:{
+            title:true,
+            description:true,
+            images:true,
+          }
+        }
+      }
+    })
+  }
+
+  async getMovieScreeningHours(date:string,id:string)
+  {
+    return prisma.movieScreening.findMany({
+      where:{date:{startsWith: date},movieId:id},
+      select:{
+        date:true,
+      }
+    })
+  }
 }

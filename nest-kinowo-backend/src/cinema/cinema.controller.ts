@@ -30,18 +30,21 @@ export class CinemaController {
   async getAll(@Param() { id }: { id: string }) {
     return this.CinemaService.getAll(id);
   }
+
   //działa
   @UseGuards(JwtAuthGuard)
   @Get('/getOne/:title')
   async getOne(@Param() { title }: { title: string }) {
     return this.CinemaService.getOne(title);
   }
+
   //działa
   @UseGuards(JwtAuthGuard)
   @Get('/getOneDetails/:id')
   async getOneDetails(@Param() { id }: { id: string }) {
     return this.CinemaService.getOneDetails(id);
   }
+
   //działa
   @UseGuards(JwtAuthGuard)
   @Get('/getMovies/:id')
@@ -92,10 +95,44 @@ export class CinemaController {
   ) {
     return this.CinemaService.updateMovie(movie);
   }
+
   //działa
   @UseGuards(JwtAuthGuard)
   @Delete('/deleteMovie/:id')
   async deleteMovie(@Param() { id }: { id: string }) {
     return this.CinemaService.deleteMovie(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Post('/putMoviesIntoScreening')
+  async putMoviesIntoScreening(
+    @Body()
+    movie: {
+      movieId: string;
+      price: number;
+      date: string;
+      end: boolean;
+      cinemaAdminId: string;
+    },
+  ) {
+    return this.CinemaService.putMoviesIntoScreening(movie);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('/getOccupiedSeats/:id')
+  async getOccupiedSeats(@Param() { id }: { id: string }) {
+    return this.CinemaService.getOccupiedSeats(id);
+  }
+
+  @Get('/getMovieScreeningByDate/:date')
+  async getMovieScreeningByDate(@Param() { date }: { date: string })
+  {
+    return this.CinemaService.getMovieScreeningByDate(date);
+  }
+
+  @Get('/getMovieScreeningHours/:date/:id')
+  async getMovieScreeningHours(@Param() { date,id }: {id:string, date: string })
+  {
+    return this.CinemaService.getMovieScreeningHours(date,id);
   }
 }

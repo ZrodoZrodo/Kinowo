@@ -97,21 +97,50 @@ let UserService = class UserService {
     }
     async createReservation({ userId, movieId, title, date, price, screeningNumber, seatNumber, }) {
         console.log(seatNumber);
-        return await prisma_1.default.reservation.create({
-            data: {
-                movieId,
-                title,
-                date,
-                price,
-                movieScreeningId: screeningNumber,
-                seatNumber,
-                user: {
-                    connect: {
-                        id: userId,
-                    },
-                },
+        const array = await prisma_1.default.movieScreening.findFirst({
+            where: { id: screeningNumber },
+            select: {
+                reservations: true,
             },
         });
+        let free = true;
+        array.reservations.forEach((res) => {
+            if (seatNumber.includes(res)) {
+                free = false;
+            }
+        });
+        if (free) {
+            await prisma_1.default.movieScreening.update({
+                where: { id: screeningNumber },
+                data: {
+                    reservations: {
+                        push: seatNumber,
+                    },
+                },
+            });
+            return await prisma_1.default.reservation.create({
+                data: {
+                    movieId,
+                    title,
+                    date,
+                    price,
+                    movieScreening: {
+                        connect: {
+                            id: screeningNumber,
+                        },
+                    },
+                    seatNumber,
+                    user: {
+                        connect: {
+                            id: userId,
+                        },
+                    },
+                },
+            });
+        }
+        else {
+            return { status: false, message: 'one or more this seats is occuped' };
+        }
     }
     async updateUser(email, name, lastName, id) {
         return prisma_1.default.user.update({

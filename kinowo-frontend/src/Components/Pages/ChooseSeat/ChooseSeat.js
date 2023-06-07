@@ -4,21 +4,33 @@ import {SeatColumn} from "./SeatColumn";
 import {Seat} from "./Seat";
 import Button from "../../UI/Button";
 import Demo from './seatDemo'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 
 export const ChooseSeat =()=>{
 
     const {id}=useParams()
-    console.log(Demo)
-    const [disabled,setDisabled]=useState([1,4,7,3])
+
+
+
+
+    const [disabled,setDisabled]=useState([1,2,3])
     const [marked,setMarked]=useState([])
 
+    useEffect(()=>{
+        fetch(`http://localhost:3000/cinema/getOccupiedSeats/${id}`,{
+            headers:{
+                'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYxMjE4MjAsImV4cCI6MTY4NjEyNTQyMH0.D8RH31klmBRv80pZ__1xnyM5wJXQKq1mgqqkGBH85Nc',
+            }
+        }).then(resp=>resp.json()).then(data=>setDisabled(data.reservations))
+
+    },[])
+
     const order=async()=>{
-       const resp= fetch('http://localhost:3000/user/createReservation',{
+       fetch('http://localhost:3000/user/createReservation',{
             method:"POST",
             headers: {
-                'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYwNTg1NjEsImV4cCI6MTY4NjA2MjE2MX0.uZoHDT8KuHCnQeRNB9xhKK-0oZDZZaHcMvZMAWTKQ84',
+                'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYxMjE4MjAsImV4cCI6MTY4NjEyNTQyMH0.D8RH31klmBRv80pZ__1xnyM5wJXQKq1mgqqkGBH85Nc',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
@@ -30,8 +42,19 @@ export const ChooseSeat =()=>{
                 screeningNumber:id,
                 seatNumber:marked
             }),
-        })
-        console.log( await resp.json())
+        }).then(res=>res.json()).then(data=>{
+            if(data.status===false)
+            {
+                alert(data.message)
+                setMarked([])
+                fetch(`http://localhost:3000/cinema/getOccupiedSeats/${id}`,{
+                    headers:{
+                        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYxMjE4MjAsImV4cCI6MTY4NjEyNTQyMH0.D8RH31klmBRv80pZ__1xnyM5wJXQKq1mgqqkGBH85Nc',
+                    }
+                }).then(resp=>resp.json()).then(data=>setDisabled(data.reservations))
+            }
+       })
+
     }
 
     if(!disabled) return;
