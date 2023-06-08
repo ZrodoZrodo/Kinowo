@@ -12,7 +12,7 @@ import {ChooseSeat} from "./Components/Pages/ChooseSeat/ChooseSeat";
 import History from "./Components/Pages/History/History";
 import AddMovie from "./Components/Pages/AddMovie";
 import AddOpinion from "./Components/Pages/AddOpinion";
-
+import OpinionList from "./Components/Pages/OpinionList";
 function App() {
   const { user } = useContext(UserContext);
 
@@ -20,6 +20,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="" exact element={<HeroPage />} />
+        <Route path="opinionlist" exact element={<OpinionList />} />
         <Route path="/addopinion/:id" element={<AddOpinion />} />
         <Route path="addmovie" element={<AddMovie />} />
         <Route path="register" element={<Register />} />
