@@ -7,18 +7,18 @@ export declare class UserService {
         message: string;
     }>;
     getUser(id: string): Promise<{
-        name: string;
-        lastName: string;
-        email: string;
+        opinions: import(".prisma/client").Opinion[];
         id: string;
         deleted: boolean;
-        opinions: import(".prisma/client").Opinion[];
+        email: string;
+        name: string;
+        lastName: string;
     }>;
     getUserActiveReservations(id: string): Promise<{
         reservations: {
             id: string;
-            movieId: string;
             title: string;
+            movieId: string;
             date: string;
             price: number;
             seatNumber: number[];
@@ -33,14 +33,14 @@ export declare class UserService {
         message: string;
     }>;
     updateUser(email: string, name: string, lastName: string, id: string): Promise<{
+        email: string;
         name: string;
         lastName: string;
-        email: string;
     }>;
     getMoviesHistory(id: string): Promise<{
         reservations: {
-            movieId: string;
             title: string;
+            movieId: string;
             date: string;
             price: number;
         }[];

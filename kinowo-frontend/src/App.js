@@ -26,10 +26,9 @@ function App() {
         <Route path="/login/:role" element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="useredit" element={<UserEdit />} />
-        <Route path="booking" element={<Film/>} />
+        <Route path="booking/:id" element={<Film/>} />
         <Route path="history" element={<History/>} />
         <Route path="/chooseSeat/:id" element={<ChooseSeat/>} />
-
         {/* {user && (
           <Route path="dashboard" element={<Dashboard />} />
         )} */}

@@ -182,6 +182,8 @@ export class CinemaService {
         },
       },
       select: {
+        date: true,
+        id: true,
         movie: {
           select: {
             title: true,
