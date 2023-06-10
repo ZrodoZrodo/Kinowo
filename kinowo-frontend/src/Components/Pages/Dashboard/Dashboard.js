@@ -1,7 +1,12 @@
 import Footer from "../../UI/Footer";
 import NavbarDashboard from "../../UI/NavbarDashboard";
+import {useCookies} from "react-cookie";
+import {useNavigate} from "react-router-dom";
 
 const Dashboard = () => {
+
+  const [cookie]=useCookies()
+  const navigate = useNavigate();
   return (
     <>
       <div className="bg-dark-purple h-full w-full">
@@ -10,7 +15,7 @@ const Dashboard = () => {
         <div className="border-2 border-l-transparent border-r-transparent border-t-purple border-b-transparent rounded-null w-1/2  "></div>
           <div className="Dashboard_banner w-4/6 sm:h-80  mt-6 grid ">
             <p className=" text-xl m-6 text-dashboard-pink">
-              Witaj w naszym serwisie!
+              {cookie.UserData.name.charAt(0).toUpperCase() + cookie.UserData.name.slice(1)} witaj w naszym serwisie!
             </p>
             <p className="text-xl m-6 text-[#DBC5D0] place-self-end ">
               <p className="text-3xl">Odkryj Mistrzostwo Kina!</p> <br></br>Przygotuj się na wspaniałą
@@ -21,7 +26,7 @@ const Dashboard = () => {
             </p>
           </div>
           <div className="grid md:grid-cols-3  grid-cols-1  gap-4 place-items-center w-full mt-24 ">
-            <div className="Burger text-3xl text-center w-max-md">
+            <div className="Burger text-3xl text-center w-max-md cursor-pointer" onClick={()=>navigate('/useredit')}>
               <p className="m-2 text-dashboard-pink">Edytuj dane konta</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +97,7 @@ const Dashboard = () => {
                 />
               </svg>
             </div>
-            <div className="Burger text-3xl text-center  sm:w-max-md lg:w-1/3 ">
+            <div className="Burger text-3xl text-center  sm:w-max-md lg:w-1/3 cursor-pointer" onClick={()=>navigate('/history')}>
               <p className="m-2 text-dashboard-pink">Historia</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

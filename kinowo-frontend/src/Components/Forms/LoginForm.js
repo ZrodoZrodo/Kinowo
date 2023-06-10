@@ -5,12 +5,13 @@ import Submit from "./Submit";
 import UserContext from "../../UserContext";
 import Cookies from "universal-cookie";
 import API from "../../env";
-
+import { useCookies } from 'react-cookie';
 
 const LoginForm = () => {
   const { setUser } = useContext(UserContext);
   const {role}=useParams();
   const navigate = useNavigate();
+  const [cookies, setCookie,removeCookie] = useCookies(['UserData','Token']);
   async function Login(e) {
     e.preventDefault();
     const setCookies = new Cookies();
@@ -28,11 +29,19 @@ const LoginForm = () => {
         }),
       });
       const { user, token } = await response.json();
-
+      const cookieNames = Object.keys(cookies);
+      cookieNames.forEach((name) => {
+        removeCookie(name);
+      });
       if(user&&token) {
-        setUser(user);
-        localStorage.setItem("TOKEN", token);
+        console.log(token)
+        removeCookie('Token')
+        console.log(cookies.Token)
+        setCookie('Token',token)
+        setCookie('UserData',user)
+        setCookie('Token',token)
         navigate("/dashboard");
+        console.log(cookies.Token)
       }
     } catch (error) {
       console.error(error);

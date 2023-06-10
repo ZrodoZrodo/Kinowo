@@ -1,7 +1,31 @@
 import Footer from "../UI/Footer";
 import NavbarDashboard from "../UI/NavbarDashboard";
+import {useEffect, useState} from "react";
+import {useCookies} from "react-cookie";
 
 const UserEdit = () => {
+  const [cookie,setCookie,removeCookie]=useCookies()
+
+  const [data,setData]=useState({name:cookie.UserData.name,lastName:cookie.UserData.lastName,email:cookie.UserData.email})
+
+
+
+ const send=(e)=>{
+    e.preventDefault()
+    fetch(`http://localhost:3000/user/${cookie.UserData.id}`,{
+      method:"PUT",
+    headers:{
+      'Authorization': 'Bearer ' + cookie.Token,
+      "Content-Type": "application/json"
+    },
+    body:JSON.stringify(data)
+    }).then(res=>res.json()).then(d=>{
+
+      removeCookie('UserData');
+      setCookie('UserData',d)
+    })
+  }
+
   return (
     <div class="card bg-main-dark w-full rounded-none shadow-xl h-screen ">
       <NavbarDashboard></NavbarDashboard>
@@ -24,6 +48,8 @@ const UserEdit = () => {
                   name="firstName"
                   type="text"
                   placeholder="Imie"
+                  value={data.name}
+                  onChange={e=>setData({...data,name:e.target.value})}
                   className="input input-bordered border-purple w-full input-info max-w-xs"
                 />
               </p>
@@ -34,21 +60,11 @@ const UserEdit = () => {
                 <input
                   name="lastName"
                   type="text"
+                  value={data.lastName}
                   placeholder="Naziwsko"
+                  onChange={e=>setData({...data,lastName:e.target.value})}
                   className="input input-bordered border-purple w-full input-info max-w-xs"
                 />{" "}
-              </p>
-            </div>
-            <div className="flex flex-col space-y-2">
-              <p>Numer telefonu</p>
-              <p className="text-white text-2xl">
-                <input
-                  name="number"
-                  type="tel"
-                  placeholder="Numer telefonu"
-                  pattern="[0-9]{9}"
-                  className="input input-bordered border-purple w-full input-info max-w-xs"
-                />
               </p>
             </div>
             <div className="flex flex-col space-y-2">
@@ -59,6 +75,8 @@ const UserEdit = () => {
                   type="text"
                   placeholder="Adres email"
                   className="input input-bordered border-purple input-info w-full max-w-xs"
+                  value={data.email}
+                  onChange={e=>setData({...data,email:e.target.value})}
                 />
               </p>
             </div>
@@ -70,7 +88,7 @@ const UserEdit = () => {
             <a class="btn bg-outline border-purple text-dark-blue  border-2">
              Wróc do panelu głównego
             </a>
-            <button class="btn btn-success text-main-dark border-2 border-success">
+            <button onClick={(e)=>send(e)} class="btn btn-success text-main-dark border-2 border-success">
               Zapisz zmiany
             </button>
           </div>

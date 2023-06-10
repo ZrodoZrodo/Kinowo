@@ -69,6 +69,8 @@ export class UserController {
     user: { email: string; name: string; lastName: string },
     @Param() id: { id: string },
   ) {
+    console.log(user);
+    console.log(id);
     return this.UserService.updateUser(
       user.email,
       user.name,

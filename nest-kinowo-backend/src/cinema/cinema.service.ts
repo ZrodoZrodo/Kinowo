@@ -170,6 +170,7 @@ export class CinemaService {
       where: { id },
       select: {
         reservations: true,
+        price: true,
       },
     });
   }
@@ -184,6 +185,7 @@ export class CinemaService {
       select: {
         date: true,
         id: true,
+        price: true,
         movie: {
           select: {
             title: true,

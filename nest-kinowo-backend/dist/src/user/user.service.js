@@ -137,7 +137,7 @@ let UserService = class UserService {
                     movieId,
                     title,
                     date,
-                    price,
+                    price: Number(price),
                     movieScreening: {
                         connect: {
                             id: screeningNumber,
@@ -164,6 +164,7 @@ let UserService = class UserService {
                 email: true,
                 name: true,
                 lastName: true,
+                id: true,
             },
         });
     }
@@ -178,6 +179,7 @@ let UserService = class UserService {
                         title: true,
                         date: true,
                         price: true,
+                        seatNumber: true,
                     },
                 },
             },

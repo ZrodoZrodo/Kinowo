@@ -1,7 +1,11 @@
 import Number from "./Number";
 import Searchinput from "./SearchInput";
+import {useCookies} from "react-cookie";
+import {useNavigate} from "react-router-dom";
 
 const NavbarDashboard = (props) => {
+
+  const navigate = useNavigate();
   return (
     <div className="navbar bg-dark-purple">
       <div className="navbar-start">
@@ -68,7 +72,7 @@ const NavbarDashboard = (props) => {
               </p>
             </li>
             <li>
-              <p>
+              <p onClick={()=>navigate('/history')}>
                 Historia{" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +119,7 @@ const NavbarDashboard = (props) => {
               </p>
             </li>
             <li>
-              <p>
+              <p onClick={()=>navigate('/useredit')}>
                 Edytuj dane konta
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

@@ -3,25 +3,29 @@ import {SeatColumn} from "./SeatColumn";
 import {Seat} from "./Seat";
 import Demo from './seatDemo'
 import {useEffect, useState} from "react";
+import {useCookies} from "react-cookie";
 
 
 export const ChooseSeat =()=>{
 
-    const {id}=useParams()
+    const {id,movieId,title,date}=useParams()
 
 
-
-
+    const [price,setPrice]=useState(0)
+    const [cookie]=useCookies(['Token'])
     const [disabled,setDisabled]=useState([1,2,3])
     const [marked,setMarked]=useState([])
-
+console.log(cookie)
     useEffect(()=>{
         fetch(`http://localhost:3000/cinema/getOccupiedSeats/${id}`,{
             headers:{
                 // eslint-disable-next-line
-                'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYyMzcyNzAsImV4cCI6MTY4NjI0MDg3MH0.FwNDgf8fgBLEyfY0tvtESJ63a2zcDKJZcCFI18SF8U0',
+                'Authorization': 'Bearer ' + cookie.Token,
             }
-        }).then(resp=>resp.json()).then(data=>setDisabled(data.reservations))
+        }).then(resp=>resp.json()).then(data=>{
+            setDisabled(data.reservations)
+            setPrice(data.price)
+        })
 
     },[id])
 
@@ -30,15 +34,15 @@ export const ChooseSeat =()=>{
             method:"POST",
             headers: {
                 //eslint-disable-next-line
-                'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYyMzcyNzAsImV4cCI6MTY4NjI0MDg3MH0.FwNDgf8fgBLEyfY0tvtESJ63a2zcDKJZcCFI18SF8U0',
+                'Authorization': 'Bearer ' + cookie.Token,
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                userId:"64743a001715c9adaf265f9a",
-                movieId:"test",
-                title:'test',
-                date:'22/22/2222',
-                price:21.37,
+                userId:cookie.UserData.id,
+                movieId:movieId,
+                title:title,
+                date:date,
+                price:(price*marked.length).toFixed(2),
                 screeningNumber:id,
                 seatNumber:marked
             }),
@@ -50,7 +54,7 @@ export const ChooseSeat =()=>{
                 fetch(`http://localhost:3000/cinema/getOccupiedSeats/${id}`,{
                     headers:{
                         //eslint-disable-next-line
-                        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYyMzcyNzAsImV4cCI6MTY4NjI0MDg3MH0.FwNDgf8fgBLEyfY0tvtESJ63a2zcDKJZcCFI18SF8U0',
+                        'Authorization': 'Bearer ' + cookie.Token,
                     }
                 }).then(resp=>resp.json()).then(data=>setDisabled(data.reservations))
             }
@@ -95,7 +99,7 @@ export const ChooseSeat =()=>{
                 <div
                     onClick={()=>order()}
                     className="border-2 px-9 mt-8 shadow-3xl border-purple rounded-lg px-3 py-2 cursor-pointer">
-                    Kup bilet
+                    Kup bilet <br/>{marked.length!==0?`Aktualna cena to ${(price*marked.length).toFixed(2)}`:""}
                 </div>
             </div>
             <div className={"grid gap-16 w-1/6 place-items-center h-fit"}>

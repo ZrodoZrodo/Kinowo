@@ -1,8 +1,24 @@
 import Footer from "../../UI/Footer";
 import NavbarDashboard from "../../UI/NavbarDashboard";
 import Watched from "./Watched";
+import {useEffect, useState} from "react";
+import {useCookies} from "react-cookie";
 
 const History = (props) => {
+
+  const [movies,setMovies]=useState([])
+const [cookie]=useCookies()
+  useEffect(()=>{
+    fetch(`http://localhost:3000/user/getMoviesHistory/${cookie.UserData.id}`,{
+      headers:{
+        'Authorization': 'Bearer ' + cookie.Token,
+      }
+    }).then(res=>res.json()).then(data=>setMovies(data))
+  },[])
+
+
+  if(!movies.reservations) return;
+
   return (
     <div className="bg-dark-purple h-screen w-full">
       <div className="bg-dark-purple h-full w-full">
@@ -26,8 +42,25 @@ const History = (props) => {
           <div className="border-2 border-l-transparent border-r-transparent border-t-purple border-b-transparent rounded-null w-1/2"></div>
         </div>
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-4 my-4 "></div>
-       
+        <div className={' w-full'}>
+          <table className={'table  w-full'}>
+            <thead>
+            <tr>
+              <th>Tytuł</th>
+              <th>Data</th>
+              <th>cena</th>
+              <th>Numery siedzeń</th>
+            </tr>
+            </thead>
+          {movies.reservations.map(m =>
+              <tr>
+            <td>{m.title}</td> <td>{m.date}</td> <td>{m.price} zł</td> <td>{m.seatNumber.map(x=><span> {x}</span>)}</td>
+            </tr>
+          )}
+          </table>
+        </div>
       </div>
+
       <Footer></Footer>
     </div>
   );

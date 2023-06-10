@@ -161,7 +161,7 @@ export class UserService {
           movieId,
           title,
           date,
-          price,
+          price: Number(price),
           movieScreening: {
             connect: {
               id: screeningNumber,
@@ -188,6 +188,7 @@ export class UserService {
         email: true,
         name: true,
         lastName: true,
+        id: true,
       },
     });
   }
@@ -203,6 +204,7 @@ export class UserService {
             title: true,
             date: true,
             price: true,
+            seatNumber: true,
           },
         },
       },

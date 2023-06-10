@@ -31,7 +31,8 @@ function App() {
         <Route path="useredit" element={<UserEdit />} />
         <Route path="booking/:id" element={<Film/>} />
         <Route path="history" element={<History/>} />
-        <Route path="/chooseSeat/:id" element={<ChooseSeat/>} />
+        <Route path="/chooseSeat/:id/:movieId/:title/:date" element={<ChooseSeat/>} />
+        <Route path={"*"} element={HeroPage}/>
         {/* {user && (
           <Route path="dashboard" element={<Dashboard />} />
         )} */}

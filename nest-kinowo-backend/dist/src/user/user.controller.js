@@ -44,6 +44,8 @@ let UserController = class UserController {
         return this.UserService.createReservation(Reservation);
     }
     async updateUser(user, id) {
+        console.log(user);
+        console.log(id);
         return this.UserService.updateUser(user.email, user.name, user.lastName, id.id);
     }
     async addOpinion(opinion) {
