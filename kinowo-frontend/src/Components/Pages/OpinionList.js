@@ -1,4 +1,4 @@
-import Footer from "../UI/Footer";
+
 import NavbarDashboard from "../UI/NavbarDashboard";
 
 const filmy = {

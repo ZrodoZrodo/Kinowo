@@ -1,6 +1,4 @@
-import Footer from "../UI/Footer";
 import NavbarDashboard from "../UI/NavbarDashboard";
-import poster1 from "../UI/Posters/BlackPanther.png";
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 
@@ -10,25 +8,27 @@ const Film = () => {
   const navigate = useNavigate();
   const [movie,setMovie]=useState({})
 
-  const [date,setDate]=useState(" ")
+  const [date,setDate]=useState("")
 
   const [movies,setMovies]=useState([])
 
   useEffect(()=>{
     fetch(`http://localhost:3000/cinema/getOneDetails/${id}`,{
       headers:{
-        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYyMDcxOTksImV4cCI6MTY4NjIxMDc5OX0.0uwTNIl9ggOjQ5cEi15eSu8gs2cM3hleFPmm6QDIvQ0',
+        //eslint-disable-next-line
+        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYyMzcyNzAsImV4cCI6MTY4NjI0MDg3MH0.FwNDgf8fgBLEyfY0tvtESJ63a2zcDKJZcCFI18SF8U0',
       },
     }).then(res=>res.json()).then(data=>setMovie(data))
-  },[])
+  },[id])
 
   console.log(movies)
 
   const getMoviesByDate=()=>{
-    if(date!==" ") {
+    if(date!=="") {
       fetch(`http://localhost:3000/cinema/getMovieScreeningByDate/${date}`, {
         headers: {
-          'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYyMDcxOTksImV4cCI6MTY4NjIxMDc5OX0.0uwTNIl9ggOjQ5cEi15eSu8gs2cM3hleFPmm6QDIvQ0',
+          //eslint-disable-next-line
+          'Authorization': 'Bearer ' + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2ODYyMzcyNzAsImV4cCI6MTY4NjI0MDg3MH0.FwNDgf8fgBLEyfY0tvtESJ63a2zcDKJZcCFI18SF8U0",
         },
       }).then(res => res.json()).then(data => {
         setMovies(data);
@@ -50,7 +50,7 @@ console.log(date);
             <div className="container px-5 py-24 mx-auto bg-dark-purple  w-full">
               <div className="p-5 flex items-center mx-auto border-b mb-10 border-purple border-2 rounded-lg sm:flex-row flex-col">
                 <div className="sm:w-32 sm:h-32 h-64 w-64 sm:mr-10 inline-flex items-center justify-center flex-shrink-0">
-                  <img src={movie?.images[0]} />
+                  <img alt={"Błąd ładowania"} src={movie?.images[0]} />
                 </div>
                 <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
                   <h1 className="text-purple text-5xl title-font font-bold mb-2">
@@ -107,12 +107,12 @@ console.log(date);
                   Sprawdź date
                 </button>
                 <div className={' w-full'}>
-                {movies?movies.map(m=><div className={'border-b flex flex-wrap justify-between p-5 w-full mb-10 border-purple border-2 rounded-lg'}>
-                  <img className={'h-16'} src={m.movie.images[0]} />
+                {movies?movies.map(m=><div key={m.date} className={'border-b flex flex-wrap justify-between p-5 w-full mb-10 border-purple border-2 rounded-lg'}>
+                  <img alt={"Błąd ładowania"} className={'h-16'} src={m.movie.images[0]} />
                   <span className={'text-purple font-bold text-2xl'}>{m.movie.title}</span>
                   <span className={''}>{m.movie.description}</span>
                   <span className={'text-2xl'}>{m.date.split(" ")[1]}</span>
-                  <a className="btn mt-3 inline-flex items-center" onClick={()=>navigate(`/chooseSeat/${m.id}`)}>
+                  <span className="btn mt-3 inline-flex items-center" onClick={()=>navigate(`/chooseSeat/${m.id}`)}>
                     Zarezerwuj bilet
                     <svg
                         fill="none"
@@ -125,7 +125,7 @@ console.log(date);
                     >
                       <path d="M5 12h14M12 5l7 7-7 7"></path>
                     </svg>
-                  </a>
+                  </span>
                 </div>):null}
                 </div>
               </div>

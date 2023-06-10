@@ -1,11 +1,11 @@
 import "./App.css";
-import {BrowserRouter as Router, Route, Routes, useParams} from "react-router-dom";
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import HeroPage from "./Components/Pages/MainPage/HeroPage";
 import Register from "./Components/Pages/Register";
 import Login from "./Components/Pages/Login";
 import Dashboard from "./Components/Pages/Dashboard/Dashboard";
-import {useContext, useEffect, useState} from "react";
-import UserContext from "./UserContext";
+// import {useContext} from "react";
+// import UserContext from "./UserContext";
 import UserEdit from "./Components/Pages/UserEdit";
 import Film from "./Components/Pages/Film";
 import {ChooseSeat} from "./Components/Pages/ChooseSeat/ChooseSeat";
@@ -14,7 +14,7 @@ import AddMovie from "./Components/Pages/AddMovie";
 import AddOpinion from "./Components/Pages/AddOpinion";
 import OpinionList from "./Components/Pages/OpinionList";
 function App() {
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
 
   return (
     <Router>
