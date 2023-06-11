@@ -221,4 +221,26 @@ export class AdminService {
       data: { deleted: false },
     });
   }
+
+  async addAdmin({
+    name,
+    lastName,
+    password,
+    email,
+  }: {
+    name: string;
+    lastName: string;
+    password: string;
+    email: string;
+  }) {
+    password = await bcrypt.hash(password, 12);
+    return prisma.admin.create({
+      data: {
+        name,
+        lastName,
+        password,
+        email,
+      },
+    });
+  }
 }

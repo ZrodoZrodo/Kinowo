@@ -14,9 +14,11 @@ import AddMovie from "./Components/Pages/AddMovie";
 import AddOpinion from "./Components/Pages/AddOpinion";
 import OpinionList from "./Components/Pages/OpinionList";
 import AdminDashboard from "./Components/Pages/Admin/AdminDashboard";
+import {useCookies} from "react-cookie";
 function App() {
   // const { user } = useContext(UserContext);
-
+  const [cookie]=useCookies()
+  console.log(cookie)
   return (
     <Router>
       <Routes>

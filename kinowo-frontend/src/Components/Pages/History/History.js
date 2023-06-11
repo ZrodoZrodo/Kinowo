@@ -3,9 +3,10 @@ import NavbarDashboard from "../../UI/NavbarDashboard";
 import Watched from "./Watched";
 import {useEffect, useState} from "react";
 import {useCookies} from "react-cookie";
+import {useNavigate} from "react-router-dom";
 
 const History = (props) => {
-
+  const navigate = useNavigate();
   const [movies,setMovies]=useState([])
 const [cookie]=useCookies()
   useEffect(()=>{
@@ -16,7 +17,7 @@ const [cookie]=useCookies()
     }).then(res=>res.json()).then(data=>setMovies(data))
   },[])
 
-
+  console.log(movies)
   if(!movies.reservations) return;
 
   return (
@@ -42,19 +43,20 @@ const [cookie]=useCookies()
           <div className="border-2 border-l-transparent border-r-transparent border-t-purple border-b-transparent rounded-null w-1/2"></div>
         </div>
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-4 my-4 "></div>
-        <div className={' w-full'}>
-          <table className={'table  w-full'}>
+        <div className={'overflow-x-auto w-full'}>
+          <table className={'table  w-full overflow-x-auto'}>
             <thead>
             <tr>
               <th>Tytuł</th>
               <th>Data</th>
               <th>cena</th>
               <th>Numery siedzeń</th>
+              <th></th>
             </tr>
             </thead>
           {movies.reservations.map(m =>
               <tr>
-            <td>{m.title}</td> <td>{m.date}</td> <td>{m.price} zł</td> <td>{m.seatNumber.map(x=><span> {x}</span>)}</td>
+            <td>{m.title}</td> <td>{m.date}</td> <td>{m.price} zł</td> <td>{m.seatNumber.map(x=><span> {x}</span>)}</td> <td><button onClick={()=>navigate(`/addopinion/${m.movieId}`)} className={'btn '}>Dodaj opinie</button></td>
             </tr>
           )}
           </table>

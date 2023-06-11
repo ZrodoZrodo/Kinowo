@@ -20,11 +20,11 @@ const [cookie]=useCookies()
         {headers:{
             'Authorization': 'Bearer ' + cookie.Token,
           }}).then(res=>res.json()).then(data=>setMovie(data))
-  },[])
+  },[id])
 
   const navigate = useNavigate();
   const [data,setData]=useState({})
-
+  console.log(movie)
 
   const send=(e)=>{
     e.preventDefault()
@@ -45,8 +45,8 @@ const [cookie]=useCookies()
 
   }
 
-if(!data.title) navigate('/');
-else {
+
+
   return (
       <div className="h-screen bg-dark-purple">
         <NavbarDashboard></NavbarDashboard>
@@ -117,7 +117,7 @@ else {
         <Footer></Footer>
       </div>
   );
-}
+
 };
 
 export default AddOpinion;

@@ -1,5 +1,7 @@
 
 import NavbarDashboard from "../UI/NavbarDashboard";
+import {useEffect, useState} from "react";
+import {useCookies} from "react-cookie";
 
 const filmy = {
   nazwa: "Jaś i Małgosia",
@@ -8,6 +10,19 @@ const filmy = {
 };
 
 const OpinionList = () => {
+
+  const [cookie]=useCookies()
+
+  const [opinions,setOpinions]=useState([])
+
+  useEffect(()=>{
+    fetch(`http://localhost:3000/user/getUserOpinions/${cookie.UserData.id}`,{headers:{
+        'Authorization': 'Bearer ' + cookie.Token,
+      }}).then(res=>res.json()).then(data=>setOpinions(data.opinions))
+  },[])
+
+  console.log(opinions)
+
   return (
     <div className="min-h-screen h-full">
       <NavbarDashboard></NavbarDashboard>
@@ -27,49 +42,32 @@ const OpinionList = () => {
       <div className=" grid justify-items-center w-full  ">
         <div className="border-2 border-l-transparent border-r-transparent border-t-purple border-b-transparent rounded-null w-1/2"></div>
         <div className="sm:w-3/4  mt-2 p-5 ">
-          <table className="">
+          <table className="w-full">
             <thead className=" sm:text-3xl text-white underline underline-offset-2 decoration-purple decoration-2 text-center">
               <th>Tytuł</th>
               <th>Opinia</th>
               <th>Ocena</th>
             </thead>
             <tbody className="text-white text-center p-4 ">
-              <tr className="mb-2">
-                <td className="border-2 border-l-purple border-r-purple border-t-transparent border-b-purple rounded-null">
-                  {filmy.nazwa}
-                </td>
-                <td className="border-2 border-l-transparent border-r-purple border-t-transparent border-b-purple rounded-null">
-                  {filmy.opis}
-                </td>
-                <td  className="text-3xl border-2 border-l-transparent border-r-purple border-t-transparent border-b-purple rounded-null">
-                  {filmy.ocena}
-                  <div class="rating rating-md">
-                    <input
-                      type="radio"
-                      name="rating-8"
-                      className="mask mask-star-2 bg-purple"
-                    />
-                  </div>
-                </td>
-              </tr>
-              <tr className="mb-2">
-                <td className="border-2 border-l-purple border-r-purple border-t-transparent border-b-purple rounded-null">
-                  {filmy.nazwa}
-                </td>
-                <td className="border-2 border-l-transparent border-r-purple border-t-transparent border-b-purple rounded-null">
-                  {filmy.opis}
-                </td>
-                <td  className="text-3xl border-2 border-l-transparent border-r-purple border-t-transparent border-b-purple rounded-null">
-                  {filmy.ocena}
-                  <div class="rating rating-md">
-                    <input
-                      type="radio"
-                      name="rating-8"
-                      className="mask mask-star-2 bg-purple"
-                    />
-                  </div>
-                </td>
-              </tr>
+            {opinions.map(opinion=>
+                <tr className="mb-2">
+                  <td className="border-2 border-l-purple border-r-purple border-t-transparent border-b-purple rounded-null">
+                    {opinion.movieTitle}
+                  </td>
+                  <td className="border-2 border-l-transparent border-r-purple border-t-transparent border-b-purple rounded-null">
+                    {opinion.description}
+                  </td>
+                  <td className="text-3xl border-2 border-l-transparent border-r-purple border-t-transparent border-b-purple rounded-null">
+                    {opinion.rate}
+                    <div className="rating rating-md">
+                      <input
+                          type="radio"
+                          name="rating-8"
+                          className="mask mask-star-2 bg-purple"
+                      />
+                    </div>
+                  </td>
+                </tr>)}
             </tbody>
           </table>
         </div>

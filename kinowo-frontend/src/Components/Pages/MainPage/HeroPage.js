@@ -8,7 +8,7 @@ import Navbar from "./Navbar";
 
 const HeroPage = () => {
   return (
-    <div>
+    <div className={'no-scrollbar'}>
       <div className="max-h-screen w-full min-h-screen Hero__background-img">
         <Navbar></Navbar>
         <HeroContent></HeroContent>

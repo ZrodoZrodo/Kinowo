@@ -1,5 +1,5 @@
 import InputForm from "./InputForm";
-import { useContext} from "react";
+import {useContext, useEffect} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import Submit from "./Submit";
 import UserContext from "../../UserContext";
@@ -11,7 +11,15 @@ const LoginForm = () => {
   const { setUser } = useContext(UserContext);
   const {role}=useParams();
   const navigate = useNavigate();
-  const [cookies, setCookie,removeCookie] = useCookies(['UserData','Token']);
+  const [cookies, setCookie,removeCookie] = useCookies(['UserData','Role','Token']);
+
+  useEffect(()=>{
+    if(cookies.UserData)
+    {
+      navigate('/dashboard')
+    }
+  })
+
   async function Login(e) {
     e.preventDefault();
     const setCookies = new Cookies();
@@ -34,14 +42,12 @@ const LoginForm = () => {
         removeCookie(name);
       });
       if(user&&token) {
-        console.log(token)
         removeCookie('Token')
-        console.log(cookies.Token)
-        setCookie('Token',token)
-        setCookie('UserData',user)
-        setCookie('Token',token)
-        navigate("/dashboard");
-        console.log(cookies.Token)
+        setCookie('Token',token,{path:'/'})
+        setCookie('UserData',user,{path:'/'})
+        setCookie('Role',role,{path:'/'})
+        if(role==='user') navigate("/dashboard");
+        if(role==='admin') navigate('/admindashboard');
       }
     } catch (error) {
       console.error(error);
@@ -55,6 +61,7 @@ const LoginForm = () => {
       <InputForm label={"Twoj email"} name="email" />
       <InputForm label={"Hasło"} type="password" name="password" />
       <div className="flex flex-nowrap w-3/4"></div>
+      <span className={'label-text mt-4 text-base text-pink cursor-default'}>Nie masz konta? <u onClick={()=>navigate("/register")} className={'cursor-pointer'}>Zarejestruj się</u></span>
       <div className="self-center mt-4 mb-8 mr-8">
         <Submit>Zaloguj się!</Submit>
       </div>

@@ -108,4 +108,17 @@ export class AdminController {
   ) {
     return this.AdminService.addCinema(data);
   }
+
+  @Post('/addAdmin')
+  async addAdmin(
+    @Body()
+    data: {
+      name: string;
+      lastName: string;
+      password: string;
+      email: string;
+    },
+  ) {
+    return this.AdminService.addAdmin(data);
+  }
 }

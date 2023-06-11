@@ -1,6 +1,6 @@
 import Footer from "../UI/Footer";
 import NavbarDashboard from "../UI/NavbarDashboard";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useCookies} from "react-cookie";
 
 const UserEdit = () => {
