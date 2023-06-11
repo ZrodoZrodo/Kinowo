@@ -1,8 +1,25 @@
 import { useNavigate } from "react-router-dom";
 import Footer from "../UI/Footer";
 
+import {useCookies} from "react-cookie";
+import {useState,useEffect} from "react";
+
 const SoonPlayed = () => {
   const navigate = useNavigate();
+
+  const [cookie]=useCookies()
+
+  const [played,setPlayed]=useState([])
+
+  useEffect(()=>{
+    fetch(`http://localhost:3000/user/UserComingReservations/${cookie.UserData.id}`, {
+      headers: {
+        'Authorization': 'Bearer ' + cookie.Token,
+      }
+    }).then(res => res.json()).then(data =>setPlayed(data.reservations))
+  },[])
+
+  console.log(played)
 
   return (
     <>
@@ -192,26 +209,25 @@ const SoonPlayed = () => {
                   <th>Dokładna data</th>
                   <th>Cena</th>
                   <th>Numer siedzenia</th>
-                  <th>Akcje</th>
                 </tr>
               </thead>
-              <tr className="text-center">
-                <td className="underline  decoration-purple  decoration-2 text-2xl text-white">
-                  Anakonda
-                </td>{" "}
-                <td className="underline  decoration-purple  decoration-2 text-2xl text-white">
-                  12:35
-                </td>{" "}
-                <td className="underline  decoration-purple  decoration-2 text-2xl text-white">
-                  21.37
-                </td>{" "}
-                <td className="underline  decoration-purple  decoration-2 text-2xl text-white">
-                  32
-                </td>{" "}
-                <td>
-                  <button className={"btn btn-error "}>Usun Rezerwacje</button>{" "}
-                </td>
-              </tr>
+
+              {played.map(p=>
+                  <tr className="text-center">
+                    <td className="underline  decoration-purple  decoration-2 text-2xl text-white">
+                      {p.title}
+                    </td>{" "}
+                    <td className="underline  decoration-purple  decoration-2 text-2xl text-white">
+                      {p.date}
+                    </td>{" "}
+                    <td className="underline  decoration-purple  decoration-2 text-2xl text-white">
+                      {p.price}
+                    </td>{" "}
+                    <td className="underline  decoration-purple  decoration-2 text-2xl text-white">
+                      {p.seatNumber.map(s=><span>{s},</span>)}
+                    </td>{" "}
+                  </tr>)}
+
             </table>
           </div>
         </div>

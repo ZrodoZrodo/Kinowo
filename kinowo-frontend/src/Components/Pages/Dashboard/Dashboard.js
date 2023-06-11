@@ -106,6 +106,10 @@ else {
                      onClick={() => navigate('/opinionlist')}>
                   <p className="m-2 text-dashboard-pink">Lista opinii</p>
                 </div>
+                <div className="Burger text-3xl text-center w-full  sm:w-max-md lg:w-1/3 cursor-pointer"
+                     onClick={() => navigate('/soonPlayed')}>
+                  <p className="m-2 text-dashboard-pink">Nadchodzące seansy</p>
+                </div>
                 <div className="Burger text-3xl text-center  sm:w-max-md lg:w-1/3 cursor-pointer"
                      onClick={() => navigate('/history')}>
                   <p className="m-2 text-dashboard-pink">Historia</p>

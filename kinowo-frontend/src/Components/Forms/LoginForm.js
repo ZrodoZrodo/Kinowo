@@ -42,7 +42,6 @@ const LoginForm = () => {
         removeCookie(name);
       });
       if(user&&token) {
-        removeCookie('Token')
         setCookie('Token',token,{path:'/'})
         setCookie('UserData',user,{path:'/'})
         setCookie('Role',role,{path:'/'})
