@@ -169,6 +169,7 @@ let UserService = class UserService {
         });
     }
     async getMoviesHistory(id) {
+        console.log(id);
         return prisma_1.default.user.findFirst({
             where: { id },
             select: {

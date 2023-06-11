@@ -194,6 +194,7 @@ export class UserService {
   }
 
   async getMoviesHistory(id: string) {
+    console.log(id);
     return prisma.user.findFirst({
       where: { id },
       select: {

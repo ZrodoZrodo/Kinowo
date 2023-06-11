@@ -1,8 +1,33 @@
 import Footer from "../../UI/Footer";
 import NavbarDashboard from "../../UI/NavbarDashboard";
 import Movie from "./Movie";
+import {useEffect, useState} from "react";
+import {useCookies} from "react-cookie";
+import {useParams} from "react-router-dom";
 
 const AllMovies = () => {
+
+    const [cookie]=useCookies()
+    const {title}=useParams()
+    const [movies,setMovies]=useState([])
+    useEffect(()=>{
+        if(title==="default")
+        {
+            fetch(`http://localhost:3000/cinema/getUserMovies/`, {
+                headers: {
+                    'Authorization': 'Bearer ' + cookie.Token,
+                }
+            }).then(res => res.json()).then(data => setMovies(data))
+        }
+        else{
+            fetch(`http://localhost:3000/cinema/getOne/${title}`, {
+                headers: {
+                    'Authorization': 'Bearer ' + cookie.Token,
+                }
+            }).then(res => res.json()).then(data => setMovies(data))
+        }
+    },[title])
+
   return (
     <div className="bg-dark-purple min-h-screen h-full w-full">
       <NavbarDashboard></NavbarDashboard>
@@ -16,11 +41,8 @@ const AllMovies = () => {
       </div>
       <div className=" grid justify-items-center  w-full  "></div>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-4 py-4  bg-dark-purple ">
-        <Movie></Movie>
-        <Movie></Movie>
-        <Movie></Movie>
-        <Movie></Movie>
-        <Movie></Movie>
+          {movies.map(movie=><Movie data={movie}/>)}
+
       
       </div>
   

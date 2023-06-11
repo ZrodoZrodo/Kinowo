@@ -44,6 +44,17 @@ export class CinemaService {
     });
   }
 
+  async getUserMovies() {
+    return prisma.movie.findMany({
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        images: true,
+      },
+    });
+  }
+
   async getOneDetails(id: string) {
     return prisma.movie.findFirst({
       where: { id },

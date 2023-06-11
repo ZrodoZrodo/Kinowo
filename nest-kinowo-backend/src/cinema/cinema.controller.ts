@@ -31,6 +31,11 @@ export class CinemaController {
     return this.CinemaService.getAll(id);
   }
 
+  @Get('/getUserMovies')
+  async getUserMovies() {
+    return this.CinemaService.getUserMovies();
+  }
+
   //działa
   @UseGuards(JwtAuthGuard)
   @Get('/getOne/:title')
@@ -125,14 +130,14 @@ export class CinemaController {
   }
 
   @Get('/getMovieScreeningByDate/:date')
-  async getMovieScreeningByDate(@Param() { date }: { date: string })
-  {
+  async getMovieScreeningByDate(@Param() { date }: { date: string }) {
     return this.CinemaService.getMovieScreeningByDate(date);
   }
 
   @Get('/getMovieScreeningHours/:date/:id')
-  async getMovieScreeningHours(@Param() { date,id }: {id:string, date: string })
-  {
-    return this.CinemaService.getMovieScreeningHours(date,id);
+  async getMovieScreeningHours(
+    @Param() { date, id }: { id: string; date: string },
+  ) {
+    return this.CinemaService.getMovieScreeningHours(date, id);
   }
 }

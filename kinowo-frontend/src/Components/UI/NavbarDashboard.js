@@ -31,7 +31,7 @@ const NavbarDashboard = (props) => {
             className="menu menu-compact Burger dropdown-content mt-3 p-2 shadow  rounded-box w-52"
           >
             <li>
-              <p onClick={()=>navigate('/allmovies')}>
+              <p onClick={()=>navigate('/allmovies/default')}>
                 Rezerwuj bilet
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +99,7 @@ const NavbarDashboard = (props) => {
               </p>
             </li>
             <li>
-              <p>
+              <p onClick={()=>navigate('/opinionlist')}>
                 Oceny
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -175,7 +175,7 @@ const NavbarDashboard = (props) => {
             </li>
           </ul>
         </div>
-        <p className="normal-case sm:text-4xl tracking-widest text-left pl-8">
+        <p onClick={()=>navigate('/dashboard')} className="cursor-pointer normal-case sm:text-4xl tracking-widest text-left pl-8">
           {" "}
           KINOWO
         </p>

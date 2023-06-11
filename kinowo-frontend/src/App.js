@@ -28,7 +28,7 @@ function App() {
         <Route path="admindashboard" exact element={<AdminDashboard />} />
         <Route path="/addopinion/:id" element={<AddOpinion />} />
         <Route path="addmovie" element={<AddMovie />} />
-        <Route path="allmovies" element={<AllMovies />} />
+        <Route path="allmovies/:title" element={<AllMovies />} />
         <Route path="register" element={<Register />} />
         <Route path="/login/:role" element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
