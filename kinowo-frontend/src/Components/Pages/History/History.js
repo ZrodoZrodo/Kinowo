@@ -17,7 +17,7 @@ const [cookie]=useCookies()
     }).then(res=>res.json()).then(data=>setMovies(data))
   },[])
 
-  console.log(movies)
+  console.log(cookie)
   if(!movies.reservations) return;
 
   return (
