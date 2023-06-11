@@ -53,6 +53,12 @@ const CinemaMovies=()=>{
 
     }
 
+    useEffect(() => {
+        if (!cookie.Role) navigate("/login/admin");
+        if (cookie.Role !== "admin") {
+            navigate("/login/admin");
+        }
+    }, []);
 
     if(!movies) return;
     return(

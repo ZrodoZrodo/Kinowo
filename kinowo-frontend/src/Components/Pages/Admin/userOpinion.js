@@ -50,7 +50,12 @@ const UserOpinion=()=>{
 
     }
     const navigate = useNavigate();
-
+    useEffect(() => {
+        if (!cookie.Role) navigate("/login/admin");
+        if (cookie.Role !== "admin") {
+            navigate("/login/admin");
+        }
+    }, []);
     if(!opinions) return;
     return(
         <div className={'h-full overflow-x-auto w-full min-h-screen'}>
