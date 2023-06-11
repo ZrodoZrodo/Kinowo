@@ -1,64 +1,68 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useCookies} from "react-cookie";
+import intru from "../../UI/Posters/tech-daily-NXAQF0bF1Y8-unsplash.jpg";
+import top from "../../UI/Posters/samuel-regan-asante-Geepgu8bCas-unsplash.jpg";
 
-const UserOpinion=()=>{
+const CinemaMovies=()=>{
 
     const {id}=useParams()
     const [cookie]=useCookies()
-
-    const [opinions,setOpinions]=useState()
+    const navigate = useNavigate();
+    const [movies,setMovies]=useState([])
 
     useEffect(()=>{
-        fetch(`http://localhost:3000/admin/getUserOpinions/${id}`, {
+        fetch(`http://localhost:3000/admin/getCinemaMovies/${id}`, {
             headers: {
                 'Authorization': 'Bearer ' + cookie.Token,
             }
-        }).then(res => res.json()).then(data => setOpinions(data))
+        }).then(res => res.json()).then(data => setMovies(data.movies))
     },[])
 
+    console.log(movies)
 
-    const deleteOpinion=(oid)=>{
+    const deleteMovie=(oid)=>{
         console.log(id)
-        fetch(`http://localhost:3000/admin/deleteOpinion/${oid}`, {
+        fetch(`http://localhost:3000/admin/deleteCinemaMovie/${oid}`, {
             headers: {
                 'Authorization': 'Bearer ' + cookie.Token,
             },
             method:"DELETE",
             body:JSON.stringify({id:id})
         }).then(()=>{
-            fetch(`http://localhost:3000/admin/getUserOpinions/${id}`, {
+            fetch(`http://localhost:3000/admin/getCinemaMovies/${id}`, {
                 headers: {
                     'Authorization': 'Bearer ' + cookie.Token,
                 }
-            }).then(res => res.json()).then(data => setOpinions(data))
+            }).then(res => res.json()).then(data => setMovies(data.movies))
         })
     }
 
-    const undeleteOpinion=(oid)=>{
-        fetch(`http://localhost:3000/admin/undeleteOpinion/${oid}`, {
+    const undeleteMovie=(oid)=>{
+        fetch(`http://localhost:3000/admin/undeleteCinemaMovie/${oid}`, {
             headers: {
                 'Authorization': 'Bearer ' + cookie.Token,
             },
         }).then(()=>{
-            fetch(`http://localhost:3000/admin/getUserOpinions/${id}`, {
+            fetch(`http://localhost:3000/admin/getCinemaMovies/${id}`, {
                 headers: {
                     'Authorization': 'Bearer ' + cookie.Token,
                 }
-            }).then(res => res.json()).then(data => setOpinions(data))
+            }).then(res => res.json()).then(data => setMovies(data.movies))
         })
 
     }
-    const navigate = useNavigate();
+
     useEffect(() => {
         if (!cookie.Role) navigate("/login/admin");
         if (cookie.Role !== "admin") {
             navigate("/login/admin");
         }
     }, []);
-    if(!opinions) return;
+
+    if(!movies) return;
     return(
-        <div className={'h-full overflow-x-auto w-full min-h-screen'}>
+        <div className={'h-full  overflow-x-auto w-full min-h-screen'}>
             <div className="drawer-content flex flex-col">
                 <div
                     className="w-full navbar border-2 border-l-transparent border-r-transparent border-t-transparent border-b-purple rounded-null ">
@@ -124,45 +128,41 @@ const UserOpinion=()=>{
                         </ul>
                     </div>
                 </div>
+
+
             </div>
-            <table className={"table  w-full overflow-x-auto"}>
+            <table className={"table w-full overflow-x-auto"}>
                 <thead className="text-center  text-white">
                 <tr>
-                    <th>Imie</th>
-                    <th>Nazwisko</th>
+                    <th>Zdjęcie</th>
                     <th>Tytuł</th>
-                    <th>Treść opinii</th>
-                    <th>Ocena</th>
+                    <th>Opis</th>
                     <th>Przycisk akcji</th>
+
                 </tr>
                 </thead>
-                {opinions.opinions.map(op=>
+                {movies.map(movie=>
                     <tr className="text-center">
-                    <td className="underline  decoration-purple decoration-2 text-2xl text-white ">
-                        {opinions.name}
-                    </td>
-                    <td className="underline  decoration-purple decoration-2 text-2xl text-white ">
-                        {opinions.lastName}
-                    </td>
+                        <td className="underline  decoration-purple decoration-2 text-2xl text-white ">
+                           <img src={movie.images[0]} alt={"Błąd wczytywania"} className={'w-32 object-fill'}/>
+                        </td>
+                        <td className="underline  decoration-purple decoration-2 text-2xl text-white ">
+                            {movie.title}
+                        </td>
                         <td className="underline  decoration-purple  decoration-2 text-2xl text-white">
-                            {op.movieTitle}
+                            {movie.description}
 
                         </td>
-                    <td className="underline  decoration-purple  decoration-2 text-2xl text-white">
-                        {op.description}
-
-                    </td>
-                    <td>
-                        {op.rate}
-                    </td>
                         <td>
-                            {op.deleted?<button onClick={()=>undeleteOpinion(op.id)} className={'btn btn-success'}>Przywróć</button>:<button onClick={()=>deleteOpinion(op.id)} className={'btn btn-error'}>Usuń</button>}
+                            {movie.deleted?<button onClick={()=>undeleteMovie(movie.id)} className={'btn btn-success'}>Przywróć</button>:<button onClick={()=>deleteMovie(movie.id)} className={'btn btn-error'}>Usuń</button>}
                         </td>
-                </tr>)}
+                    </tr>
+                )}
+
 
             </table>
         </div>
     )
 }
 
-export default UserOpinion;
+export default CinemaMovies;

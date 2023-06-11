@@ -70,32 +70,17 @@ export class AdminService {
     });
   }
 
-  async getCinemaNoDeletedMovies(id: string) {
+  async getCinemaMovies(id: string) {
     return prisma.cinemaAdmin.findFirst({
       where: { id },
       select: {
         movies: {
-          where: { deleted: false },
           select: {
             id: true,
             title: true,
             description: true,
-          },
-        },
-      },
-    });
-  }
-
-  async getCinemaDeletedMovies(id: string) {
-    return prisma.cinemaAdmin.findFirst({
-      where: { id },
-      select: {
-        movies: {
-          where: { deleted: true },
-          select: {
-            id: true,
-            title: true,
-            description: true,
+            images: true,
+            deleted: true,
           },
         },
       },
@@ -156,6 +141,7 @@ export class AdminService {
             movieTitle: true,
             description: true,
             rate: true,
+            deleted: true,
           },
         },
       },

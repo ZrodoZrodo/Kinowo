@@ -32,18 +32,18 @@ export class AdminController {
     return this.AdminService.undeleteUser(id);
   }
   //działa
-  @Get('/getUserUndeletedOpinions/:id')
+  @Get('/getUserOpinions/:id')
   async getUserOpinions(@Param() { id }: { id: string }) {
     return this.AdminService.getUserOpinions(id);
   }
 
   @Delete('/deleteOpinion/:id')
-  async deleteOpinion(@Body() { id }: { id: string }) {
+  async deleteOpinion(@Param() { id }: { id: string }) {
     return this.AdminService.deleteOpinion(id);
   }
 
-  @Post('/undeleteOpinion/:id')
-  async undeleteOpinion(@Body() { id }: { id: string }) {
+  @Get('/undeleteOpinion/:id')
+  async undeleteOpinion(@Param() { id }: { id: string }) {
     return this.AdminService.undeleteOpinion(id);
   }
   //cinema
@@ -65,20 +65,17 @@ export class AdminController {
     return this.AdminService.undeleteCinema(id);
   }
 
-  @Get('/getCinemaNoDeletedMovies/:id')
+  @Get('/getCinemaMovies/:id')
   async getCinemaNoDeletedMovies(@Param() { id }: { id: string }) {
-    return this.AdminService.getCinemaNoDeletedMovies(id);
+    return this.AdminService.getCinemaMovies(id);
   }
-  @Get('/getCinemaDeletedMovies/:id')
-  async getCinemaDeletedMovies(@Param() { id }: { id: string }) {
-    return this.AdminService.getCinemaDeletedMovies(id);
-  }
-  @Delete('/deleteCinemaMovie')
-  async deleteCinemaMovie(@Body() { id }: { id: string }) {
+
+  @Delete('/deleteCinemaMovie/:id')
+  async deleteCinemaMovie(@Param() { id }: { id: string }) {
     return this.AdminService.deleteCinemaMovie(id);
   }
-  @Post('/undeleteCinemaMovie')
-  async undeleteCinemaMovie(@Body() { id }: { id: string }) {
+  @Get('/undeleteCinemaMovie/:id')
+  async undeleteCinemaMovie(@Param() { id }: { id: string }) {
     return this.AdminService.undeleteCinemaMovie(id);
   }
   //działa
