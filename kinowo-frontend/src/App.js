@@ -21,6 +21,8 @@ import UserList from "./Components/Pages/Admin/UserList";
 import CinemaAdminDashboard from "./Components/Pages/CinemaAdmin/CinemaAdminDashboard";
 import NowOnScreen from "./Components/Pages/CinemaAdmin/NowOnScreen";
 import ActiveReservation from "./Components/Pages/CinemaAdmin/ActiveReservation";
+import UserOpinion from "./Components/Pages/Admin/userOpinion";
+import CinemaMovies from "./Components/Pages/Admin/cinemaMovies";
 function App() {
   // const { user } = useContext(UserContext);
   const [cookie]=useCookies()
@@ -45,6 +47,8 @@ function App() {
         <Route path="userlist" element={<UserList />} />
         <Route path="booking/:id" element={<Film/>} />
         <Route path="history" element={<History/>} />
+        <Route path="useropinion/:id" element={<UserOpinion/>} />
+        <Route path="cinemamovies/:id" element={<CinemaMovies/>} />
         <Route path="/chooseSeat/:id/:movieId/:title/:date" element={<ChooseSeat/>} />
         <Route path={"*"} element={HeroPage}/>
         {/* {user && (

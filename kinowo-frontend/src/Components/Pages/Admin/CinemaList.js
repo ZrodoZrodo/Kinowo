@@ -26,6 +26,7 @@ const CinemaList = (props) => {
     }).then(res => res.json()).then(data => setCinemas(data))
   },[])
 
+
   const deleteCinema=(id)=>{
     console.log(id)
     fetch(`http://localhost:3000/admin/deleteCinema/${id}`, {
@@ -150,7 +151,7 @@ const CinemaList = (props) => {
                       {cinema.lastName}
                     </td>{" "}
                     <td>
-                      <button className={"btn px-2"}>Pokaz filmy</button>{" "}
+                      <button onClick={()=>navigate(`/cinemamovies/${cinema.id}`)} className={"btn px-2"}>Pokaz filmy</button>{" "}
                       {cinema.deleted?<button onClick={()=>undeleteCinema(cinema.id)} className={"btn btn-success"}>Cofnij usunięcie</button>:
                         <button onClick={()=>deleteCinema(cinema.id)} className={"btn btn-error"}>Usun kino</button>
                       }

@@ -152,7 +152,7 @@ const UserList = () => {
                     </td>{" "}
 
                       <td>
-                        <button className={"btn px-2"}>Pokaz opinie</button>
+                        <button onClick={()=>navigate(`/useropinion/${user.id}`)} className={"btn px-2"}>Pokaz opinie</button>
 
                         {user.deleted?<button onClick={()=>undeleteUser(user.id)} className={"btn btn-success "}>Przywróć użytkownmika</button>:<button onClick={()=>deleteUser(user.id)} className={"btn btn-error "}>Usuń użytkownika</button>}
 
