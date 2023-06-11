@@ -20,6 +20,7 @@ import CinemaList from "./Components/Pages/Admin/CinemaList";
 import UserList from "./Components/Pages/Admin/UserList";
 import CinemaAdminDashboard from "./Components/Pages/CinemaAdmin/CinemaAdminDashboard";
 import NowOnScreen from "./Components/Pages/CinemaAdmin/NowOnScreen";
+import SoonPlayed from "./Components/Pages/SoonPlayed";
 import ActiveReservation from "./Components/Pages/CinemaAdmin/ActiveReservation";
 import UserOpinion from "./Components/Pages/Admin/userOpinion";
 import CinemaMovies from "./Components/Pages/Admin/cinemaMovies";
@@ -33,6 +34,7 @@ function App() {
       <Routes>
         <Route path="" exact element={<HeroPage />} />
         <Route path="opinionlist" exact element={<OpinionList />} />
+        <Route path="soonPlayed" exact element={<SoonPlayed />} />
         <Route path="admindashboard" exact element={<AdminDashboard />} />
         <Route path="cienmaadmindashboard" exact element={<CinemaAdminDashboard />} />
         <Route path="cienmaadminnowonscreen" exact element={<NowOnScreen />} />

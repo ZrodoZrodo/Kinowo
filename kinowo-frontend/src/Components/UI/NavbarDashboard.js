@@ -1,180 +1,212 @@
 import Number from "./Number";
 import Searchinput from "./SearchInput";
-import {useCookies} from "react-cookie";
-import {useNavigate} from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 
 const NavbarDashboard = (props) => {
-  const [cookie]=useCookies();
+  const [cookie] = useCookies();
   const navigate = useNavigate();
   return (
     <div className="navbar bg-dark-purple">
       <div className="navbar-start">
-        {cookie.Role==='user'&&<div className="dropdown">
-          <label tabindex="0" className="btn btn-ghost btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
+        {cookie.Role === "user" && (
+          <div className="dropdown">
+            <label tabindex="0" className="btn btn-ghost btn-circle">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h7"
+                />
+              </svg>
+            </label>
+            <ul
+              tabindex="0"
+              className="menu menu-compact Burger dropdown-content mt-3 p-2 shadow  rounded-box w-52"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h7"
-              />
-            </svg>
-          </label>
-          <ul
-            tabindex="0"
-            className="menu menu-compact Burger dropdown-content mt-3 p-2 shadow  rounded-box w-52"
-          >
-            <li>
-              <p onClick={()=>navigate('/allmovies/default')}>
-                Rezerwuj bilet
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <path
-                    d="M9.88161 18.4049L13.4975 4.91031C13.5731 4.62789 13.4055 4.33759 13.1231 4.26191L7.38438 2.72423C7.10195 2.64855 6.81166 2.81615 6.73598 3.09858L3.12013 16.5931C2.61983 18.4603 3.72787 20.3794 5.595 20.8797C7.46213 21.38 9.38131 20.272 9.88161 18.4049Z"
-                    stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M6.5 20.9999L20.4706 20.9999C20.763 20.9999 21 20.7629 21 20.4705V14.5293"
-                    stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M6.5 17.6H6.502V17.602H6.5V17.6Z"
-                    stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M7.97998 20.6713L20.6416 14.7671C20.9066 14.6435 21.0213 14.3285 20.8977 14.0635L18.3869 8.67897C18.2633 8.41398 17.9483 8.29933 17.6833 8.4229L12.03 11.0591"
-                    stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
+              <li>
+                <p onClick={() => navigate("/allmovies/default")}>
+                  Rezerwuj bilet
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M9.88161 18.4049L13.4975 4.91031C13.5731 4.62789 13.4055 4.33759 13.1231 4.26191L7.38438 2.72423C7.10195 2.64855 6.81166 2.81615 6.73598 3.09858L3.12013 16.5931C2.61983 18.4603 3.72787 20.3794 5.595 20.8797C7.46213 21.38 9.38131 20.272 9.88161 18.4049Z"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M6.5 20.9999L20.4706 20.9999C20.763 20.9999 21 20.7629 21 20.4705V14.5293"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M6.5 17.6H6.502V17.602H6.5V17.6Z"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M7.97998 20.6713L20.6416 14.7671C20.9066 14.6435 21.0213 14.3285 20.8977 14.0635L18.3869 8.67897C18.2633 8.41398 17.9483 8.29933 17.6833 8.4229L12.03 11.0591"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </p>
+              </li>
+              <li>
+                <p onClick={() => navigate("/history")}>
+                  Historia{" "}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M10 8H5V3"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M5.29053 16.3571C6.22236 17.792 7.58966 18.8904 9.19169 19.4909C10.7937 20.0915 12.5461 20.1627 14.1916 19.6939C15.837 19.2252 17.2889 18.2413 18.3339 16.8867C19.379 15.5321 19.9623 13.8781 19.9981 12.1675C20.034 10.457 19.5205 8.78004 18.533 7.38284C17.5456 5.98564 16.1362 4.94181 14.5118 4.4046C12.8874 3.86738 11.1336 3.86509 9.50784 4.39805C7.88206 4.93101 6.46997 5.97114 5.47887 7.36575"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </p>
+              </li>
+              <li>
+                <p onClick={() => navigate("/opinionlist")}>
+                  Oceny
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <path
+                      d="M14.986 8.47434L12.4538 2.98442C12.2751 2.59699 11.7244 2.59699 11.5457 2.98442L9.01347 8.47434C8.94064 8.63224 8.791 8.74096 8.61831 8.76144L2.61459 9.47327C2.19089 9.52351 2.02073 10.0472 2.33398 10.3369L6.77269 14.4417C6.90036 14.5597 6.95752 14.7357 6.92363 14.9062L5.74537 20.8361C5.66222 21.2545 6.1077 21.5782 6.48001 21.3698L11.7555 18.4168C11.9073 18.3319 12.0922 18.3319 12.244 18.4168L17.5195 21.3698C17.8918 21.5782 18.3373 21.2545 18.2541 20.8361L17.0759 14.9062C17.042 14.7357 17.0991 14.5597 17.2268 14.4417L21.6655 10.3369C21.9788 10.0472 21.8086 9.52351 21.3849 9.47327L15.3812 8.76144C15.2085 8.74096 15.0589 8.63224 14.986 8.47434Z"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </p>
+              </li>
+              <li>
+                <p onClick={() => navigate("/useredit")}>
+                  Edytuj dane konta
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                  >
+                    <circle
+                      cx="11.5833"
+                      cy="6.8124"
+                      r="4.06966"
+                      stroke="white"
+                      stroke-width="1.5"
+                    />
+                    <path
+                      d="M11.6906 21.1906C5.78734 21.1906 3.05127 21.1906 3.05127 17.9903C3.05127 14.79 7.43732 13.322 11.6906 13.322C13.4843 13.322 14.2667 13.2845 15.7245 13.8264"
+                      stroke="white"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M15.1187 18.8745L19.1016 12.7399L21.6141 14.3712L17.4451 20.7925L15.2495 21.649L15.1187 18.8745Z"
+                      stroke="white"
+                      stroke-width="1.5"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </p>
+              </li>
+              <li>
+                <p onClick={() => navigate("/soonPlayed")}>
+                  Twoje nadchodzące seane
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="white"
+                  >
+                    <path
+                      d="M12.8587 17.7142H9.1105C9.04122 17.7142 8.97036 17.7313 8.90878 17.7669C7.14231 18.7897 9.21654 21.03 11.0128 21.03C12.6779 21.03 14.9464 18.6822 13.0348 17.7537C12.98 17.7271 12.9183 17.7142 12.8587 17.7142Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M19.6358 15.9737V15.9737C18.4392 15.9737 17.4693 15.0037 17.4693 13.8072V8.24186C17.4693 4.65232 14.5594 1.74243 10.9699 1.74243V1.74243C7.38032 1.74243 4.47043 4.65232 4.47043 8.24185V13.8674C4.47043 15.0307 3.52741 15.9737 2.36414 15.9737V15.9737"
+                      stroke="#0A0A0A"
+                      stroke-width="1.5"
+                      fill="white"
+                    />
+                    <path
+                      d="M1.60522 15.9738L20.3947 15.9738"
+                      stroke="#0A0A0A"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      fill="white"
+                    />
+                  </svg>
+                </p>
+              </li>
+              <p>
+                <div className="border-2 border-l-transparent border-r-transparent border-t-transparent border-b-purple rounded-null w-full mt-2 mb-2"></div>
               </p>
-            </li>
-            <li>
-              <p onClick={()=>navigate('/history')}>
-                Historia{" "}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <path
-                    d="M10 8H5V3"
-                    stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M5.29053 16.3571C6.22236 17.792 7.58966 18.8904 9.19169 19.4909C10.7937 20.0915 12.5461 20.1627 14.1916 19.6939C15.837 19.2252 17.2889 18.2413 18.3339 16.8867C19.379 15.5321 19.9623 13.8781 19.9981 12.1675C20.034 10.457 19.5205 8.78004 18.533 7.38284C17.5456 5.98564 16.1362 4.94181 14.5118 4.4046C12.8874 3.86738 11.1336 3.86509 9.50784 4.39805C7.88206 4.93101 6.46997 5.97114 5.47887 7.36575"
-                    stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </p>
-            </li>
-            <li>
-              <p onClick={()=>navigate('/opinionlist')}>
-                Oceny
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <path
-                    d="M14.986 8.47434L12.4538 2.98442C12.2751 2.59699 11.7244 2.59699 11.5457 2.98442L9.01347 8.47434C8.94064 8.63224 8.791 8.74096 8.61831 8.76144L2.61459 9.47327C2.19089 9.52351 2.02073 10.0472 2.33398 10.3369L6.77269 14.4417C6.90036 14.5597 6.95752 14.7357 6.92363 14.9062L5.74537 20.8361C5.66222 21.2545 6.1077 21.5782 6.48001 21.3698L11.7555 18.4168C11.9073 18.3319 12.0922 18.3319 12.244 18.4168L17.5195 21.3698C17.8918 21.5782 18.3373 21.2545 18.2541 20.8361L17.0759 14.9062C17.042 14.7357 17.0991 14.5597 17.2268 14.4417L21.6655 10.3369C21.9788 10.0472 21.8086 9.52351 21.3849 9.47327L15.3812 8.76144C15.2085 8.74096 15.0589 8.63224 14.986 8.47434Z"
-                    stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </p>
-            </li>
-            <li>
-              <p onClick={()=>navigate('/useredit')}>
-                Edytuj dane konta
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <circle
-                    cx="11.5833"
-                    cy="6.8124"
-                    r="4.06966"
-                    stroke="white"
-                    stroke-width="1.5"
-                  />
-                  <path
-                    d="M11.6906 21.1906C5.78734 21.1906 3.05127 21.1906 3.05127 17.9903C3.05127 14.79 7.43732 13.322 11.6906 13.322C13.4843 13.322 14.2667 13.2845 15.7245 13.8264"
-                    stroke="white"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                  />
-                  <path
-                    d="M15.1187 18.8745L19.1016 12.7399L21.6141 14.3712L17.4451 20.7925L15.2495 21.649L15.1187 18.8745Z"
-                    stroke="white"
-                    stroke-width="1.5"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </p>
-            </li>
-            <p>
-              <div className="border-2 border-l-transparent border-r-transparent border-t-transparent border-b-purple rounded-null w-full mt-2 mb-2"></div>
-            </p>
-            <li>
-              <label for="my-modal-4" class="">
-                Lokalizacja
-              </label>
-            </li>
-            <li>
-              <label for="my-modal-4-1" class="">
-                Regulamin
-              </label>
-            </li>
-            <li>
-              <label for="my-modal-4-2" class="">
-                O nas
-              </label>
-            </li>
-            <li>
-              <label for="my-modal-4-3" class="">
-                Kontakt
-              </label>
-            </li>
-          </ul>
-        </div>}
+              <li>
+                <label for="my-modal-4" class="">
+                  Lokalizacja
+                </label>
+              </li>
+              <li>
+                <label for="my-modal-4-1" class="">
+                  Regulamin
+                </label>
+              </li>
+              <li>
+                <label for="my-modal-4-2" class="">
+                  O nas
+                </label>
+              </li>
+              <li>
+                <label for="my-modal-4-3" class="">
+                  Kontakt
+                </label>
+              </li>
+            </ul>
+          </div>
+        )}
         <p className="normal-case sm:text-4xl tracking-widest text-left pl-8">
           {" "}
           KINOWO
@@ -182,42 +214,42 @@ const NavbarDashboard = (props) => {
       </div>
 
       <div className="navbar-end">
-        {cookie.Role==='user'&&<Searchinput />}
+        {cookie.Role === "user" && <Searchinput />}
         <input type="checkbox" id="my-modal-4" class="modal-toggle" />
         <label for="my-modal-4" class="modal cursor-pointer">
           <label class="modal-box relative bg-dark-purple" for="">
             <h3 class="text-dark-pink text-3xl">Lokalizacja</h3>
             <p class="py-4">
-            <div className="flex flex-nowrap ">
-            <Number>01</Number>
-            <p className="self-center text-white min-[400px]:text-3xl ml-4 sm:text-thin">
-              Cinema City Wolności
-            </p>
-          </div>
-          <div className="flex flex-nowrap ">
-            <Number>02</Number>
-            <p className="self-center text-white min-[400px]:text-3xl ml-4 ">
-              Cinema City Galeria Jurajska
-            </p>
-          </div>
-          <div className="flex flex-nowrap ">
-            <Number>03</Number>
-            <p className="self-center text-white min-[400px]:text-3xl ml-4 ">
-              Cinema City Poznań
-            </p>
-          </div>
-          <div className="flex flex-nowrap ">
-            <Number>04</Number>
-            <p className="self-center text-white min-[400px]:text-3xl ml-4">
-              Cinema City Warszawa
-            </p>
-          </div>
-          <div className="flex flex-nowrap ">
-            <Number>05</Number>
-            <p className="self-center text-white min-[400px]:text-3xl ml-4">
-              Stanowiska sponsorów
-            </p>
-          </div>
+              <div className="flex flex-nowrap ">
+                <Number>01</Number>
+                <p className="self-center text-white min-[400px]:text-3xl ml-4 sm:text-thin">
+                  Cinema City Wolności
+                </p>
+              </div>
+              <div className="flex flex-nowrap ">
+                <Number>02</Number>
+                <p className="self-center text-white min-[400px]:text-3xl ml-4 ">
+                  Cinema City Galeria Jurajska
+                </p>
+              </div>
+              <div className="flex flex-nowrap ">
+                <Number>03</Number>
+                <p className="self-center text-white min-[400px]:text-3xl ml-4 ">
+                  Cinema City Poznań
+                </p>
+              </div>
+              <div className="flex flex-nowrap ">
+                <Number>04</Number>
+                <p className="self-center text-white min-[400px]:text-3xl ml-4">
+                  Cinema City Warszawa
+                </p>
+              </div>
+              <div className="flex flex-nowrap ">
+                <Number>05</Number>
+                <p className="self-center text-white min-[400px]:text-3xl ml-4">
+                  Stanowiska sponsorów
+                </p>
+              </div>
             </p>
           </label>
         </label>
