@@ -101,12 +101,10 @@ const CinemaAdminDashboard = () => {
               <div>
                 <p className="text-2xl text-white text-3xl">
                   {" "}
-                  Lista aktualnie wyświetlanych filmów
+                  Dodawanie filmu
                 </p>
                 <p className="text-start mt-2 max-w-xs text-white">
-                  Lista aktualnie wyświetlanych filmów odnosi się do filmów,
-                  które są wyświetlane w naszych kinach. Lista filmów służy do
-                  wyświetlania wszystkich filmów jakie są aktualnie grane w kiniach.
+                  Specjalnie przygotowane miejsce gdzie możesz w wygodny i szybki sposób dodać film do swojego kina
                 </p>
               </div>
               <div className="flex justify-center h-full">

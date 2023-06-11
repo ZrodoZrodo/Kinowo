@@ -47,6 +47,7 @@ const LoginForm = () => {
         setCookie('UserData',user,{path:'/'})
         setCookie('Role',role,{path:'/'})
         if(role==='user') navigate("/dashboard");
+        if(role==='cinemaAdmin') navigate('/admindashboard');
         if(role==='admin') navigate('/admindashboard');
       }
     } catch (error) {

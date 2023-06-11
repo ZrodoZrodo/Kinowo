@@ -8,7 +8,7 @@ const Film = () => {
   const {id}=useParams()
   const navigate = useNavigate();
   const [movie,setMovie]=useState({})
-
+  const [photo,setPhoto]=useState(0)
   const [date,setDate]=useState("")
   const [cookie]=useCookies(['Token'])
   const [movies,setMovies]=useState([])
@@ -36,7 +36,12 @@ console.log(cookie)
     }
   }
 
-console.log(date);
+  const inc=()=>{
+    setPhoto(prevState => movie.images.length===prevState+1?0:prevState+1)
+    console.log(movies.images)
+  }
+
+
 
   if(!movie.title)   navigate('/');
   else {
@@ -52,7 +57,7 @@ console.log(date);
                       className="p-5 flex items-center mx-auto border-b mb-10 border-purple border-2 rounded-lg sm:flex-row flex-col">
                     <div
                         className="sm:w-32 sm:h-32 h-64 w-64 sm:mr-10 inline-flex items-center justify-center flex-shrink-0">
-                      <img alt={"Błąd ładowania"} src={movie?.images[0]}/>
+                      <img alt={"Błąd ładowania"} onClick={()=>inc()} src={movie.images[photo]}/>
                     </div>
                     <div className="flex-grow sm:text-left text-center mt-6 sm:mt-0">
                       <h1 className="text-purple text-5xl title-font font-bold mb-2">
@@ -94,27 +99,28 @@ console.log(date);
                     </div>
 
                   </div>
-                  <div className=" grid justify-items-center space-y-4 my-4 mx-4">
-                    <p className="text-2xl mb-2"> Wybierz date</p>
-                    <input
-                        type="date"
-                        placeholder="Price"
-                        className="input input-bordered border-purple max-w-xs"
-                        onChange={(e) => setDate(e.target.value)}
-                    />
-                    <button onClick={() => getMoviesByDate()}
-                            className="btn text-main-dark border-2 border-success max-w-xs justify-center">
-                      Sprawdź date
-                    </button>
-                    <div className={' w-full'}>
-                      {movies ? movies.map(m => <div key={m.date}
-                                                     className={'border-b flex flex-wrap justify-between p-5 w-full mb-10 border-purple border-2 rounded-lg'}>
-                        <img alt={"Błąd ładowania"} className={'h-16'} src={m.movie.images[0]}/>
-                        <span className={'text-purple font-bold text-2xl'}>{m.movie.title}</span>
-                        <span className={''}>{m.movie.description}</span>
-                        <span className={'text-2xl'}>{m.date.split(" ")[1]}</span>
-                        <span className="btn mt-3 inline-flex items-center"
-                              onClick={() => navigate(`/chooseSeat/${m.id}/${id}/${m.movie.title}/${m.date}/`)}>
+                  {cookie.Role==='user'&&
+                    <div className=" grid justify-items-center space-y-4 my-4 mx-4">
+                      <p className="text-2xl mb-2"> Wybierz date</p>
+                      <input
+                          type="date"
+                          placeholder="Price"
+                          className="input input-bordered border-purple max-w-xs"
+                          onChange={(e) => setDate(e.target.value)}
+                      />
+                      <button onClick={() => getMoviesByDate()}
+                              className="btn text-main-dark border-2 border-success max-w-xs justify-center">
+                        Sprawdź date
+                      </button>
+                      <div className={' w-full'}>
+                        {movies ? movies.map(m => <div key={m.date}
+                                                       className={'border-b flex flex-wrap justify-between p-5 w-full mb-10 border-purple border-2 rounded-lg'}>
+                          <img onClick={()=>inc()} alt={"Błąd ładowania"} className={'h-16'} />
+                          <span className={'text-purple font-bold text-2xl'}>{m.movie.title}</span>
+                          <span className={''}>{m.movie.description}</span>
+                          <span className={'text-2xl'}>{m.date.split(" ")[1]}</span>
+                          <span className="btn mt-3 inline-flex items-center"
+                                onClick={() => navigate(`/chooseSeat/${m.id}/${id}/${m.movie.title}/${m.date}/`)}>
                     Zarezerwuj bilet
                     <svg
                         fill="none"
@@ -128,9 +134,10 @@ console.log(date);
                       <path d="M5 12h14M12 5l7 7-7 7"></path>
                     </svg>
                   </span>
-                      </div>) : null}
+                        </div>) : null}
+                      </div>
                     </div>
-                  </div>
+                  }
                 </div>
               </section>
             </section>

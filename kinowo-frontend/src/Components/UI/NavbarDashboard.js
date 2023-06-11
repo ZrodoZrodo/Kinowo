@@ -4,12 +4,12 @@ import {useCookies} from "react-cookie";
 import {useNavigate} from "react-router-dom";
 
 const NavbarDashboard = (props) => {
-
+  const [cookie]=useCookies();
   const navigate = useNavigate();
   return (
     <div className="navbar bg-dark-purple">
       <div className="navbar-start">
-        <div className="dropdown">
+        {cookie.Role==='user'&&<div className="dropdown">
           <label tabindex="0" className="btn btn-ghost btn-circle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -174,7 +174,7 @@ const NavbarDashboard = (props) => {
               </label>
             </li>
           </ul>
-        </div>
+        </div>}
         <p className="normal-case sm:text-4xl tracking-widest text-left pl-8">
           {" "}
           KINOWO
@@ -182,7 +182,7 @@ const NavbarDashboard = (props) => {
       </div>
 
       <div className="navbar-end">
-        <Searchinput />
+        {cookie.Role==='user'&&<Searchinput />}
         <input type="checkbox" id="my-modal-4" class="modal-toggle" />
         <label for="my-modal-4" class="modal cursor-pointer">
           <label class="modal-box relative bg-dark-purple" for="">

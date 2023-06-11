@@ -155,7 +155,7 @@ const [movies,setMovies]=useState([])
                         </span>
                     </td>{" "}
                     <td>
-                      <button className={"btn px-2"}>Pokaz film</button>{" "}
+                      <button onClick={()=>navigate(`/booking/${movie.id}`)} className={"btn px-2"}>Pokaz film</button>{" "}
                       {movie.deleted?<button onClick={()=>undeleteCinema(movie.id)} className={"btn btn-success "}>Przywróć film</button>:<button onClick={()=>deleteCinema(movie.id)} className={"btn btn-error "}>Usun film</button>}{" "}
                     </td>
                   </tr>
