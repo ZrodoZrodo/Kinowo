@@ -42,7 +42,7 @@ const AdminDashboard = (props) => {
               </label>
             </div>
 
-            <p className=" flex-1 px-2 mx-2 normal-case sm:text-4xl tracking-widest text-left pl-8">
+            <p onClick={()=>navigate('/admindashboard')} className="cursor-pointer flex-1 px-2 mx-2 normal-case sm:text-4xl tracking-widest text-left pl-8">
               {" "}
               KINOWO
             </p>

@@ -4,10 +4,55 @@ import top from "../../UI/Posters/samuel-regan-asante-Geepgu8bCas-unsplash.jpg";
 import intru from "../../UI/Posters/tech-daily-NXAQF0bF1Y8-unsplash.jpg";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
+
 
 const CinemaList = (props) => {
+
+  const [input,setInput]=useState("")
   const navigate = useNavigate();
+  const [cookie]=useCookies()
+  const [cinemas,setCinemas]=useState([])
+
+  useEffect(()=>{
+    fetch(`http://localhost:3000/admin/getCinemas/`, {
+      headers: {
+        'Authorization': 'Bearer ' + cookie.Token,
+      }
+    }).then(res => res.json()).then(data => setCinemas(data))
+  },[])
+
+  const deleteCinema=(id)=>{
+    console.log(id)
+    fetch(`http://localhost:3000/admin/deleteCinema/${id}`, {
+      headers: {
+        'Authorization': 'Bearer ' + cookie.Token,
+      },
+      method:"DELETE",
+      body:JSON.stringify({id:id})
+    }).then(()=>{
+      fetch(`http://localhost:3000/admin/getCinemas/`, {
+        headers: {
+          'Authorization': 'Bearer ' + cookie.Token,
+        }
+      }).then(res => res.json()).then(data => setCinemas(data))
+    })
+  }
+
+  const undeleteCinema=(id)=>{
+    fetch(`http://localhost:3000/admin/undeleteCinema/${id}`, {
+      headers: {
+        'Authorization': 'Bearer ' + cookie.Token,
+      },
+    }).then(()=>{
+      fetch(`http://localhost:3000/admin/getCinemas/`, {
+        headers: {
+          'Authorization': 'Bearer ' + cookie.Token,
+        }
+      }).then(res => res.json()).then(data => setCinemas(data))
+    })
+
+  }
 
   return (
     <>
@@ -33,7 +78,7 @@ const CinemaList = (props) => {
               </label>
             </div>
 
-            <p className=" flex-1 px-2 mx-2 normal-case sm:text-4xl tracking-widest text-left pl-8">
+            <p onClick={()=>navigate('/admindashboard')} className="cursor-pointer flex-1 px-2 mx-2 normal-case sm:text-4xl tracking-widest text-left pl-8">
               {" "}
               KINOWO
             </p>
@@ -76,33 +121,40 @@ const CinemaList = (props) => {
             </div>
           </div>
           <div className={"overflow-x-auto w-full mt-8"}>
+            <input onChange={(e)=>setInput(e.target.value)} type={'text'} className={'input input-bordered mb-5 w-full max-w-xs"'} placeholder={'Wpisz mail szukanej osoby'}/>
+
             <table className={"table  w-full overflow-x-auto"}>
               <thead className="text-center  text-white">
                 <tr>
-                  <th>Imie</th>
-                  <th>Naziwsko</th>
-                  <th>e-Mail</th>
+                  <th>Nazwa kina</th>
+                  <th>Imie Administratora</th>
+                  <th>Nazwisko administratora</th>
 
                   <th>Przyciski akcji</th>
                 </tr>
               </thead>
+              {cinemas.filter(cinema=>cinema.name.includes(input)).map(cinema=>
+                  <tr className="text-center">
+                    <td className="underline  decoration-purple decoration-2 text-2xl text-white ">
+                      {cinema.cinemaName}
+                    </td>{" "}
+                    <td className="underline  decoration-purple decoration-2 text-2xl text-white ">
+                      {cinema.name}
+                    </td>{" "}
+                    <td className="underline  decoration-purple  decoration-2 text-2xl text-white">
+                      {" "}
+                      {cinema.lastName}
+                    </td>{" "}
+                    <td>
+                      <button className={"btn px-2"}>Pokaz filmy</button>{" "}
+                      {cinema.deleted?<button onClick={()=>undeleteCinema(cinema.id)} className={"btn btn-success"}>Cofnij usunięcie</button>:
+                        <button onClick={()=>deleteCinema(cinema.id)} className={"btn btn-error"}>Usun kino</button>
+                      }
+                    </td>
+                  </tr>
+                    )}
 
-              <tr className="text-center">
-                <td className="underline  decoration-purple decoration-2 text-2xl text-white ">
-                  Jan
-                </td>{" "}
-                <td className="underline  decoration-purple decoration-2 text-2xl text-white ">
-                  Kowal
-                </td>{" "}
-                <td className="underline  decoration-purple  decoration-2 text-2xl text-white">
-                  {" "}
-                  Duza
-                </td>{" "}
-                <td>
-                  <button className={"btn px-2"}>Pokaz opinie</button>{" "}
-                  <button className={"btn btn-error"}>Usun uzytkownika</button>{" "}
-                </td>
-              </tr>
+
             </table>
           </div>
         </div>

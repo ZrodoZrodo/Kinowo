@@ -7,19 +7,19 @@ export declare class UserController {
     getUser(id: {
         id: string;
     }): Promise<{
-        name: string;
-        lastName: string;
-        email: string;
+        opinions: import(".prisma/client").Opinion[];
         id: string;
         deleted: boolean;
-        opinions: import(".prisma/client").Opinion[];
+        email: string;
+        name: string;
+        lastName: string;
     }>;
     getMoviesHistory(id: {
         id: string;
     }): Promise<{
         reservations: {
-            movieId: string;
             title: string;
+            movieId: string;
             date: string;
             price: number;
             seatNumber: number[];
@@ -30,8 +30,8 @@ export declare class UserController {
     }): Promise<{
         reservations: {
             id: string;
-            movieId: string;
             title: string;
+            movieId: string;
             date: string;
             price: number;
             seatNumber: number[];
@@ -63,10 +63,10 @@ export declare class UserController {
     }, id: {
         id: string;
     }): Promise<{
+        id: string;
+        email: string;
         name: string;
         lastName: string;
-        email: string;
-        id: string;
     }>;
     addOpinion(opinion: {
         userid: string;
