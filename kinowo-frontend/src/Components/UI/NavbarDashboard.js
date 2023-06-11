@@ -99,7 +99,7 @@ const NavbarDashboard = (props) => {
               </p>
             </li>
             <li>
-              <p>
+              <p onClick={()=>navigate('/opinionlist')} >
                 Oceny
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
