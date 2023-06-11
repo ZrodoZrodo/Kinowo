@@ -16,6 +16,8 @@ import OpinionList from "./Components/Pages/OpinionList";
 import AdminDashboard from "./Components/Pages/Admin/AdminDashboard";
 import {useCookies} from "react-cookie";
 import AllMovies from "./Components/Pages/AllMovies/AllMovies";
+import CinemaList from "./Components/Pages/Admin/CinemaList";
+import UserList from "./Components/Pages/Admin/UserList";
 function App() {
   // const { user } = useContext(UserContext);
   const [cookie]=useCookies()
@@ -33,6 +35,8 @@ function App() {
         <Route path="/login/:role" element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="useredit" element={<UserEdit />} />
+        <Route path="cinemalist" element={<CinemaList />} />
+        <Route path="userlist" element={<UserList />} />
         <Route path="booking/:id" element={<Film/>} />
         <Route path="history" element={<History/>} />
         <Route path="/chooseSeat/:id/:movieId/:title/:date" element={<ChooseSeat/>} />

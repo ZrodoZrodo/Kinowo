@@ -6,17 +6,8 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
-const AdminDashboard = (props) => {
+const CinemaList = (props) => {
   const navigate = useNavigate();
-  const [cookie] = useCookies();
-  console.log(cookie);
-
-  useEffect(() => {
-    if (!cookie.Role) navigate("/login/admin");
-    if (cookie.Role !== "admin") {
-      navigate("/login/admin");
-    }
-  }, []);
 
   return (
     <>
@@ -84,69 +75,45 @@ const AdminDashboard = (props) => {
               </ul>
             </div>
           </div>
-          <div className="flex flex-wrap m-8">
-            <div className="">
-              <p className="text-white sm:text-6xl text-2xl underline underline-offset-2 decoration-purple decoration-2">
-                {" "}
-                Panel administratora.{" "}
-              </p>
+          <div className={"overflow-x-auto w-full mt-8"}>
+            <table className={"table  w-full overflow-x-auto"}>
+              <thead className="text-center  text-white">
+                <tr>
+                  <th>Imie</th>
+                  <th>Naziwsko</th>
+                  <th>e-Mail</th>
 
-              <p className="text-white sm:text-center md:text-left sm:w-1/3 w-full mt-6">
-                W tym miejscu możesz znaleźć dwa panele odpowiadające za listę
-                użytkowników zarejestrowanych w naszym serwisie, oraz listę kin
-                które zostały które zostały zarejestrowane w naszym serwsie.
-              </p>
-            </div>
-            <div className="grid sm:grid-cols-3 lg:grid-cols-5 gap-6 mt-24">
-              <div>
-                <p className="text-2xl text-white text-3xl">
+                  <th>Przyciski akcji</th>
+                </tr>
+              </thead>
+
+              <tr className="text-center">
+                <td className="underline  decoration-purple decoration-2 text-2xl text-white ">
+                  Jan
+                </td>{" "}
+                <td className="underline  decoration-purple decoration-2 text-2xl text-white ">
+                  Kowal
+                </td>{" "}
+                <td className="underline  decoration-purple  decoration-2 text-2xl text-white">
                   {" "}
-                  Lista użytkowników
-                </p>
-                <p className="text-start mt-2 max-w-xs text-white">
-                  Lista użytkowników odnosi się do osób, które korzystają z
-                  usług naszej firmy. Lista użytkowników służy do zarządzania
-                  dostępem, personalizacji doświadczeń użytkowników oraz
-                  świadczenia wsparcia
-                </p>
-              </div>
-              <div className="flex justify-center h-full">
-                <img src={intru} alt="poster"></img>
-              </div>
-              <div className="mt-24 justify-center">
-                <div className=" invisible  xl:visible border-2 border-l-purple  h-64 border-r-purple border-t-transparent border-b-transparent ">
-                  <p className="text-4xl text-white text-center">
-                    Szybka i łatwa administracja danymi
-                  </p>
-                </div>
-              </div>
-              <div className="flex justify-center ">
-                <img src={top} alt="poster"></img>
-              </div>
-              <div>
-                <p className="text-3xl sm:text-start text-white xl:text-end">
-                  {" "}
-                  Lista kin
-                </p>
-                <p className="sm:text-start lg:text-end mt-2 text-white">
-                  Nasze kina oferują wyjątkowe wrażenia kinowe, dzięki
-                  najnowszym technologiom w dziedzinie projekcji filmów, dźwięku
-                  i innych innowacyjnych rozwiązaniom. nasze sale kinowe są
-                  przestronne i wygodne, a wybór filmów jest na tyle szeroki, że
-                  każdy kinoman znajdzie coś dla siebie.
-                </p>
-              </div>
-            </div>
+                  Duza
+                </td>{" "}
+                <td>
+                  <button className={"btn px-2"}>Pokaz opinie</button>{" "}
+                  <button className={"btn btn-error"}>Usun uzytkownika</button>{" "}
+                </td>
+              </tr>
+            </table>
           </div>
         </div>
 
         <div class="drawer-side">
           <label for="my-drawer-3" class="drawer-overlay"></label>
           <ul class="menu p-4 sm:w-80 w-40 bg-base-100">
-            <li>
+            <li onClick={() => navigate("/userlist")}>
               <a>Lista użytkowników</a>
             </li>
-            <li>
+            <li onClick={() => navigate("/cinemalist")}>
               <a>Lista kin</a>
             </li>
             <li>
@@ -183,4 +150,4 @@ const AdminDashboard = (props) => {
   );
 };
 
-export default AdminDashboard;
+export default CinemaList;
