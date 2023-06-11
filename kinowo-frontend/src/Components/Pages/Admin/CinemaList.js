@@ -1,7 +1,4 @@
 import Footer from "../../UI/Footer";
-import NavbarDashboard from "../../UI/NavbarDashboard";
-import top from "../../UI/Posters/samuel-regan-asante-Geepgu8bCas-unsplash.jpg";
-import intru from "../../UI/Posters/tech-daily-NXAQF0bF1Y8-unsplash.jpg";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { useEffect,useState } from "react";

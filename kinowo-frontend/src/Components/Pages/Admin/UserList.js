@@ -50,8 +50,7 @@ const UserList = () => {
     })
 
   }
-
-  console.log(users)
+  
   if(!users) return;
 
   return (

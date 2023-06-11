@@ -115,6 +115,14 @@ export class UserService {
       select: {
         reservations: {
           where: { watched: false },
+          select: {
+            userId: true,
+            movieId: true,
+            title: true,
+            date: true,
+            price: true,
+            seatNumber: true,
+          },
         },
       },
     });
