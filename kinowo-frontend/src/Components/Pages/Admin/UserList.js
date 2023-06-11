@@ -10,6 +10,13 @@ const UserList = () => {
   const [cookie]=useCookies()
   const [users,setUsers]=useState([])
   const [input,setInput]=useState("")
+  useEffect(() => {
+    if (!cookie.Role) navigate("/login/admin");
+    if (cookie.Role !== "admin") {
+      navigate("/login/admin");
+    }
+  }, []);
+
   useEffect(()=>{
     fetch(`http://localhost:3000/admin/getUsers/`, {
       headers: {

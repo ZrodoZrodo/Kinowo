@@ -109,6 +109,12 @@ export class CinemaController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get('/undeleteMovie/:id')
+  async undeleteMovie(@Param() { id }: { id: string }) {
+    return this.CinemaService.undeleteMovie(id);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Post('/putMoviesIntoScreening')
   async putMoviesIntoScreening(
     @Body()

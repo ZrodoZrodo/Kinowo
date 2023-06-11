@@ -1,8 +1,66 @@
 import { useNavigate } from "react-router-dom";
 import Footer from "../../UI/Footer";
 import top from "../../UI/Posters/rezerwacje.png";
+import {useEffect,useState} from "react";
+import {useCookies} from "react-cookie";
 const NowOnScreen = () => {
   const navigate = useNavigate();
+
+const [movies,setMovies]=useState([])
+  const [input,setInput]=useState("")
+  const [cookie]=useCookies()
+  console.log(cookie)
+
+  useEffect(() => {
+    if (!cookie.Role) navigate("/login/cinemaAdmin");
+    if (cookie.Role !== "cinemaAdmin") {
+      navigate("/login/cinemaAdmin");
+    }
+  }, []);
+
+  useEffect(()=>{
+    fetch(`http://localhost:3000/cinema/getMovies/${cookie.UserData.id}/`, {
+      headers: {
+        'Authorization': 'Bearer ' + cookie.Token,
+      }
+    }).then(res => res.json()).then(data => setMovies(data.movies))
+  },[])
+
+  console.log(movies)
+
+  const deleteCinema=(id)=>{
+    console.log(id)
+    fetch(`http://localhost:3000/cinema/deleteMovie/${id}`, {
+      headers: {
+        'Authorization': 'Bearer ' + cookie.Token,
+      },
+      method:"DELETE",
+      body:JSON.stringify({id:id})
+    }).then(()=>{
+      fetch(`http://localhost:3000/cinema/getMovies/${cookie.UserData.id}/`, {
+        headers: {
+          'Authorization': 'Bearer ' + cookie.Token,
+        }
+      }).then(res => res.json()).then(data => setMovies(data.movies))
+    })
+  }
+
+  const undeleteCinema=(id)=>{
+    fetch(`http://localhost:3000/cinema/undeleteMovie/${id}`, {
+      headers: {
+        'Authorization': 'Bearer ' + cookie.Token,
+      },
+    }).then(()=>{
+      fetch(`http://localhost:3000/cinema/getMovies/${cookie.UserData.id}/`, {
+        headers: {
+          'Authorization': 'Bearer ' + cookie.Token,
+        }
+      }).then(res => res.json()).then(data => setMovies(data.movies))
+    })
+
+  }
+
+  if(!movies) return;
   return (
     <>
       <div class="drawer">
@@ -27,7 +85,7 @@ const NowOnScreen = () => {
               </label>
             </div>
 
-            <p className=" flex-1 px-2 mx-2 normal-case sm:text-4xl tracking-widest text-left pl-8">
+            <p onClick={() => navigate("/cienmaadmindashboard")} className="cursor-pointer flex-1 px-2 mx-2 normal-case sm:text-4xl tracking-widest text-left pl-8">
               {" "}
               KINOWO
             </p>
@@ -36,8 +94,8 @@ const NowOnScreen = () => {
                 <li onClick={() => navigate("/cienmaadminnowonscreen")}>
                   <a>Lista aktualnie wyświetlanych filmów </a>
                 </li>
-                <li onClick={() => navigate("/cienmaadminactivereservation")}>
-                  <a>Aktywne rezerwacje</a>
+                <li onClick={() => navigate("/addmovie")}>
+                  <a>Dodaj film</a>
                 </li>
                 <li>
                   {" "}
@@ -70,32 +128,39 @@ const NowOnScreen = () => {
             </div>
           </div>
           <div className={"overflow-x-auto w-full mt-8"}>
+            <input onChange={(e)=>setInput(e.target.value)} type={'text'} className={'input input-bordered mb-5 w-full max-w-xs"'} placeholder={'Wpisz tytuł'}/>
+
             <table className={"table  w-full overflow-x-auto"}>
               <thead className="text-center text-white">
                 <tr>
                   <th>Okładka</th>
                   <th>Nazwa filmu</th>
-                  <th>Opis</th>
+                  <th className={'w-32'}>Opis</th>
 
                   <th>Przyciski akcji</th>
                 </tr>
               </thead>
 
-              <tr className="text-center">
-                <td className=" flex justify-center underline  decoration-purple decoration-2 text-2xl text-white">
-                  <img src={top} className=" h-1/4 w-1/4"></img>
-                </td>{" "}
-                <td className="underline  decoration-purple decoration-2 text-2xl text-white">
-                  Jan
-                </td>{" "}
-                <td className="underline  decoration-purple  decoration-2 text-2xl text-white">
-                  Tutaj opis
-                </td>{" "}
-                <td>
-                  <button className={"btn px-2"}>Pokaz film</button>{" "}
-                  <button className={"btn btn-error "}>Usun film</button>{" "}
-                </td>
-              </tr>
+              {movies.filter(movie=>movie.title.includes(input)).map(movie=>
+                  <tr className="text-center">
+                    <td className=" flex justify-center underline  decoration-purple decoration-2 text-2xl text-white">
+                      <img src={movie.images[0]} className="object-fill"></img>
+                    </td>{" "}
+                    <td className="underline  decoration-purple decoration-2 text-2xl text-white">
+                      {movie.title}
+                    </td>{" "}
+                    <td className="underline  decoration-purple w-32  decoration-2 text-2xl text-white">
+                      <span className={'w-32 break-all'}>
+                      {movie.description}
+                        </span>
+                    </td>{" "}
+                    <td>
+                      <button className={"btn px-2"}>Pokaz film</button>{" "}
+                      {movie.deleted?<button onClick={()=>undeleteCinema(movie.id)} className={"btn btn-success "}>Przywróć film</button>:<button onClick={()=>deleteCinema(movie.id)} className={"btn btn-error "}>Usun film</button>}{" "}
+                    </td>
+                  </tr>
+              )}
+
             </table>
           </div>
         </div>

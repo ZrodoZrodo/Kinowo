@@ -1,11 +1,13 @@
 import Footer from "../UI/Footer";
 import NavbarDashboard from "../UI/NavbarDashboard";
 import {useState} from "react";
+import {useCookies} from "react-cookie";
+import {useNavigate} from "react-router-dom";
 
 const AddMovie = () => {
-
+  const navigate = useNavigate();
   const [data,setData]=useState({})
-
+  const [cookie]=useCookies()
   const [photosUrls,setPhotosUrls]=useState([])
 
   const addPhoto=(e)=>{
@@ -37,12 +39,12 @@ e.preventDefault()
     formData.append('premiere',data.premiere)
     formData.append('description',data.description)
     formData.append('title',data.title)
-    formData.append('id',"647e3cf8c696b7a714a9644a")
+    formData.append('id',cookie.UserData.id)
 
     fetch('http://localhost:3000/cinema/upload',{
       method: "POST",
       body:formData
-    }).then(res=>res.json()).then(data=>console.log(data))
+    }).then(res=>res.json()).then(data=>console.log(data)).then(()=>navigate('/cienmaadminnowonscreen'))
 
   }
 
@@ -116,7 +118,7 @@ e.preventDefault()
             <button onClick={(e)=>send(e)} class="btn btn-success text-main-dark border-2 border-success max-w-xs justify-center">
                 Dodaj film
               </button>
-              <p className="btn btn-outline text-white">Wróc do listy filmów</p>
+              <p onClick={()=>navigate('/cienmaadminnowonscreen')} className="btn btn-outline text-white">Wróc do listy filmów</p>
               
             </div>
           </div>

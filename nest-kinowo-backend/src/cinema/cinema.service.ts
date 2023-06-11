@@ -124,12 +124,18 @@ export class CinemaService {
       data: { deleted: true },
     });
   }
+  async undeleteMovie(id) {
+    return prisma.movie.update({
+      where: { id },
+      data: { deleted: false },
+    });
+  }
+
   async getMovies(id: string) {
     return prisma.cinemaAdmin.findFirst({
       where: { id },
       select: {
         movies: {
-          where: { deleted: false },
           select: {
             id: true,
             title: true,
@@ -138,6 +144,7 @@ export class CinemaService {
             opinion: true,
             premiere: true,
             end: true,
+            deleted: true,
           },
         },
       },

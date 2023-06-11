@@ -2,9 +2,21 @@ import { useNavigate } from "react-router-dom";
 import top from "../../UI/Posters/rezerwacje.png"
 import intru from "../../UI/Posters/niewiem.png";
 import Footer from "../../UI/Footer";
+import {useCookies} from "react-cookie";
+import {useEffect} from "react";
+
 
 const CinemaAdminDashboard = () => {
+  const [cookie]=useCookies()
+  console.log(cookie)
   const navigate = useNavigate();
+  useEffect(() => {
+    if (!cookie.Role) navigate("/login/cinemaAdmin");
+    if (cookie.Role !== "cinemaAdmin") {
+      navigate("/login/cinemaAdmin");
+    }
+  }, []);
+
   return (
     <>
       <div class="drawer">
@@ -29,7 +41,7 @@ const CinemaAdminDashboard = () => {
               </label>
             </div>
 
-            <p className=" flex-1 px-2 mx-2 normal-case sm:text-4xl tracking-widest text-left pl-8">
+            <p onClick={() => navigate("/cienmaadmindashboard")} className="cursor-pointer flex-1 px-2 mx-2 normal-case sm:text-4xl tracking-widest text-left pl-8">
               {" "}
               KINOWO
             </p>
@@ -38,8 +50,8 @@ const CinemaAdminDashboard = () => {
                 <li onClick={() => navigate("/cienmaadminnowonscreen")}>
                   <a>Lista aktualnie wyświetlanych filmów </a>
                 </li>
-                <li onClick={() => navigate("/cienmaadminactivereservation")}>
-                  <a>Aktywne rezerwacje</a>
+                <li onClick={() => navigate("/addmovie")}>
+                  <a>Dodaj film</a>
                 </li>
                 <li>
                   {" "}

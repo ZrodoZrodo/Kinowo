@@ -11,6 +11,13 @@ const CinemaList = (props) => {
   const [cookie]=useCookies()
   const [cinemas,setCinemas]=useState([])
 
+  useEffect(() => {
+    if (!cookie.Role) navigate("/login/admin");
+    if (cookie.Role !== "admin") {
+      navigate("/login/admin");
+    }
+  }, []);
+
   useEffect(()=>{
     fetch(`http://localhost:3000/admin/getCinemas/`, {
       headers: {

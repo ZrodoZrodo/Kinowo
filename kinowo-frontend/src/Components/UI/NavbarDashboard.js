@@ -175,7 +175,7 @@ const NavbarDashboard = (props) => {
             </li>
           </ul>
         </div>
-        <p onClick={()=>navigate('/dashboard')} className="cursor-pointer normal-case sm:text-4xl tracking-widest text-left pl-8">
+        <p className="normal-case sm:text-4xl tracking-widest text-left pl-8">
           {" "}
           KINOWO
         </p>
