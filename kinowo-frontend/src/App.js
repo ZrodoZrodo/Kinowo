@@ -18,6 +18,9 @@ import {useCookies} from "react-cookie";
 import AllMovies from "./Components/Pages/AllMovies/AllMovies";
 import CinemaList from "./Components/Pages/Admin/CinemaList";
 import UserList from "./Components/Pages/Admin/UserList";
+import CinemaAdminDashboard from "./Components/Pages/CinemaAdmin/CinemaAdminDashboard";
+import NowOnScreen from "./Components/Pages/CinemaAdmin/NowOnScreen";
+import ActiveReservation from "./Components/Pages/CinemaAdmin/ActiveReservation";
 function App() {
   // const { user } = useContext(UserContext);
   const [cookie]=useCookies()
@@ -28,6 +31,9 @@ function App() {
         <Route path="" exact element={<HeroPage />} />
         <Route path="opinionlist" exact element={<OpinionList />} />
         <Route path="admindashboard" exact element={<AdminDashboard />} />
+        <Route path="cienmaadmindashboard" exact element={<CinemaAdminDashboard />} />
+        <Route path="cienmaadminnowonscreen" exact element={<NowOnScreen />} />
+        <Route path="cienmaadminactivereservation" exact element={<ActiveReservation />} />
         <Route path="/addopinion/:id" element={<AddOpinion />} />
         <Route path="addmovie" element={<AddMovie />} />
         <Route path="allmovies/:title" element={<AllMovies />} />
