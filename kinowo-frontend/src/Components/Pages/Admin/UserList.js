@@ -50,7 +50,7 @@ const UserList = () => {
     })
 
   }
-  
+
   if(!users) return;
 
   return (
