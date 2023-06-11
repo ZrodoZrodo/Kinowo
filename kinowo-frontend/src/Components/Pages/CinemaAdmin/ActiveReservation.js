@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import Footer from "../../UI/Footer";
-import top from "../../UI/Posters/rezerwacje.png";
 const ActiveReservation = () => {
   const navigate = useNavigate();
   return (

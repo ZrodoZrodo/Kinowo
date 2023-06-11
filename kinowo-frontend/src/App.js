@@ -23,6 +23,7 @@ import NowOnScreen from "./Components/Pages/CinemaAdmin/NowOnScreen";
 import ActiveReservation from "./Components/Pages/CinemaAdmin/ActiveReservation";
 import UserOpinion from "./Components/Pages/Admin/userOpinion";
 import CinemaMovies from "./Components/Pages/Admin/cinemaMovies";
+import AddScreening from "./Components/Pages/CinemaAdmin/addScreening";
 function App() {
   // const { user } = useContext(UserContext);
   const [cookie]=useCookies()
@@ -37,6 +38,7 @@ function App() {
         <Route path="cienmaadminnowonscreen" exact element={<NowOnScreen />} />
         <Route path="cienmaadminactivereservation" exact element={<ActiveReservation />} />
         <Route path="/addopinion/:id" element={<AddOpinion />} />
+        <Route path="/addscreening/:id/:title/:description" element={<AddScreening />} />
         <Route path="addmovie" element={<AddMovie />} />
         <Route path="allmovies/:title" element={<AllMovies />} />
         <Route path="register" element={<Register />} />

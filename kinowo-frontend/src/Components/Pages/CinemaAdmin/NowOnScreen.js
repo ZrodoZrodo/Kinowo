@@ -144,7 +144,7 @@ const [movies,setMovies]=useState([])
               {movies.filter(movie=>movie.title.includes(input)).map(movie=>
                   <tr className="text-center">
                     <td className=" flex justify-center underline  decoration-purple decoration-2 text-2xl text-white">
-                      <img src={movie.images[0]} className="object-fill"></img>
+                      <img src={movie.images[0]} className="w-32 object-fill"></img>
                     </td>{" "}
                     <td className="underline  decoration-purple decoration-2 text-2xl text-white">
                       {movie.title}
@@ -154,8 +154,9 @@ const [movies,setMovies]=useState([])
                       {movie.description}
                         </span>
                     </td>{" "}
-                    <td>
-                      <button onClick={()=>navigate(`/booking/${movie.id}`)} className={"btn px-2"}>Pokaz film</button>{" "}
+                    <td className={'space-x-2'}>
+                      <button onClick={()=>navigate(`/booking/${movie.id}`)} className={"btn px-2 "}>Pokaz film</button>
+                      <button onClick={()=>navigate(`/addscreening/${movie.id}/${movie.title}/${movie.description}`)} className={"btn px-2 "}>Dodaj senas</button>
                       {movie.deleted?<button onClick={()=>undeleteCinema(movie.id)} className={"btn btn-success "}>Przywróć film</button>:<button onClick={()=>deleteCinema(movie.id)} className={"btn btn-error "}>Usun film</button>}{" "}
                     </td>
                   </tr>

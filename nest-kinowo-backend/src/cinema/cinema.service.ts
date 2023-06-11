@@ -171,7 +171,7 @@ export class CinemaService {
             id: movieId,
           },
         },
-        price,
+        price: Number(price),
         date,
         end,
         CinemaAdmin: {
