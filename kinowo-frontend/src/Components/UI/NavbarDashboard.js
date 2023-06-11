@@ -99,11 +99,7 @@ const NavbarDashboard = (props) => {
               </p>
             </li>
             <li>
-<<<<<<< HEAD
               <p onClick={()=>navigate('/opinionlist')}>
-=======
-              <p onClick={()=>navigate('/opinionlist')} >
->>>>>>> 0b4661ff8224ad8e08f672668f2963790db1ed79
                 Oceny
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
