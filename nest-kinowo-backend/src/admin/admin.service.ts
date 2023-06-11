@@ -3,30 +3,20 @@ import prisma from '../../prisma/prisma';
 import * as bcrypt from 'bcrypt';
 @Injectable()
 export class AdminService {
-  async getUndeletedUsers() {
+  async getUsers() {
     return prisma.user.findMany({
-      where: { deleted: false },
       select: {
         id: true,
         email: true,
         name: true,
         lastName: true,
+        deleted: true,
       },
     });
   }
 
-  async getDeletedUsers() {
-    return prisma.user.findMany({
-      where: { deleted: true },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        lastName: true,
-      },
-    });
-  }
   async deleteUser(id: string) {
+    console.log(id);
     return prisma.user.update({
       where: { id },
       data: {
@@ -68,26 +58,10 @@ export class AdminService {
     });
   }
 
-  async getUndeletedCinemas() {
+  async getCinemas() {
     return prisma.cinemaAdmin.findMany({
-      where: {
-        deleted: false,
-      },
       select: {
-        id: true,
-        cinemaName: true,
-        name: true,
-        lastName: true,
-      },
-    });
-  }
-
-  async getDeletedCinemas() {
-    return prisma.cinemaAdmin.findMany({
-      where: {
-        deleted: false,
-      },
-      select: {
+        deleted: true,
         id: true,
         cinemaName: true,
         name: true,
@@ -169,7 +143,7 @@ export class AdminService {
     });
   }
 
-  async getUserUndeletedOpinions(id: string) {
+  async getUserOpinions(id: string) {
     return prisma.user.findFirst({
       where: { id },
       select: {
@@ -177,27 +151,6 @@ export class AdminService {
         lastName: true,
         id: true,
         opinions: {
-          where: { deleted: false },
-          select: {
-            id: true,
-            movieTitle: true,
-            description: true,
-            rate: true,
-          },
-        },
-      },
-    });
-  }
-
-  async getUserDeletedOpinions(id: string) {
-    return prisma.user.findFirst({
-      where: { id },
-      select: {
-        name: true,
-        lastName: true,
-        id: true,
-        opinions: {
-          where: { deleted: true },
           select: {
             id: true,
             movieTitle: true,

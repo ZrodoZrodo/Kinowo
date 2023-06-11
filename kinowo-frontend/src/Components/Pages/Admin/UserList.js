@@ -1,9 +1,59 @@
 import { useNavigate } from "react-router-dom";
 import Footer from "../../UI/Footer";
+import {useCookies} from "react-cookie";
+import {useEffect, useState} from "react";
+
 
 const UserList = () => {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [cookie]=useCookies()
+  const [users,setUsers]=useState([])
+  const [input,setInput]=useState("")
+  useEffect(()=>{
+    fetch(`http://localhost:3000/admin/getUsers/`, {
+      headers: {
+        'Authorization': 'Bearer ' + cookie.Token,
+      }
+    }).then(res => res.json()).then(data => setUsers(data))
+  },[])
+
+
+  const deleteUser=(id)=>{
+    console.log(id)
+    fetch(`http://localhost:3000/admin/deleteUser/${id}`, {
+      headers: {
+        'Authorization': 'Bearer ' + cookie.Token,
+      },
+      method:"DELETE",
+      body:JSON.stringify({id:id})
+    }).then(()=>{
+      fetch(`http://localhost:3000/admin/getUsers/`, {
+        headers: {
+          'Authorization': 'Bearer ' + cookie.Token,
+        }
+      }).then(res => res.json()).then(data => setUsers(data))
+    })
+  }
+
+  const undeleteUser=(id)=>{
+    fetch(`http://localhost:3000/admin/undeleteUser/${id}`, {
+      headers: {
+        'Authorization': 'Bearer ' + cookie.Token,
+      },
+    }).then(()=>{
+      fetch(`http://localhost:3000/admin/getUsers/`, {
+        headers: {
+          'Authorization': 'Bearer ' + cookie.Token,
+        }
+      }).then(res => res.json()).then(data => setUsers(data))
+    })
+
+  }
+
+  console.log(users)
+  if(!users) return;
+
   return (
     <>
       <div class="drawer">
@@ -28,7 +78,7 @@ const UserList = () => {
               </label>
             </div>
 
-            <p className=" flex-1 px-2 mx-2 normal-case sm:text-4xl tracking-widest text-left pl-8">
+            <p onClick={()=>navigate('/admindashboard')} className="cursor-pointer flex-1 px-2 mx-2 normal-case sm:text-4xl tracking-widest text-left pl-8">
               {" "}
               KINOWO
             </p>
@@ -71,33 +121,40 @@ const UserList = () => {
             </div>
           </div>
           <div className={"overflow-x-auto w-full mt-8"}>
+            <input onChange={(e)=>setInput(e.target.value)} type={'text'} className={'input input-bordered mb-5 w-full max-w-xs"'} placeholder={'Wpisz mail szukanej osoby'}/>
             <table className={"table  w-full overflow-x-auto"}>
               <thead className="text-center text-white">
                 <tr>
-                  <th>Nazwa kina</th>
-                  <th>Imie administratora</th>
-                  <th>Nazwisko  administratora</th>
+                  <th>Imie</th>
+                  <th>Nazwisko</th>
+                  <th>email</th>
 
                   <th>Przyciski akcji</th>
                 </tr>
               </thead>
+              {users.filter(user=>user.email.includes(input)).map(user=>
+                  <tr className="text-center">
+                    <td className="underline  decoration-purple decoration-2 text-2xl text-white">
+                      {user.name}
+                    </td>{" "}
+                    <td className="underline  decoration-purple decoration-2 text-2xl text-white">
+                      {user.lastName}
+                    </td>{" "}
+                    <td className="underline  decoration-purple  decoration-2 text-2xl text-white">
+                      {" "}
+                      {user.email}
+                    </td>{" "}
 
-              <tr className="text-center">
-                <td className="underline  decoration-purple decoration-2 text-2xl text-white">
-                  Cinema City
-                </td>{" "}
-                <td className="underline  decoration-purple decoration-2 text-2xl text-white">
-                  Jan
-                </td>{" "}
-                <td className="underline  decoration-purple  decoration-2 text-2xl text-white">
-                  {" "}
-                  Kowalski
-                </td>{" "}
-                <td>
-                  <button className={"btn px-2"}>Pokaz filmy</button>{" "}
-                  <button className={"btn btn-error "}>Usun kino</button>{" "}
-                </td>
-              </tr>
+                      <td>
+                        <button className={"btn px-2"}>Pokaz opinie</button>
+
+                        {user.deleted?<button onClick={()=>undeleteUser(user.id)} className={"btn btn-success "}>Przywróć użytkownmika</button>:<button onClick={()=>deleteUser(user.id)} className={"btn btn-error "}>Usuń użytkownika</button>}
+
+                      </td>
+
+                  </tr>
+              )}
+
             </table>
           </div>
         </div>

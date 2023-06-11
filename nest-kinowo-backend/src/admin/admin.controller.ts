@@ -16,66 +16,52 @@ export class AdminController {
   //user
 
   //działa
-  @Get('/getUndeletedUsers')
+  @Get('/getUsers')
   async getUndeletedUsers() {
-    return this.AdminService.getUndeletedUsers();
+    return this.AdminService.getUsers();
+  }
+
+  //działa
+  @Delete('/deleteUser/:id')
+  async deleteUser(@Param() { id }: { id: string }) {
+    return await this.AdminService.deleteUser(id);
   }
   //działa
-  @Get('/getDeletedUsers')
-  async getUDeletedUsers() {
-    return this.AdminService.getDeletedUsers();
-  }
-  //działa
-  @Delete('/deleteUser')
-  async deleteUser(@Body() { id }: { id: string }) {
-    return this.AdminService.deleteUser(id);
-  }
-  //działa
-  @Post('/undeleteUser')
-  async undeleteUser(@Body() { id }: { id: string }) {
+  @Get('/undeleteUser/:id')
+  async undeleteUser(@Param() { id }: { id: string }) {
     return this.AdminService.undeleteUser(id);
   }
   //działa
   @Get('/getUserUndeletedOpinions/:id')
-  async getUserUndeletedOpinions(@Param() { id }: { id: string }) {
-    return this.AdminService.getUserUndeletedOpinions(id);
-  }
-  //działa
-  @Get('/getUserDeletedOpinions/:id')
-  async getUserDeletedOpinions(@Param() { id }: { id: string }) {
-    return this.AdminService.getUserDeletedOpinions(id);
+  async getUserOpinions(@Param() { id }: { id: string }) {
+    return this.AdminService.getUserOpinions(id);
   }
 
-  @Delete('/deleteOpinion')
+  @Delete('/deleteOpinion/:id')
   async deleteOpinion(@Body() { id }: { id: string }) {
     return this.AdminService.deleteOpinion(id);
   }
 
-  @Post('/undeleteOpinion')
+  @Post('/undeleteOpinion/:id')
   async undeleteOpinion(@Body() { id }: { id: string }) {
     return this.AdminService.undeleteOpinion(id);
   }
   //cinema
 
   //działa
-  @Get('/getUndeletedCinemas')
-  async getUndeletedCinemas() {
-    return this.AdminService.getUndeletedCinemas();
+  @Get('/getCinemas')
+  async getCinemas() {
+    return this.AdminService.getCinemas();
   }
 
   //działa
-  @Get('/getDeletedCinemas')
-  async getUDeletedCinemas() {
-    return this.AdminService.getDeletedCinemas();
-  }
-  //działa
-  @Delete('/deleteCinema')
-  async deleteCinema(@Body() { id }: { id: string }) {
+  @Delete('/deleteCinema/:id')
+  async deleteCinema(@Param() { id }: { id: string }) {
     return this.AdminService.deleteCinema(id);
   }
   //działa
-  @Post('/undeleteCinema')
-  async undeleteCinema(@Body() { id }: { id: string }) {
+  @Get('/undeleteCinema/:id')
+  async undeleteCinema(@Param() { id }: { id: string }) {
     return this.AdminService.undeleteCinema(id);
   }
 
