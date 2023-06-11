@@ -15,6 +15,7 @@ import AddOpinion from "./Components/Pages/AddOpinion";
 import OpinionList from "./Components/Pages/OpinionList";
 import AdminDashboard from "./Components/Pages/Admin/AdminDashboard";
 import {useCookies} from "react-cookie";
+import AllMovies from "./Components/Pages/AllMovies/AllMovies";
 function App() {
   // const { user } = useContext(UserContext);
   const [cookie]=useCookies()
@@ -27,6 +28,7 @@ function App() {
         <Route path="admindashboard" exact element={<AdminDashboard />} />
         <Route path="/addopinion/:id" element={<AddOpinion />} />
         <Route path="addmovie" element={<AddMovie />} />
+        <Route path="allmovies" element={<AllMovies />} />
         <Route path="register" element={<Register />} />
         <Route path="/login/:role" element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />

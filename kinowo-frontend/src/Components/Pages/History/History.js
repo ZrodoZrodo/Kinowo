@@ -1,6 +1,6 @@
 import Footer from "../../UI/Footer";
 import NavbarDashboard from "../../UI/NavbarDashboard";
-import Watched from "./Watched";
+
 import {useEffect, useState} from "react";
 import {useCookies} from "react-cookie";
 import {useNavigate} from "react-router-dom";

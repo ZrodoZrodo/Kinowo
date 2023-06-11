@@ -31,7 +31,7 @@ const NavbarDashboard = (props) => {
             className="menu menu-compact Burger dropdown-content mt-3 p-2 shadow  rounded-box w-52"
           >
             <li>
-              <p>
+              <p onClick={()=>navigate('/allmovies')}>
                 Rezerwuj bilet
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

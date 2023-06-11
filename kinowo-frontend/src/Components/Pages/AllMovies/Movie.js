@@ -1,6 +1,6 @@
 import poster1 from "../../UI/Posters/BlackPanther.png";
 
-const Watched = () => {
+const Movie = () => {
   return (
     <div class="card w-96 bg-[#171017] shadow-xl rounded-xl">
   <figure class="px-10 pt-10">
@@ -17,4 +17,4 @@ const Watched = () => {
   );
 };
 
-export default Watched;
+export default Movie;
