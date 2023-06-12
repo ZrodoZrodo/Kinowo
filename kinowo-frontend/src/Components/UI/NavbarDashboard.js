@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
 const NavbarDashboard = (props) => {
-  const [cookie] = useCookies();
+  const [cookie, setCookie, removeCookie] = useCookies();
   const navigate = useNavigate();
   return (
     <div className="navbar bg-dark-purple">
@@ -373,7 +373,16 @@ const NavbarDashboard = (props) => {
             </p>
           </label>
         </label>
-        <button className="btn btn-ghost btn-circle">
+        <button
+          onClick={() => {
+            const keys = Object.keys(cookie);
+            keys.forEach((k) => {
+              removeCookie(k);
+            });
+            navigate("/");
+          }}
+          className="btn btn-ghost btn-circle"
+        >
           <div className="indicator">
             <svg
               xmlns="http://www.w3.org/2000/svg"
